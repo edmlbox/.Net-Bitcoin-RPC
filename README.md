@@ -22,4 +22,10 @@ Table of contents
    * [Dependency](#dependency)
 <!--te-->
 
+Usage
+=====
+
+
+STDIN
+-----
 
