@@ -26,7 +26,7 @@ Table of contents
 Blockchain
 -----
 ```diff
- - text in red (and bold)@@
+ @- text in red (and bold)@@
 + text in green (and bold)@@
  ! text in orange (and bold)@@
  # text in gray (and bold)@@
