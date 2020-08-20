@@ -1,7 +1,7 @@
 # .Net-Bitcoin-RPC
 
-### Bitcoin Core Rpc library for .Net.
-### Covers all commands. 
+### Bitcoin Core Rpc library for .Net. Covers all commands. 
+
 
 Table of contents
 =================
