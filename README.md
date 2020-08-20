@@ -26,7 +26,7 @@ Table of contents
 Blockchain
 -----
 
-[GitHub](#Blockchain), [GitHub](#Mining), [GitHub](#RawTransaction), 
+**[GitHub](#Blockchain),** [GitHub](#Mining), [GitHub](#RawTransaction), 
 
 To create an anchor to a heading in github flavored markdown. Add - characters between each word in the heading and wrap the value in parens (#some-markdown-heading) so your link should look like so:
 To create an anchor to a heading in github flavored markdown. Add - characters between each word in the heading and wrap the value in parens (#some-markdown-heading) so your link should look like so:
