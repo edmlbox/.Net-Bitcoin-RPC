@@ -26,7 +26,7 @@ Table of contents
 Blockchain
 -----
 ```diff
-@+text in purple (and bold), text in purple (and bold)@@
+@@text in purple (and bold), text in purple (and bold)@@
 ```
 To create an anchor to a heading in github flavored markdown. Add - characters between each word in the heading and wrap the value in parens (#some-markdown-heading) so your link should look like so:
 To create an anchor to a heading in github flavored markdown. Add - characters between each word in the heading and wrap the value in parens (#some-markdown-heading) so your link should look like so:
