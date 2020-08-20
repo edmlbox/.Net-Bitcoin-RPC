@@ -7,18 +7,18 @@ Table of contents
 =================
 
 <!--ts-->
-   * [gh-md-toc](#gh-md-toc)
-   * [Table of contents](#table-of-contents)
    * [Installation](#installation)
-   * [Usage](#usage)
-      * [STDIN](#stdin)
-      * [Local files](#local-files)
-      * [Remote files](#remote-files)
-      * [Multiple files](#multiple-files)
-      * [Combo](#combo)
-      * [Auto insert and update TOC](#auto-insert-and-update-toc)
-      * [GitHub token](#github-token)
-   * [Tests](#tests)
+   * [Core Rpc](#usage)
+      * [Blockchain](#stdin)
+      * [Mining](#local-files)
+      * [Network](#remote-files)
+      * [RawTransaction](#multiple-files)
+      * [RegTestGenerate](#combo)
+      * [ServerControl](#auto-insert-and-update-toc)
+      * [Util](#github-token)
+      * [Wallet](#github-token)
+      * [ZMQ](#github-token)
+  
    * [Dependency](#dependency)
 <!--te-->
 
