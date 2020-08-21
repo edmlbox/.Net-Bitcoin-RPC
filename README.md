@@ -731,7 +731,15 @@ Console.WriteLine(getmempoolancestors);
 ### getmempoolentry
 -----
 ```csharp    
- 
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+string txid = "e3da017450b456e194cb32f9959808b2ec2dacf8702018edf334eabafe829257";
+
+string getmempoolentry = await blockchain.GetMemPoolEntry(txid);
+
+Console.WriteLine(getmempoolentry);
   
 ```
 
@@ -740,7 +748,34 @@ Console.WriteLine(getmempoolancestors);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "fees": {
+      "base": 0.00016616,
+      "modified": 0.00016616,
+      "ancestor": 0.00016616,
+      "descendant": 0.00016616
+    },
+    "vsize": 134,
+    "weight": 534,
+    "fee": 0.00016616,
+    "modifiedfee": 0.00016616,
+    "time": 1598013291,
+    "height": 1807973,
+    "descendantcount": 1,
+    "descendantsize": 134,
+    "descendantfees": 16616,
+    "ancestorcount": 1,
+    "ancestorsize": 134,
+    "ancestorfees": 16616,
+    "wtxid": "6659d9b42017c485f410cd75567d740745bfc0f03ef13f9ec263de8d32ab37f6",
+    "depends": [],
+    "spentby": [],
+    "bip125-replaceable": false
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
