@@ -86,7 +86,7 @@ Console.WriteLine(getbestblockhash_VerbosityTwo);
 </details>
 <details>
   
-  <summary>Server response (getbestblockhash_VerbosityTwo)</summary>
+  <summary>Server response (getbestblockhash_VerbosityOne)</summary>
  
  ```json
 {
@@ -126,7 +126,7 @@ Console.WriteLine(getbestblockhash_VerbosityTwo);
 </details>
 <details>
   
-  <summary>Server response (getbestblockhash2)</summary>
+  <summary>Server response (getbestblockhash_VerbosityTwo)</summary>
  
  ```json
 {
