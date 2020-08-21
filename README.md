@@ -44,9 +44,9 @@ BLOCKCHAIN
    
   ```json
 {
-  "firstName": "John",
-  "lastName": "Smith",
-  "age": 25
+  "result": "0000000000000000000560f1c95e7ab5857d37777f9c34015c99293fbe3c0d36",
+  "error": null,
+  "id": null
 }
 ```
 </details>
