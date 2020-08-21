@@ -4,7 +4,6 @@
 
 
 ## Table of contents
-=================
 
 <!--ts-->
    * [Installation](#installation)
