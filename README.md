@@ -56,6 +56,19 @@ BLOCKCHAIN
 
 ### getblock
 -----
+```csharp    
+ 
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
 ### getblockchaininfo
 -----
 ### getblockcount
