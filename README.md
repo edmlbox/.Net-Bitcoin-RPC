@@ -1010,7 +1010,13 @@ Console.WriteLine(getrawmempool_ArrayTxIds);
 ### gettxout
 -----
 ```csharp    
- 
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+string txid = "cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80";
+string gettxout = await blockchain.GetTxOut(txid,0);
+
+Console.WriteLine(gettxout);
   
 ```
 
@@ -1019,7 +1025,25 @@ Console.WriteLine(getrawmempool_ArrayTxIds);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "bestblock": "0000000053afbeda917e9a9d64af3bb5805214e21d9d982190695b7ed0dbfeff",
+    "confirmations": 0,
+    "value": 0.01189035,
+    "scriptPubKey": {
+      "asm": "0 7fd0e5fbb32a78ac2ced83fbc26be7d63e1f91fa",
+      "hex": "00147fd0e5fbb32a78ac2ced83fbc26be7d63e1f91fa",
+      "reqSigs": 1,
+      "type": "witness_v0_keyhash",
+      "addresses": [
+        "tb1q0lgwt7an9fu2ct8ds0auy6l86clply06m2te54"
+      ]
+    },
+    "coinbase": false
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
