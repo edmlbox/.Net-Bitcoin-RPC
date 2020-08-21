@@ -25,33 +25,57 @@ Table of contents
 BLOCKCHAIN
 -----
 
-**[getbestblockhash](#Blockchain),** **[getblock](#Mining)**, **[getblockchaininfo](#RawTransaction)**, **[getblockcount](#RawTransaction)**, **[getblockhash](#RawTransaction)**,  **[getblockheader](#RawTransaction)**,  **[getblockstats](#RawTransaction)**,  **[getchaintips](#RawTransaction)**,  **[getchaintxstats](#RawTransaction)**,  **[getdifficulty](#RawTransaction)**,  **[getmempoolancestors](#RawTransaction)**,  **[getmempooldescendants](#RawTransaction)**,  **[getmempoolentry](#RawTransaction)**,  **[getmempoolinfo](#RawTransaction)**, **[getrawmempool](#RawTransaction)**, **[gettxout](#RawTransaction)**, **[gettxoutproof](#RawTransaction)**, **[gettxoutsetinfo](#RawTransaction)**, **[preciousblock](#RawTransaction)**, **[pruneblockchain](#RawTransaction)**, **[savemempool](#RawTransaction)**, **[scantxoutset](#RawTransaction)**, **[verifychain](#RawTransaction)**, **[verifytxoutproof](#RawTransaction)**
+**[getbestblockhash](#getbestblockhash),** **[getblock](#getblock)**, **[getblockchaininfo](#getblockchaininfo)**, **[getblockcount](#getblockcount)**, **[getblockhash](#getblockhash)**,  **[getblockheader](#getblockheader)**,  **[getblockstats](#getblockstats)**,  **[getchaintips](#getchaintips)**,  **[getchaintxstats](#getchaintxstats)**,  **[getdifficulty](#getdifficulty)**,  **[getmempoolancestors](#getmempoolancestors)**,  **[getmempooldescendants](#getmempooldescendants)**,  **[getmempoolentry](#getmempoolentry)**,  **[getmempoolinfo](#getmempoolinfo)**, **[getrawmempool](#getrawmempool)**, **[gettxout](#gettxout)**, **[gettxoutproof](#gettxoutproof)**, **[gettxoutsetinfo](#gettxoutsetinfo)**, **[preciousblock](#preciousblock)**, **[pruneblockchain](#pruneblockchain)**, **[savemempool](#savemempool)**, **[scantxoutset](#scantxoutset)**, **[verifychain](#verifychain)**, **[verifytxoutproof](#verifytxoutproof)**
 
 
-getbestblockhash
-getblock
-getblockchaininfo
-getblockcount
-getblockhash
-getblockheader
-getblockstats
-getchaintips
-getchaintxstats
-getdifficulty
-getmempoolancestors
-getmempooldescendants
-getmempoolentry
-getmempoolinfo
-getrawmempool
-gettxout
-gettxoutproof
-gettxoutsetinfo
-preciousblock
-pruneblockchain
-savemempool
-scantxoutset
-verifychain
-verifytxoutproof
+### getbestblockhash
+-----
+### getblock
+-----
+### getblockchaininfo
+-----
+### getblockcount
+-----
+### getblockhash
+-----
+### getblockheader
+-----
+### getblockstats
+-----
+### getchaintips
+-----
+### getchaintxstats
+-----
+### getdifficulty
+-----
+### getmempoolancestors
+-----
+### getmempooldescendants
+-----
+### getmempoolentry
+-----
+### getmempoolinfo
+-----
+### getrawmempool
+-----
+### gettxout
+-----
+### gettxoutproof
+-----
+### gettxoutsetinfo
+-----
+### preciousblock
+-----
+### pruneblockchain
+-----
+### savemempool
+-----
+### scantxoutset
+-----
+### verifychain
+-----
+### verifytxoutproof
+-----
 
 CONTROL
 -----
