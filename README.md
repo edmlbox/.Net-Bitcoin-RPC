@@ -662,8 +662,13 @@ Console.WriteLine(getchaintxstats_nblocks_finalBlockhash);
 ### getdifficulty
 -----
 ```csharp    
- 
-  
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+            
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+string getdifficulty = await blockchain.GetDifficulty();
+
+Console.WriteLine(getdifficulty);
 ```
 
 <details>
@@ -671,7 +676,11 @@ Console.WriteLine(getchaintxstats_nblocks_finalBlockhash);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": 16947802333946.61,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
