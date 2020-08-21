@@ -1224,7 +1224,20 @@ Console.WriteLine(savemempool);
 ### scantxoutset
 -----
 ```csharp    
- 
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+ScanTxOutSet scanTxOutSet = new ScanTxOutSet();
+scanTxOutSet.Descriptor = Descriptor.addr;
+scanTxOutSet.ScanObjects = new List<string>()
+   {
+        "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+        "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj"
+   };
+
+string scantxoutset = await blockchain.ScanTxOutSet(Scan.Start, scanTxOutSet);
+
+Console.WriteLine(scantxoutset);
   
 ```
 
@@ -1233,7 +1246,52 @@ Console.WriteLine(savemempool);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "success": true,
+    "txouts": 24100064,
+    "height": 1807980,
+    "bestblock": "0000000040daaabe09fd46b9c1c06352ee4f9da2b9ae5dad222d91b2d40a8b9f",
+    "unspents": [
+      {
+        "txid": "c1e5d3718ff4ff0dfd5f50bd09d7c36c30a1ce203228041422411b8dbf28f501",
+        "vout": 1,
+        "scriptPubKey": "76a914ee747a81bc7af6afce0e597c672d9dcb4268aa4188ac",
+        "desc": "addr(n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj)#lr0lv3s0",
+        "amount": 0.00001000,
+        "height": 1807225
+      },
+      {
+        "txid": "1bdfb9b27a9ba9c8978933f3bbd95cd5845e2e6d770cabe92b170e3d570f8509",
+        "vout": 1,
+        "scriptPubKey": "76a914ee747a81bc7af6afce0e597c672d9dcb4268aa4188ac",
+        "desc": "addr(n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj)#lr0lv3s0",
+        "amount": 0.00001000,
+        "height": 1807224
+      },
+      {
+        "txid": "475b13c64baacc842336029d0c3ea3b1ad82f9f1c9e8fb156dd2c1c283ce5f0c",
+        "vout": 1,
+        "scriptPubKey": "76a914ee747a81bc7af6afce0e597c672d9dcb4268aa4188ac",
+        "desc": "addr(n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj)#lr0lv3s0",
+        "amount": 0.00003300,
+        "height": 1807222
+      },
+      {
+        "txid": "49314d54509c657184679c8801b9c13767e4b1aeee881ec2f378eb6518ff4f13",
+        "vout": 1,
+        "scriptPubKey": "76a914ee747a81bc7af6afce0e597c672d9dcb4268aa4188ac",
+        "desc": "addr(n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj)#lr0lv3s0",
+        "amount": 0.00003300,
+        "height": 1807221
+      },
+    ...
+    ],
+    "total_amount": 0.32075157
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
