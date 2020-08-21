@@ -377,16 +377,114 @@ Console.WriteLine(getblockheader_Json);
 ### getblockstats
 -----
 ```csharp    
- 
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+int blockHeight = 100;
+string getblockstats_byHeight = await blockchain.GetBlockStats(blockHeight); 
+
+string blockhash = "00000000000000b5eadb000848db1e0f79051679c462721dd29fe1fd365cb157";
+string getblockstats_byBlockhash = await blockchain.GetBlockStats(blockhash);
+
+Console.WriteLine(getblockstats_byHeight);
+Console.WriteLine(getblockstats_byBlockhash);
   
 ```
 
 <details>
   
-  <summary>Server response</summary>
+  <summary>Server response (getblockstats_byHeight)</summary>
  
  ```json
-
+{
+  "result": {
+    "avgfee": 0,
+    "avgfeerate": 0,
+    "avgtxsize": 0,
+    "blockhash": "000000002ce019cc4a8f2af62b3ecf7c30a19d29828b25268a0194dbac3cac50",
+    "feerate_percentiles": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "height": 100,
+    "ins": 0,
+    "maxfee": 0,
+    "maxfeerate": 0,
+    "maxtxsize": 0,
+    "medianfee": 0,
+    "mediantime": 1296698941,
+    "mediantxsize": 0,
+    "minfee": 0,
+    "minfeerate": 0,
+    "mintxsize": 0,
+    "outs": 1,
+    "subsidy": 5000000000,
+    "swtotal_size": 0,
+    "swtotal_weight": 0,
+    "swtxs": 0,
+    "time": 1296699105,
+    "total_out": 0,
+    "total_size": 0,
+    "total_weight": 0,
+    "totalfee": 0,
+    "txs": 1,
+    "utxo_increase": 1,
+    "utxo_size_inc": 85
+  },
+  "error": null,
+  "id": null
+}
+```
+</details>
+<details>
+  
+  <summary>Server response (getblockstats_byBlockhash)</summary>
+ 
+ ```json
+{
+  "result": {
+    "avgfee": 8657,
+    "avgfeerate": 27,
+    "avgtxsize": 548,
+    "blockhash": "00000000000000b5eadb000848db1e0f79051679c462721dd29fe1fd365cb157",
+    "feerate_percentiles": [
+      1,
+      1,
+      1,
+      19,
+      124
+    ],
+    "height": 1807969,
+    "ins": 274,
+    "maxfee": 70000,
+    "maxfeerate": 309,
+    "maxtxsize": 33003,
+    "medianfee": 256,
+    "mediantime": 1598004409,
+    "mediantxsize": 247,
+    "minfee": 141,
+    "minfeerate": 1,
+    "mintxsize": 189,
+    "outs": 256,
+    "subsidy": 19531250,
+    "swtotal_size": 65286,
+    "swtotal_weight": 139755,
+    "swtxs": 114,
+    "time": 1598008819,
+    "total_out": 256365694128,
+    "total_size": 70754,
+    "total_weight": 161627,
+    "totalfee": 1116779,
+    "txs": 130,
+    "utxo_increase": -18,
+    "utxo_size_inc": -1307
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
