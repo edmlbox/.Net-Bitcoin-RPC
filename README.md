@@ -39,7 +39,7 @@ To create an anchor to a heading in github flavored markdown. Add - characters b
 
 CONTROL
 -----
-**[getmemoryinfo](#Blockchain)**, **[getrpcinfo](#Blockchain)**, **[help](#Blockchain)**, **[logging](#Blockchain)**, **[stop](#Blockchain)**, **[uptime](#Blockchain)
+**[getmemoryinfo](#Blockchain)**, **[getrpcinfo](#Blockchain)**, **[help](#Blockchain)**, **[logging](#Blockchain)**, **[stop](#Blockchain)**, **[uptime](#Blockchain)**
 
 
 To create an anchor to a heading in github flavored markdown. Add - characters between each word in the heading and wrap the value in parens (#some-markdown-heading) so your link should look like so:
@@ -67,7 +67,7 @@ To create an anchor to a heading in github flavored markdown. Add - characters b
 
 MINING
 -----
-**[getblocktemplate](#Blockchain)**, **[getmininginfo](#Blockchain)**, **[getnetworkhashps](#Blockchain)**, **[prioritisetransaction](#Blockchain)**, **[submitblock](#Blockchain)**, **[submitheader](#Blockchain)
+**[getblocktemplate](#Blockchain)**, **[getmininginfo](#Blockchain)**, **[getnetworkhashps](#Blockchain)**, **[prioritisetransaction](#Blockchain)**, **[submitblock](#Blockchain)**, **[submitheader](#Blockchain)**
 
 
 To create an anchor to a heading in github flavored markdown. Add - characters between each word in the heading and wrap the value in parens (#some-markdown-heading) so your link should look like so:
