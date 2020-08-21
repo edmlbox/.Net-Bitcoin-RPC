@@ -2,8 +2,8 @@
 
 ### Bitcoin Core Rpc library for .Net. Covers all commands. 
 
-
-## Table of contents
+Table of contents
+=================
 
 <!--ts-->
    * [Installation](#installation)
