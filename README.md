@@ -1199,8 +1199,13 @@ Console.WriteLine(pruneblockchain_UpToUnixEpochTime);
 ### savemempool
 -----
 ```csharp    
- 
-  
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+            
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+string savemempool = await blockchain.SaveMemPool();
+
+Console.WriteLine(savemempool);
 ```
 
 <details>
@@ -1208,7 +1213,11 @@ Console.WriteLine(pruneblockchain_UpToUnixEpochTime);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
