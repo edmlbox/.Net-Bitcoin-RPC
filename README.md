@@ -37,10 +37,9 @@ BLOCKCHAIN
   
   string getbestblockhash = await blockchain.GetBestBlockHash();
   
-  Console.WriteLine(getbestblockhash);
 ```
 <details>
-  <summary>Json response</summary>
+  <summary> Console.WriteLine(getbestblockhash);</summary>
    
   ```json
 {
