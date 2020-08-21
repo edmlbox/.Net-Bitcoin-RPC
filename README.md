@@ -1096,8 +1096,13 @@ Console.WriteLine(gettxoutproof_InThisBlock);
 ### gettxoutsetinfo
 -----
 ```csharp    
- 
-  
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+string gettxoutsetinfo = await blockchain.GetTxOutSetInfo();
+
+Console.WriteLine(gettxoutsetinfo);
 ```
 
 <details>
@@ -1105,15 +1110,33 @@ Console.WriteLine(gettxoutproof_InThisBlock);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "height": 1807979,
+    "bestblock": "00000000d8cd50ceee79f11c7a19eaf39edbb99a54aedc778bbcae127ef1bdf3",
+    "transactions": 9218161,
+    "txouts": 24099837,
+    "bogosize": 1807594455,
+    "hash_serialized_2": "f0f4f455363d595f95c8df7e752dd8cc6f30b2429b3e068e4a1bc5362046f9a5",
+    "disk_size": 1313163280,
+    "total_amount": 20942088.95565249
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### preciousblock
 -----
 ```csharp    
- 
-  
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+string blockhash = "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319";
+string preciousblock = await blockchain.PreciousBlock(blockhash);
+
+Console.WriteLine(preciousblock);
 ```
 
 <details>
@@ -1121,23 +1144,55 @@ Console.WriteLine(gettxoutproof_InThisBlock);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### pruneblockchain
 -----
 ```csharp    
- 
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+//Overload 1. Prune upto height.
+int height = 198000;
+string pruneblockchain_UpToHeight = await blockchain.PruneBlockchain(height);
+
+//Overload 2. Prune upto UnixEpochTime.
+long UnixEpochTime = 1503326167;
+string pruneblockchain_UpToUnixEpochTime = await blockchain.PruneBlockchain(UnixEpochTime);
+
+Console.WriteLine(pruneblockchain_UpToHeight);
+Console.WriteLine(pruneblockchain_UpToUnixEpochTime);
   
 ```
 
 <details>
   
-  <summary>Server response</summary>
+  <summary>Server response (pruneblockchain_UpToHeight)</summary>
  
  ```json
-
+{
+  "result": 644374,
+  "error": null,
+  "id": null
+}
+```
+</details>
+<details>
+  
+  <summary>Server response (pruneblockchain_UpToUnixEpochTime)</summary>
+ 
+ ```json
+{
+  "result": 644374,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
