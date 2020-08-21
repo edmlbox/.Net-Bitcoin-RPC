@@ -202,7 +202,13 @@ Console.WriteLine(getbestblockhash_VerbosityTwo);
 ### getblockchaininfo
 -----
 ```csharp    
- 
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+string getblockchaininfo = await blockchain.GetbBlockchainInfo();
+
+Console.WriteLine(getblockchaininfo);
   
 ```
 
@@ -211,7 +217,51 @@ Console.WriteLine(getbestblockhash_VerbosityTwo);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "chain": "test",
+    "blocks": 1807968,
+    "headers": 1807968,
+    "bestblockhash": "00000000e3498214681a478131ec9ca7773a019312d4dae762bdb31ac2134db8",
+    "difficulty": 1,
+    "mediantime": 1598003205,
+    "verificationprogress": 0.9999986474152942,
+    "initialblockdownload": false,
+    "chainwork": "0000000000000000000000000000000000000000000001bfc48f2faa9fc6f79e",
+    "size_on_disk": 28008947975,
+    "pruned": false,
+    "softforks": {
+      "bip34": {
+        "type": "buried",
+        "active": true,
+        "height": 21111
+      },
+      "bip66": {
+        "type": "buried",
+        "active": true,
+        "height": 330776
+      },
+      "bip65": {
+        "type": "buried",
+        "active": true,
+        "height": 581885
+      },
+      "csv": {
+        "type": "buried",
+        "active": true,
+        "height": 770112
+      },
+      "segwit": {
+        "type": "buried",
+        "active": true,
+        "height": 834624
+      }
+    },
+    "warnings": "Warning: unknown new rules activated (versionbit 28)"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
