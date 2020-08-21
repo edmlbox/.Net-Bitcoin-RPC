@@ -95,7 +95,7 @@ To create an anchor to a heading in github flavored markdown. Add - characters b
 
 RAWTRANSACTIONS
 -----
-**[analyzepsbt](#Blockchain)**, **[combinepsbt](#Blockchain)**, **[combinerawtransaction](#Blockchain)**, **[converttopsbt](#Blockchain)**, **[createpsbt](#Blockchain), **[createrawtransaction](#Blockchain)**, **[decodepsbt](#Blockchain)**, **[decoderawtransaction](#Blockchain)**, **[decodescript](#Blockchain)**, **[finalizepsbt](#Blockchain), **[fundrawtransaction](#Blockchain)**, **[getrawtransaction](#Blockchain)**, **[joinpsbts](#Blockchain)**, **[sendrawtransaction](#Blockchain)**, **[signrawtransactionwithkey](#Blockchain)**, **[testmempoolaccept](#Blockchain)**, **[utxoupdatepsbt](#Blockchain)**
+**[analyzepsbt](#Blockchain)**, **[combinepsbt](#Blockchain)**, **[combinerawtransaction](#Blockchain)**, **[converttopsbt](#Blockchain)**, **[createpsbt](#Blockchain), **[createrawtransaction](#Blockchain)**, **[decodepsbt](#Blockchain)**, **[decoderawtransaction](#Blockchain)**, **[decodescript](#Blockchain)**, **[finalizepsbt](#Blockchain)**, **[fundrawtransaction](#Blockchain)**, **[getrawtransaction](#Blockchain)**, **[joinpsbts](#Blockchain)**, **[sendrawtransaction](#Blockchain)**, **[signrawtransactionwithkey](#Blockchain)**, **[testmempoolaccept](#Blockchain)**, **[utxoupdatepsbt](#Blockchain)**
 
 
 To create an anchor to a heading in github flavored markdown. Add - characters between each word in the heading and wrap the value in parens (#some-markdown-heading) so your link should look like so:
