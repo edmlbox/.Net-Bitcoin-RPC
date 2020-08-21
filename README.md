@@ -56,19 +56,23 @@ BLOCKCHAIN
 
 ### getblock
 -----
+
 ```csharp    
- 
+  BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
   
 ```
 
 <details>
-  
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "0000000000000000000560f1c95e7ab5857d37777f9c34015c99293fbe3c0d36",
+  "error": null,
+  "id": null
+}
 ```
-</details>
+
 ### getblockchaininfo
 -----
 ### getblockcount
