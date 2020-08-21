@@ -1049,16 +1049,49 @@ Console.WriteLine(gettxout);
 ### gettxoutproof
 -----
 ```csharp    
- 
+ BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            Blockchain blockchain = new Blockchain(bitcoinClient);
+
+            List<string> txids = new List<string>();
+           
+            txids.Add("aff347e3bf1803d33548b3b440506d7df6275ce4fae6c548f9076de0f46a63d1");
+            txids.Add("8903339fa21b5856e8ba9ed0828a9f03888ace9d551a2c24e3d19f9e3c3f9220");
+            
+            //Overload 1.
+            string gettxoutproof = await blockchain.GetTxOutProof(txids);
+
+            //Overload 2. Looks for txid in the block with this hash.
+            string blockhash = "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319";
+            string gettxoutproof_InThisBlock= await blockchain.GetTxOutProof(txids, blockhash);
+
+
+            Console.WriteLine(gettxoutproof);
+            Console.WriteLine(gettxoutproof_InThisBlock);
   
 ```
 
 <details>
   
-  <summary>Server response</summary>
+  <summary>Server response (gettxoutproof)</summary>
  
  ```json
-
+{
+  "result": "000000207a5cd1d7d427da62a4a50fe4c91f92a5d4ad71335c7234880800000000000000d925e93b0e26f52e29ac074a44211382502ae2012600fd909f0c309fc316ac3b82ba365fffff001d8518aa6d150100000b35500c73b23dbe87c95a6df03fb02543733b6697ceaa277041f3f0f97a37366ed1636af4e06d07f948c5e6fae45c27f67d6d5040b4b34835d30318bfe347f3af20923f3c9e9fd1e3242c1a559dce8a88039f8a82d09ebae856581ba29f330389f16139def68f52b2d8013c24a0a3b8f5c008013ef495967ea6066fe7bb61a41193021c84199b08c30c9b3c27b168ef2b9812d154215851357018a52c019b66e71456e009e91983e6f839391e723465095d0d523a46ab5998919c6d28c3b21caff06803d7d15d98f966301d8a86c27bd4e6b35257e02049fb35ac234a53e7d84a353cfd6243b6f09b4b7f801e0f4a7c6661ba68d752b7e80833a6e2a87b7de046e0690a708b6361063223f9092a35840da01bd507eabc7e2eddf645fb142528a400c2c768b23b075186177baa987966aa527741fb37d04f78d9e0700b3b23375f8100ce01f8ee7e21034aab4658e99d814a725ecf5c35b7184149a6bd516a338a03ff1d00",
+  "error": null,
+  "id": null
+}
+```
+</details>
+<details>
+  
+  <summary>Server response (gettxoutproof_InThisBlock)</summary>
+ 
+ ```json
+{
+  "result": "000000207a5cd1d7d427da62a4a50fe4c91f92a5d4ad71335c7234880800000000000000d925e93b0e26f52e29ac074a44211382502ae2012600fd909f0c309fc316ac3b82ba365fffff001d8518aa6d150100000b35500c73b23dbe87c95a6df03fb02543733b6697ceaa277041f3f0f97a37366ed1636af4e06d07f948c5e6fae45c27f67d6d5040b4b34835d30318bfe347f3af20923f3c9e9fd1e3242c1a559dce8a88039f8a82d09ebae856581ba29f330389f16139def68f52b2d8013c24a0a3b8f5c008013ef495967ea6066fe7bb61a41193021c84199b08c30c9b3c27b168ef2b9812d154215851357018a52c019b66e71456e009e91983e6f839391e723465095d0d523a46ab5998919c6d28c3b21caff06803d7d15d98f966301d8a86c27bd4e6b35257e02049fb35ac234a53e7d84a353cfd6243b6f09b4b7f801e0f4a7c6661ba68d752b7e80833a6e2a87b7de046e0690a708b6361063223f9092a35840da01bd507eabc7e2eddf645fb142528a400c2c768b23b075186177baa987966aa527741fb37d04f78d9e0700b3b23375f8100ce01f8ee7e21034aab4658e99d814a725ecf5c35b7184149a6bd516a338a03ff1d00",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
