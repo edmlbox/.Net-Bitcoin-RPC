@@ -687,12 +687,10 @@ Console.WriteLine(getdifficulty);
 ### getmempoolancestors
 -----
 ```csharp    
-BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
-            
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");            
 Blockchain blockchain = new Blockchain(bitcoinClient);
 
 string txid = "e3da017450b456e194cb32f9959808b2ec2dacf8702018edf334eabafe829257";
-
 string getmempoolancestors = await blockchain.GetMemPoolAncestors(txid);
 
 Console.WriteLine(getmempoolancestors);
@@ -741,12 +739,10 @@ Console.WriteLine(getmempooldescendants);
 ### getmempoolentry
 -----
 ```csharp    
-BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
-            
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");         
 Blockchain blockchain = new Blockchain(bitcoinClient);
 
 string txid = "e3da017450b456e194cb32f9959808b2ec2dacf8702018edf334eabafe829257";
-
 string getmempoolentry = await blockchain.GetMemPoolEntry(txid);
 
 Console.WriteLine(getmempoolentry);
