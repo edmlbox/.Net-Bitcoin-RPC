@@ -1017,7 +1017,6 @@ string txid = "cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80"
 string gettxout = await blockchain.GetTxOut(txid,0);
 
 Console.WriteLine(gettxout);
-  
 ```
 
 <details>
