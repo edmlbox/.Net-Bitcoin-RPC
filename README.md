@@ -576,16 +576,86 @@ Console.WriteLine(getchaintips);
 ### getchaintxstats
 -----
 ```csharp    
- 
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+//Overload 1. One month window. Chain tip.
+string getchaintxstats = await blockchain.GetChainTxStats();
+
+//Overload 2. Size of the window in number of blocks.
+string getchaintxstats_nblocks = await blockchain.GetChainTxStats(100);
+
+//Overload 3. Size of the window in number of blocks. The hash of the block that ends the window.
+string getchaintxstats_nblocks_finalBlockhash = await blockchain.GetChainTxStats(100, "00000000000000b5eadb000848db1e0f79051679c462721dd29fe1fd365cb157");
+
+Console.WriteLine(getchaintxstats);
+Console.WriteLine(getchaintxstats_nblocks);
+Console.WriteLine(getchaintxstats_nblocks_finalBlockhash);
   
 ```
 
 <details>
   
-  <summary>Server response</summary>
+  <summary>Server response (getchaintxstats)</summary>
  
  ```json
-
+{
+  "result": {
+    "time": 1598011942,
+    "txcount": 57469714,
+    "window_final_block_hash": "00000000759beb8094905a71acd9d3af0979dc1884026ef97817cbd1fedcc869",
+    "window_final_block_height": 1807972,
+    "window_block_count": 4320,
+    "window_tx_count": 449972,
+    "window_interval": 1481867,
+    "txrate": 0.3036520821369259
+  },
+  "error": null,
+  "id": null
+}
+```
+</details>
+<details>
+  
+  <summary>Server response (getchaintxstats_nblocks)</summary>
+ 
+ ```json
+{
+  "result": {
+    "time": 1598011942,
+    "txcount": 57469714,
+    "window_final_block_hash": "00000000759beb8094905a71acd9d3af0979dc1884026ef97817cbd1fedcc869",
+    "window_final_block_height": 1807972,
+    "window_block_count": 100,
+    "window_tx_count": 21900,
+    "window_interval": 96261,
+    "txrate": 0.2275064667934054
+  },
+  "error": null,
+  "id": null
+}
+```
+</details>
+<details>
+  
+  <summary>Server response (getchaintxstats_nblocks_finalBlockhash)</summary>
+ 
+ ```json
+{
+  "result": {
+    "time": 1598008819,
+    "txcount": 57468886,
+    "window_final_block_hash": "00000000000000b5eadb000848db1e0f79051679c462721dd29fe1fd365cb157",
+    "window_final_block_height": 1807969,
+    "window_block_count": 100,
+    "window_tx_count": 21564,
+    "window_interval": 96426,
+    "txrate": 0.2236326302034721
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
