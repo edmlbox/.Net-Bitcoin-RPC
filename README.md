@@ -30,14 +30,10 @@ BLOCKCHAIN
 
 ### getbestblockhash
 -----
-```csharp
-           
-  BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333","alice:pass");
-            
+```csharp    
+  BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
   Blockchain blockchain = new Blockchain(bitcoinClient);
-            
-  string getbestblockhash = blockchain.GetBestBlockHash().Result;
-
+  string getbestblockhash = await blockchain.GetBestBlockHash();
   Console.WriteLine(getbestblockhash);
 ```
 
