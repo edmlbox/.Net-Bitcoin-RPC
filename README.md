@@ -380,16 +380,15 @@ Console.WriteLine(getblockheader_Json);
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
 Blockchain blockchain = new Blockchain(bitcoinClient);
 
+//Overload 1
 int blockHeight = 100;
 string getblockstats_byHeight = await blockchain.GetBlockStats(blockHeight); 
 
+//Overload 2
 string blockhash = "00000000000000b5eadb000848db1e0f79051679c462721dd29fe1fd365cb157";
 string getblockstats_byBlockhash = await blockchain.GetBlockStats(blockhash);
 
-Console.WriteLine(getblockstats_byHeight);
-Console.WriteLine(getblockstats_byBlockhash);
-
-//Include a filter.
+//Include a filter. Note: If not included returns all.
 List<BlockStatsFilter> blockStatsFilters = new List<BlockStatsFilter>();
             
 blockStatsFilters.Add(BlockStatsFilter.maxfeerate);
@@ -398,6 +397,8 @@ blockStatsFilters.Add(BlockStatsFilter.totalfee);
 
 string getblockstats_with_filter = await blockchain.GetBlockStats(100, blockStatsFilters);
 
+Console.WriteLine(getblockstats_byHeight);
+Console.WriteLine(getblockstats_byBlockhash);
 Console.WriteLine(getblockstats_with_filter);
   
 ```
