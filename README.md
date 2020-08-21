@@ -519,7 +519,13 @@ Console.WriteLine(getblockstats_with_filter);
 ### getchaintips
 -----
 ```csharp    
- 
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+string getchaintips = await blockchain.GetChainTips();
+
+Console.WriteLine(getchaintips);
   
 ```
 
@@ -528,7 +534,42 @@ Console.WriteLine(getblockstats_with_filter);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "height": 1807971,
+      "hash": "00000000eef8f81f91d8c3471be9545daab28bb09f7961faf5c1b16abbc9ade9",
+      "branchlen": 0,
+      "status": "active"
+    },
+    {
+      "height": 1806605,
+      "hash": "00000000000000a1cf038a2d4cf1d65bd07dc06feeca94b132a2ba389579156c",
+      "branchlen": 1,
+      "status": "valid-fork"
+    },
+    {
+      "height": 1806595,
+      "hash": "000000000000011bbcceab08b921c7a713c3aff25ef2bdfa5c14426b98b1b006",
+      "branchlen": 1,
+      "status": "valid-fork"
+    },
+    {
+      "height": 1803960,
+      "hash": "00000000000009016758be325bacf174b8bf6b088cc030e71a36f13efbe409ea",
+      "branchlen": 1,
+      "status": "valid-fork"
+    },
+    {
+      "height": 1414433,
+      "hash": "00000000210004840364b52bc5e455d888f164e4264a4fec06a514b67e9d5722",
+      "branchlen": 23,
+      "status": "headers-only"
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
