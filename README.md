@@ -822,16 +822,188 @@ Console.WriteLine(getmempoolinfo);
 ### getrawmempool
 -----
 ```csharp    
- 
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+string getrawmempool_Json = await blockchain.GetRawMempool(ReturnFormat.JSON);
+string getrawmempool_ArrayTxIds = await blockchain.GetRawMempool(ReturnFormat.ArrayOfTransactionIds);
+
+Console.WriteLine(getrawmempool_Json);
+Console.WriteLine(getrawmempool_ArrayTxIds);
   
 ```
 
 <details>
   
-  <summary>Server response</summary>
+  <summary>Server response (getrawmempool_Json)</summary>
  
  ```json
-
+{
+  "result": {
+    "e7b18c209782a0fa9c2dd0c93c46720526b795c818f99d009c612f4405642f90": {
+      "fees": {
+        "base": 0.00016080,
+        "modified": 0.00016080,
+        "ancestor": 0.00016080,
+        "descendant": 0.00016080
+      },
+      "vsize": 134,
+      "weight": 533,
+      "fee": 0.00016080,
+      "modifiedfee": 0.00016080,
+      "time": 1598013079,
+      "height": 1807972,
+      "descendantcount": 1,
+      "descendantsize": 134,
+      "descendantfees": 16080,
+      "ancestorcount": 1,
+      "ancestorsize": 134,
+      "ancestorfees": 16080,
+      "wtxid": "8f174f4d9650ab1f55a55199d01c96e72b2eeb24d5881258767c4a816b0af082",
+      "depends": [],
+      "spentby": [],
+      "bip125-replaceable": false
+    },
+    "e1b98b7f5450b512a62dfd1f212ca1dbed5c46a394f3b01f230fbcea5ea7ab5f": {
+      "fees": {
+        "base": 0.00000168,
+        "modified": 0.00000168,
+        "ancestor": 0.00000168,
+        "descendant": 0.00001109
+      },
+      "vsize": 168,
+      "weight": 669,
+      "fee": 0.00000168,
+      "modifiedfee": 0.00000168,
+      "time": 1598013084,
+      "height": 1807972,
+      "descendantcount": 2,
+      "descendantsize": 1104,
+      "descendantfees": 1109,
+      "ancestorcount": 1,
+      "ancestorsize": 168,
+      "ancestorfees": 168,
+      "wtxid": "14d70368f4123391c5c098cc10b8f1293e35f182f9ec868e3eecbbeb7fd5c200",
+      "depends": [],
+      "spentby": [
+        "0d8a941cb0a29c8dddc16a8d1dfb2c8e7eabef5e0125fd20389865758586d352"
+      ],
+      "bip125-replaceable": false
+    },
+    "48b2fff54ad2a94434c6ab0d512505ca8b43d72d64fdee66b2471983b6f09c3d": {
+      "fees": {
+        "base": 0.00016616,
+        "modified": 0.00016616,
+        "ancestor": 0.00016616,
+        "descendant": 0.00016616
+      },
+      "vsize": 134,
+      "weight": 533,
+      "fee": 0.00016616,
+      "modifiedfee": 0.00016616,
+      "time": 1598014003,
+      "height": 1807973,
+      "descendantcount": 1,
+      "descendantsize": 134,
+      "descendantfees": 16616,
+      "ancestorcount": 1,
+      "ancestorsize": 134,
+      "ancestorfees": 16616,
+      "wtxid": "dfca2c8e32039c1c89c3eab915f97ce94783e6d76d343be7eba48612938065c0",
+      "depends": [],
+      "spentby": [],
+      "bip125-replaceable": false
+    },
+    "09656f5763c79d1fa7879e633a665a864b288b7c7dab606a9345cc01fe0e36eb": {
+      "fees": {
+        "base": 0.00016080,
+        "modified": 0.00016080,
+        "ancestor": 0.00016080,
+        "descendant": 0.00016080
+      },
+      "vsize": 134,
+      "weight": 533,
+      "fee": 0.00016080,
+      "modifiedfee": 0.00016080,
+      "time": 1598013063,
+      "height": 1807972,
+      "descendantcount": 1,
+      "descendantsize": 134,
+      "descendantfees": 16080,
+      "ancestorcount": 1,
+      "ancestorsize": 134,
+      "ancestorfees": 16080,
+      "wtxid": "1e0a2465142fd7238dc75c3fe93c932edba6905a75a0e350ac1991ca337bddfb",
+      "depends": [],
+      "spentby": [],
+      "bip125-replaceable": false
+    },
+    "12b4ee5000b4b6e41beb1a9a22ad2d02b43c726d9d43bdbac96749aa004bdecd": {
+      "fees": {
+        "base": 0.00008000,
+        "modified": 0.00008000,
+        "ancestor": 0.00008000,
+        "descendant": 0.00008000
+      },
+      "vsize": 351,
+      "weight": 1404,
+      "fee": 0.00008000,
+      "modifiedfee": 0.00008000,
+      "time": 1598013326,
+      "height": 1807973,
+      "descendantcount": 1,
+      "descendantsize": 351,
+      "descendantfees": 8000,
+      "ancestorcount": 1,
+      "ancestorsize": 351,
+      "ancestorfees": 8000,
+      "wtxid": "12b4ee5000b4b6e41beb1a9a22ad2d02b43c726d9d43bdbac96749aa004bdecd",
+      "depends": [],
+      "spentby": [],
+      "bip125-replaceable": false
+    },
+    ...
+    
+  "error": null,
+  "id": null
+}
+```
+</details>
+<details>
+  
+  <summary>Server response (getrawmempool_ArrayTxIds)</summary>
+ 
+ ```json
+{
+  "result": [
+    "04ca9faf997418bf118daec86024667c697d86ac69dba478307faf21f85120c0",
+    "45c6eb4bc755df282f581ac0d062d1f3994e7ca1c7c6657f1661f32710a518d0",
+    "2e311d736b1ce1220d8d57e5c6dc67dfb59a0dc6fb43c2ea60207fd1f6b6efb0",
+    "810ac5f503d986019ab82ffa20873c3dc43d5b13b35faf1a8d8d1587875e1489",
+    "ca82e25573068e8f4e080938b4edd753d16de2d1b88bc63f223d7a6e50b05488",
+    "09c61603db830d3a04d0473a9f673e9cfce41d5990f9421d86d464cc08d22c84",
+    "464bc508bb01e775b551c47b71452f8fd37dff776e82940a001d2be0d277e780",
+    "5f874b6cf2b156abff574506f142587f093fb9aae495314e8a99b93fa8ff327c",
+    "db7c29c7f6f829e054ab6b1ffad05c1647de015ece8fd4fea8bc7907c17ce271",
+    "62133de6a090aea37f9ced2a85641292e94150d7b966f9980ca6f22c29e7e94d",
+    "ed69e0290eaef004d10de2ef55f8801159961289ef863fc59ebf05f3c0ba014c",
+    "ba6fda128ca4fd05ceef9638d4225632b6946f7895dd1bb3436ae78407454a0f",
+    "0b678077192c6f98ec48966058b3921a9804c5ddc32a75ca7ed2fc35f38be2b4",
+    "94d780a34ecdecc3481993a275849a3db7a221a4dead9ea10172f2f00a5461f0",
+    "62df2e795b99c34bbbdcbaf3e794abd2089b1b0971f00f7526f642c4e1135fbc",
+    "2e6c94c54ff1400397786d3a0fbf7658bb725d0785383b7af5d189d58051b858",
+    "de4c2706fde242d4155950ab2e6f034b6fd2b2e6f3e20a44248a1a5e77ce9a7b",
+    "7db6b7e7b9e4a66de1b16d260ce987694ac097d2fd5f8559c086d9fe65ba7c44",
+    "b45f9015da711c8bfe46c902fbcfbc3724cc5f394366272308712215073a2ee0",
+    "3a0c8f7f14929fa0ebf32d5f67301d91ae9bc135a0fe013f1d2e92f01cde037c",
+    "38e478d389e003640153fa70bc10a937618f832362ae3f5a071efbb981e6cd77",
+    "50a7f5da7fe2b080bd725d85bf2bcb8217dd4c6d341265bcc9258b31d7fff65e",
+    "da10bd222f849cb25ff0f5cdb764e83332435e3fbcb1f50f14695d5b804f0633",
+    "dd884a32973545a9ab0e9b118dd982263e004a98f80d62312591cf6188f2d20f"
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
