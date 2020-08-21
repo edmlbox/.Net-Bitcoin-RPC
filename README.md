@@ -1049,25 +1049,23 @@ Console.WriteLine(gettxout);
 ### gettxoutproof
 -----
 ```csharp    
- BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
-            Blockchain blockchain = new Blockchain(bitcoinClient);
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Blockchain blockchain = new Blockchain(bitcoinClient);
 
-            List<string> txids = new List<string>();
+List<string> txids = new List<string>();
            
-            txids.Add("aff347e3bf1803d33548b3b440506d7df6275ce4fae6c548f9076de0f46a63d1");
-            txids.Add("8903339fa21b5856e8ba9ed0828a9f03888ace9d551a2c24e3d19f9e3c3f9220");
+txids.Add("aff347e3bf1803d33548b3b440506d7df6275ce4fae6c548f9076de0f46a63d1");
+txids.Add("8903339fa21b5856e8ba9ed0828a9f03888ace9d551a2c24e3d19f9e3c3f9220");
             
-            //Overload 1.
-            string gettxoutproof = await blockchain.GetTxOutProof(txids);
+//Overload 1.
+string gettxoutproof = await blockchain.GetTxOutProof(txids);
 
-            //Overload 2. Looks for txid in the block with this hash.
-            string blockhash = "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319";
-            string gettxoutproof_InThisBlock= await blockchain.GetTxOutProof(txids, blockhash);
+//Overload 2. Looks for txid in the block with this hash.
+string blockhash = "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319";
+string gettxoutproof_InThisBlock= await blockchain.GetTxOutProof(txids, blockhash);
 
-
-            Console.WriteLine(gettxoutproof);
-            Console.WriteLine(gettxoutproof_InThisBlock);
-  
+Console.WriteLine(gettxoutproof);
+Console.WriteLine(gettxoutproof_InThisBlock);
 ```
 
 <details>
