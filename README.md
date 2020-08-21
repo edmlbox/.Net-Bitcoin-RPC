@@ -110,7 +110,7 @@ GENERATING
 
 MINING
 -----
-**[getblocktemplate](#Blockchain)**, **[getmininginfo](#Blockchain)**, **[getnetworkhashps](#Blockchain)**, **[prioritisetransaction](#Blockchain)**, **[submitblock](#Blockchain)**, **[submitheader](#Blockchain)**
+**[getblocktemplate](#getblocktemplate)**, **[getmininginfo](#getmininginfo)**, **[getnetworkhashps](#getnetworkhashps)**, **[prioritisetransaction](#prioritisetransaction)**, **[submitblock](#submitblock)**, **[submitheader](#submitheader)**
 
 
 ### getblocktemplate
