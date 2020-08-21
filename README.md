@@ -388,6 +388,17 @@ string getblockstats_byBlockhash = await blockchain.GetBlockStats(blockhash);
 
 Console.WriteLine(getblockstats_byHeight);
 Console.WriteLine(getblockstats_byBlockhash);
+
+//Include a filter.
+List<BlockStatsFilter> blockStatsFilters = new List<BlockStatsFilter>();
+            
+blockStatsFilters.Add(BlockStatsFilter.maxfeerate);
+blockStatsFilters.Add(BlockStatsFilter.mediantime);
+blockStatsFilters.Add(BlockStatsFilter.totalfee);
+
+string getblockstats_with_filter = await blockchain.GetBlockStats(100, blockStatsFilters);
+
+Console.WriteLine(getblockstats_with_filter);
   
 ```
 
@@ -481,6 +492,22 @@ Console.WriteLine(getblockstats_byBlockhash);
     "txs": 130,
     "utxo_increase": -18,
     "utxo_size_inc": -1307
+  },
+  "error": null,
+  "id": null
+}
+```
+</details>
+<details>
+  
+  <summary>Server response (getblockstats_with_filter)</summary>
+ 
+ ```json
+{
+  "result": {
+    "maxfeerate": 0,
+    "mediantime": 1296698941,
+    "totalfee": 0
   },
   "error": null,
   "id": null
