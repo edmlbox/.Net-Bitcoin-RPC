@@ -56,20 +56,37 @@ BLOCKCHAIN
 
 ### getblock
 -----
-```csharp    
- BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
- 
- Blockchain blockchain = new Blockchain(bitcoinClient);
+```csharp
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Blockchain blockchain = new Blockchain(bitcoinClient);
 
- string getbestblockhash = await blockchain.GetBlock("00000000000000fd38c98aeef2f981a9591375748c2bb09b043be251d213edaf");
- 
- Console.WriteLine(getbestblockhash);
+string blockhash="00000000000000fd38c98aeef2f981a9591375748c2bb09b043be251d213edaf";
+
+string getbestblockhash_VerbosityZero = await blockchain.GetBlock(blockhash, Verbosity.VerbosityZero);
+string getbestblockhash_VerbosityOne = await blockchain.GetBlock(blockhash, Verbosity.VerbosityOne);
+string getbestblockhash_VerbosityTwo = await blockchain.GetBlock(blockhash, Verbosity.VerbosityTwo);
+            
+Console.WriteLine(getbestblockhash_VerbosityZero);
+Console.WriteLine(getbestblockhash_VerbosityOne);
+Console.WriteLine(getbestblockhash_VerbosityTwo);
   
 ```
 
 <details>
   
-  <summary>Server response</summary>
+  <summary>Server response (getbestblockhash_VerbosityZero)</summary>
+ 
+ ```json
+{
+  "result": "0000c020e4ceed9df9c1849e51ee20b554ecf30b7f057fecdf4712126300000000000000a134f6eeff209f5328ebede96e03173b19f12b300345f5e6413ba5472368f8233b973f5fda51011a38b5d02efd6501020000000001010000000000000000000000000000000000000000000000000000000000000000ffffffff28035a961b043b973f5f7669702f7777772e6f6b706f6f6c2e746f702f020000002754000000000000ffffffff020cdd45010000000017a9147d0bc1f74eb7e9f77d68221c54a9ab76879f580f870000000000000000266a24aa21a9ed3ec75454dbd863f1ed72717b5124e2f6649c58ec65100857e91c6d3647208b630120000000000000000000000000...",
+  "error": null,
+  "id": null
+}
+```
+</details>
+<details>
+  
+  <summary>Server response (getbestblockhash_VerbosityTwo)</summary>
  
  ```json
 {
@@ -90,6 +107,80 @@ BLOCKCHAIN
       "5407f54b04d75c35be46023c28b00ee3194ffa23c12b33e6e0293de2b00e8a15",
       "cdcbf95127282fe27157bce4f5ae6fb3cf9e6ac92e5c33f20bf16855559995bd",
       "dc9c8ea2d452ac7709a3bc7aae7ddfd5482854cafa1aad66b3ced801950450aa",
+      ...
+    ],
+    "time": 1598003003,
+    "mediantime": 1597998014,
+    "nonce": 785429816,
+    "bits": "1a0151da",
+    "difficulty": 12712392.76864377,
+    "chainwork": "0000000000000000000000000000000000000000000001bfc249400761d235ce",
+    "nTx": 357,
+    "previousblockhash": "0000000000000063121247dfec7f057f0bf3ec54b520ee519e84c1f99dedcee4",
+    "nextblockhash": "000000000000012da5c2fcb6c72523301a15319dd8d8469a6b298092230972a5"
+  },
+  "error": null,
+  "id": null
+}
+```
+</details>
+<details>
+  
+  <summary>Server response (getbestblockhash2)</summary>
+ 
+ ```json
+{
+  "result": {
+    "hash": "00000000000000fd38c98aeef2f981a9591375748c2bb09b043be251d213edaf",
+    "confirmations": 7,
+    "strippedsize": 63348,
+    "size": 111897,
+    "weight": 301941,
+    "height": 1807962,
+    "version": 549453824,
+    "versionHex": "20c00000",
+    "merkleroot": "23f8682347a53b41e6f54503302bf1193b17036ee9edeb28539f20ffeef634a1",
+    "tx": [
+      {
+        "txid": "45fc5d4375be80fe1a2a8bbe6dc04a2923a29e967466db5736763c1c57217e59",
+        "hash": "143756e1fafc786d7f15d0327d1bb4f0839fa2f24502a5cfa5e22d2f87ad5041",
+        "version": 2,
+        "size": 206,
+        "vsize": 179,
+        "weight": 716,
+        "locktime": 0,
+        "vin": [
+          {
+            "coinbase": "035a961b043b973f5f7669702f7777772e6f6b706f6f6c2e746f702f020000002754000000000000",
+            "sequence": 4294967295
+          }
+        ],
+        "vout": [
+          {
+            "value": 0.21355788,
+            "n": 0,
+            "scriptPubKey": {
+              "asm": "OP_HASH160 7d0bc1f74eb7e9f77d68221c54a9ab76879f580f OP_EQUAL",
+              "hex": "a9147d0bc1f74eb7e9f77d68221c54a9ab76879f580f87",
+              "reqSigs": 1,
+              "type": "scripthash",
+              "addresses": [
+                "2N4eQYCbKUHCCTUjBJeHcJp9ok6J2GZsTDt"
+              ]
+            }
+          },
+          {
+            "value": 0.00000000,
+            "n": 1,
+            "scriptPubKey": {
+              "asm": "OP_RETURN aa21a9ed3ec75454dbd863f1ed72717b5124e2f6649c58ec65100857e91c6d3647208b63",
+              "hex": "6a24aa21a9ed3ec75454dbd863f1ed72717b5124e2f6649c58ec65100857e91c6d3647208b63",
+              "type": "nulldata"
+            }
+          }
+        ],
+        "hex": "020000000001010000000000000000000000000000000000000000000000000000000000000000ffffffff28035a961b043b973f5f7669702f7777772e6f6b706f6f6c2e746f702f020000002754000000000000ffffffff020cdd45010000000017a9147d0bc1f74eb7e9f77d68221c54a9ab76879f580f870000000000000000266a24aa21a9ed3ec75454dbd863f1ed72717b5124e2f6649c58ec65100857e91c6d3647208b630120000000000000000000000000000000000000000000000000000000000000000000000000"
+      },
       ...
     ],
     "time": 1598003003,
