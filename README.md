@@ -40,10 +40,12 @@ BLOCKCHAIN
   Console.WriteLine(getbestblockhash);
   
 ```
+
 <details>
+  
   <summary>Server response</summary>
-   
-  ```json
+ 
+ ```json
 {
   "result": "0000000000000000000560f1c95e7ab5857d37777f9c34015c99293fbe3c0d36",
   "error": null,
