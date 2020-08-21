@@ -320,16 +320,57 @@ Console.WriteLine(getblockhash);
 ### getblockheader
 -----
 ```csharp    
- 
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+
+Blockchain blockchain = new Blockchain(bitcoinClient);
+string blockhash = "00000000000000b5eadb000848db1e0f79051679c462721dd29fe1fd365cb157";
+
+string getblockheader_Hex = await blockchain.GetBlockHeader(blockhash, BlockHeaderVerbosity.Hex);
+string getblockheader_Json = await blockchain.GetBlockHeader(blockhash, BlockHeaderVerbosity.Json);
+            
+Console.WriteLine(getblockheader_Hex);
+Console.WriteLine(getblockheader_Json);
   
 ```
 
 <details>
   
-  <summary>Server response</summary>
+  <summary>Server response (getblockheader_Hex)</summary>
  
  ```json
-
+{
+  "result": "00000020b84d13c21ab3bd62e7dad41293013a77a79cec3181471a68148249e3000000002612428a5cb4cea23ab8929b6eb622d15becb96c8edba5266d9a30f4e7702937f3ad3f5fda51011a70fb1fca",
+  "error": null,
+  "id": null
+}
+```
+</details>
+<details>
+  
+  <summary>Server response (getblockheader_Json)</summary>
+ 
+ ```json
+{
+  "result": {
+    "hash": "00000000000000b5eadb000848db1e0f79051679c462721dd29fe1fd365cb157",
+    "confirmations": 2,
+    "height": 1807969,
+    "version": 536870912,
+    "versionHex": "20000000",
+    "merkleroot": "372970e7f4309a6d26a5db8e6cb9ec5bd122b66e9b92b83aa2ceb45c8a421226",
+    "time": 1598008819,
+    "mediantime": 1598004409,
+    "nonce": 3391093616,
+    "bits": "1a0151da",
+    "difficulty": 12712392.76864377,
+    "chainwork": "0000000000000000000000000000000000000000000001bfc5512a355f178d8d",
+    "nTx": 130,
+    "previousblockhash": "00000000e3498214681a478131ec9ca7773a019312d4dae762bdb31ac2134db8",
+    "nextblockhash": "0000000000000139ca625052631124ab9e5864aceb84a691da083ff61eb6adae"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
