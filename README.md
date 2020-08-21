@@ -294,7 +294,13 @@ Console.WriteLine(getblockcount);
 ### getblockhash
 -----
 ```csharp    
- 
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+string getblockhash = await blockchain.GetBlockHash(1000);
+
+Console.WriteLine(getblockhash);
   
 ```
 
@@ -303,7 +309,11 @@ Console.WriteLine(getblockcount);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "00000000373403049c5fff2cd653590e8cbe6f7ac639db270e7d1a7503d698df",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
