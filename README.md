@@ -4,7 +4,7 @@
 
 Table of contents
 =================
-
+   
 <!--ts-->
    * [Installation](#installation)
    * [Core Rpc](#usage)
@@ -30,6 +30,17 @@ BLOCKCHAIN
 
 ### getbestblockhash
 -----
+```csharp
+           
+  BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333","alice:pass");
+            
+  Blockchain blockchain = new Blockchain(bitcoinClient);
+            
+  string getbestblockhash = blockchain.GetBestBlockHash().Result;
+
+  Console.WriteLine(getbestblockhash);
+```
+
 ### getblock
 -----
 ### getblockchaininfo
