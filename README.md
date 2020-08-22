@@ -1357,17 +1357,99 @@ CONTROL
 
 ### getmemoryinfo
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getrpcinfo
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### help
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### logging
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### stop
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### uptime
 -----
+```csharp    
 
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
 
 GENERATING
 -----
@@ -1376,8 +1458,35 @@ GENERATING
 
 ### generatetoaddress
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### generatetodescriptor
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
 
 
 
@@ -1388,16 +1497,99 @@ MINING
 
 ### getblocktemplate
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getmininginfo
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getnetworkhashps
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### prioritisetransaction
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### submitblock
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### submitheader
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
 
 
 NETWORK
@@ -1407,30 +1599,211 @@ NETWORK
 
 ### addnode
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### clearbanned
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### disconnectnode
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getaddednodeinfo
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getconnectioncount
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getnettotals
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getnetworkinfo
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getnodeaddresses
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getpeerinfo
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### listbanned
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### ping
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### setban
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### setnetworkactive
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
 
 
 RAWTRANSACTIONS
@@ -1440,39 +1813,275 @@ RAWTRANSACTIONS
 
 ### analyzepsbt
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### combinepsbt
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### combinerawtransaction
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### converttopsbt
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### createpsbt
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### createrawtransaction
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### decodepsbt
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### decoderawtransaction
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### decodescript
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### finalizepsbt
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### fundrawtransaction
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getrawtransaction
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### joinpsbts
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### sendrawtransaction
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### signrawtransactionwithkey
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### testmempoolaccept
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### utxoupdatepsbt
 -----
+```csharp    
 
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
 
 UTIL
 -----
@@ -1481,19 +2090,115 @@ UTIL
 
 ### createmultisig
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### deriveaddresses
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### estimatesmartfee
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getdescriptorinfo
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### signmessagewithprivkey
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### validateaddress
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### verifymessage
 -----
+```csharp    
 
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
 
 WALLET
 -----
@@ -1502,114 +2207,883 @@ WALLET
 
 ### abandontransaction
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### abortrescan
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### addmultisigaddress
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### backupwallet
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### bumpfee
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### createwallet
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### dumpprivkey
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### dumpwallet
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### encryptwallet
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getaddressesbylabel
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getaddressinfo
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getbalance
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getbalances
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getnewaddress
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getrawchangeaddress
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getreceivedbyaddress
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getreceivedbylabel
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### gettransaction
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getunconfirmedbalance
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### getwalletinfo
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### importaddress
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### importmulti
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### importprivkey
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### importprunedfunds
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### importpubkey
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### importwallet
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### keypoolrefill
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### listaddressgroupings
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### listlabels
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### listlockunspent
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### listreceivedbyaddress
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### listreceivedbylabel
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### listsinceblock
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### listtransactions
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### listunspent
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### listwalletdir
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### listwallets
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### loadwallet
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### lockunspent
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### removeprunedfunds
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### rescanblockchain
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### sendmany
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### sendtoaddress
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### sethdseed
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### setlabel
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### settxfee
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### setwalletflag
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### signmessage
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### signrawtransactionwithwallet
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### unloadwallet
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### walletcreatefundedpsbt
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### walletlock
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### walletpassphrase
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### walletpassphrasechange
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
+
 ### walletprocesspsbt
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
 
 
 
@@ -1624,5 +3098,18 @@ ZMQ
 
 ### getzmqnotifications
 -----
+```csharp    
+
+  
+```
+
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+
+```
+</details>
 
 
