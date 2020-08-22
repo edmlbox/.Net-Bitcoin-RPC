@@ -2193,7 +2193,7 @@ Console.WriteLine(disconnectnode_byNodeId);
 
 <details>
   
-  <summary>Server response</summary>
+  <summary>Server response (disconnectnode_byAddress)</summary>
  
  ```json
 {
@@ -2206,7 +2206,7 @@ Console.WriteLine(disconnectnode_byNodeId);
 
 <details>
   
-  <summary>Server response</summary>
+  <summary>Server response (disconnectnode_byNodeId)</summary>
  
  ```json
 {
