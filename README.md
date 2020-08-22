@@ -1358,8 +1358,13 @@ CONTROL
 ### getmemoryinfo
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+ServerControl serverControl = new ServerControl(bitcoinClient);
 
-  
+string getmemoryinfo = await serverControl.GetMemoryInfo();
+
+Console.WriteLine(getmemoryinfo);
 ```
 
 <details>
@@ -1367,15 +1372,33 @@ CONTROL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "locked": {
+      "used": 176,
+      "free": 261968,
+      "total": 262144,
+      "locked": 0,
+      "chunks_used": 1,
+      "chunks_free": 1
+    }
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getrpcinfo
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+ServerControl serverControl = new ServerControl(bitcoinClient);
 
-  
+string getrpcinfo = await serverControl.GetRpcInfo();
+
+Console.WriteLine(getrpcinfo);
 ```
 
 <details>
@@ -1383,31 +1406,80 @@ CONTROL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "active_commands": [
+      {
+        "method": "getrpcinfo",
+        "duration": 0
+      }
+    ],
+    "logpath": "E:\\btcData\\testnet3\\debug.log"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### help
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+ServerControl serverControl = new ServerControl(bitcoinClient);
 
-  
+string help = await serverControl.Help();
+string help_with_Command = await serverControl.Help(CommandHelp.addnode);
+
+Console.WriteLine(help);
+Console.WriteLine(help_with_Command); 
 ```
 
 <details>
   
-  <summary>Server response</summary>
+  <summary>Server response (help)</summary>
  
  ```json
-
+{
+  "result": "== Blockchain ==\ngetbestblockhash\ngetblock \u0022blockhash\u0022 ( verbosity )\ngetblockchaininfo\ngetblockcount\ngetblockfilter \u0022blockhash\u0022 ( \u0022filtertype\u0022 )\ngetblockhash height\ngetblockheader \u0022blockhash\u0022 ( verbose )\ngetblockstats hash_or_height ( stats )\ngetchaintips\ngetchaintxstats ( nblocks \u0022blockhash\u0022 )\ngetdifficulty\ngetmempoolancestors \u0022txid\u0022 ( verbose )\ngetmempooldescendants \u0022txid\u0022 ( verbose )\ngetmempoolentry \u0022txid\u0022\ngetmempoolinfo\ngetrawmempool ( verbose )\ngettxout \u0022txid\u0022 n ( include_mempool )\ngettxoutproof [\u0022txid\u0022,...] ( \u0022blockhash\u0022 )\ngettxoutsetinfo\npreciousblock \u0022blockhash\u0022\npruneblockchain height\nsavemempool\nscantxoutset \u0022action\u0022 ( [scanobjects,...] )\nverifychain ( checklevel nblocks )\nverifytxoutproof \u0022proof\u0022\n\n== Control ==\ngetmemoryinfo ( \u0022mode\u0022 )\ngetrpcinfo\nhelp ( \u0022command\u0022 )\nlogging ( [\u0022include_category\u0022,...] [\u0022exclude_category\u0022,...] )\nstop\nuptime\n\n== Generating ==\ngeneratetoaddress nblocks \u0022address\u0022 ( maxtries )\ngeneratetodescriptor num_blocks \u0022descriptor\u0022 ( maxtries )\n\n== Mining ==\ngetblocktemplate ( \u0022template_request\u0022 )\ngetmininginfo\ngetnetworkhashps ( nblocks height )\nprioritisetransaction \u0022txid\u0022 ( dummy ) fee_delta\nsubmitblock \u0022hexdata\u0022 ( \u0022dummy\u0022 )\nsubmitheader \u0022hexdata\u0022\n\n== Network ==\naddnode \u0022node\u0022 \u0022command\u0022\nclearbanned\ndisconnectnode ( \u0022address\u0022 nodeid )\ngetaddednodeinfo ( \u0022node\u0022 )\ngetconnectioncount\ngetnettotals\ngetnetworkinfo\ngetnodeaddresses ( count )\ngetpeerinfo\nlistbanned\nping\nsetban \u0022subnet\u0022 \u0022command\u0022 ( bantime absolute )\nsetnetworkactive state\n\n== Rawtransactions ==\nanalyzepsbt \u0022psbt\u0022\ncombinepsbt [\u0022psbt\u0022,...]\ncombinerawtransaction [\u0022hexstring\u0022,...]\nconverttopsbt \u0022hexstring\u0022 ( permitsigdata iswitness )\ncreatepsbt [{\u0022txid\u0022:\u0022hex\u0022,\u0022vout\u0022:n,\u0022sequence\u0022:n},...] [{\u0022address\u0022:amount},{\u0022data\u0022:\u0022hex\u0022},...] ( locktime replaceable )\ncreaterawtransaction [{\u0022txid\u0022:\u0022hex\u0022,\u0022vout\u0022:n,\u0022sequence\u0022:n},...] [{\u0022address\u0022:amount},{\u0022data\u0022:\u0022hex\u0022},...] ( locktime replaceable )\ndecodepsbt \u0022psbt\u0022\ndecoderawtransaction \u0022hexstring\u0022 ( iswitness )\ndecodescript \u0022hexstring\u0022\nfinalizepsbt \u0022psbt\u0022 ( extract )\nfundrawtransaction \u0022hexstring\u0022 ( options iswitness )\ngetrawtransaction \u0022txid\u0022 ( verbose \u0022blockhash\u0022 )\njoinpsbts [\u0022psbt\u0022,...]\nsendrawtransaction \u0022hexstring\u0022 ( maxfeerate )\nsignrawtransactionwithkey \u0022hexstring\u0022 [\u0022privatekey\u0022,...] ( [{\u0022txid\u0022:\u0022hex\u0022,\u0022vout\u0022:n,\u0022scriptPubKey\u0022:\u0022hex\u0022,\u0022redeemScript\u0022:\u0022hex\u0022,\u0022witnessScript\u0022:\u0022hex\u0022,\u0022amount\u0022:amount},...] \u0022sighashtype\u0022 )\ntestmempoolaccept [\u0022rawtx\u0022,...] ( maxfeerate )\nutxoupdatepsbt \u0022psbt\u0022 ( [\u0022\u0022,{\u0022desc\u0022:\u0022str\u0022,\u0022range\u0022:n or [n,n]},...] )\n\n== Util ==\ncreatemultisig nrequired [\u0022key\u0022,...] ( \u0022address_type\u0022 )\nderiveaddresses \u0022descriptor\u0022 ( range )\nestimatesmartfee conf_target ( \u0022estimate_mode\u0022 )\ngetdescriptorinfo \u0022descriptor\u0022\nsignmessagewithprivkey \u0022privkey\u0022 \u0022message\u0022\nvalidateaddress \u0022address\u0022\nverifymessage \u0022address\u0022 \u0022signature\u0022 \u0022message\u0022\n\n== Wallet ==\nabandontransaction \u0022txid\u0022\nabortrescan\naddmultisigaddress nrequired [\u0022key\u0022,...] ( \u0022label\u0022 \u0022address_type\u0022 )\nbackupwallet \u0022destination\u0022\nbumpfee \u0022txid\u0022 ( options )\ncreatewallet \u0022wallet_name\u0022 ( disable_private_keys blank \u0022passphrase\u0022 avoid_reuse )\ndumpprivkey \u0022address\u0022\ndumpwallet \u0022filename\u0022\nencryptwallet \u0022passphrase\u0022\ngetaddressesbylabel \u0022label\u0022\ngetaddressinfo \u0022address\u0022\ngetbalance ( \u0022dummy\u0022 minconf include_watchonly avoid_reuse )\ngetbalances\ngetnewaddress ( \u0022label\u0022 \u0022address_type\u0022 )\ngetrawchangeaddress ( \u0022address_type\u0022 )\ngetreceivedbyaddress \u0022address\u0022 ( minconf )\ngetreceivedbylabel \u0022label\u0022 ( minconf )\ngettransaction \u0022txid\u0022 ( include_watchonly verbose )\ngetunconfirmedbalance\ngetwalletinfo\nimportaddress \u0022address\u0022 ( \u0022label\u0022 rescan p2sh )\nimportmulti \u0022requests\u0022 ( \u0022options\u0022 )\nimportprivkey \u0022privkey\u0022 ( \u0022label\u0022 rescan )\nimportprunedfunds \u0022rawtransaction\u0022 \u0022txoutproof\u0022\nimportpubkey \u0022pubkey\u0022 ( \u0022label\u0022 rescan )\nimportwallet \u0022filename\u0022\nkeypoolrefill ( newsize )\nlistaddressgroupings\nlistlabels ( \u0022purpose\u0022 )\nlistlockunspent\nlistreceivedbyaddress ( minconf include_empty include_watchonly \u0022address_filter\u0022 )\nlistreceivedbylabel ( minconf include_empty include_watchonly )\nlistsinceblock ( \u0022blockhash\u0022 target_confirmations include_watchonly include_removed )\nlisttransactions ( \u0022label\u0022 count skip include_watchonly )\nlistunspent ( minconf maxconf [\u0022address\u0022,...] include_unsafe query_options )\nlistwalletdir\nlistwallets\nloadwallet \u0022filename\u0022\nlockunspent unlock ( [{\u0022txid\u0022:\u0022hex\u0022,\u0022vout\u0022:n},...] )\nremoveprunedfunds \u0022txid\u0022\nrescanblockchain ( start_height stop_height )\nsendmany \u0022\u0022 {\u0022address\u0022:amount} ( minconf \u0022comment\u0022 [\u0022address\u0022,...] replaceable conf_target \u0022estimate_mode\u0022 )\nsendtoaddress \u0022address\u0022 amount ( \u0022comment\u0022 \u0022comment_to\u0022 subtractfeefromamount replaceable conf_target \u0022estimate_mode\u0022 avoid_reuse )\nsethdseed ( newkeypool \u0022seed\u0022 )\nsetlabel \u0022address\u0022 \u0022label\u0022\nsettxfee amount\nsetwalletflag \u0022flag\u0022 ( value )\nsignmessage \u0022address\u0022 \u0022message\u0022\nsignrawtransactionwithwallet \u0022hexstring\u0022 ( [{\u0022txid\u0022:\u0022hex\u0022,\u0022vout\u0022:n,\u0022scriptPubKey\u0022:\u0022hex\u0022,\u0022redeemScript\u0022:\u0022hex\u0022,\u0022witnessScript\u0022:\u0022hex\u0022,\u0022amount\u0022:amount},...] \u0022sighashtype\u0022 )\nunloadwallet ( \u0022wallet_name\u0022 )\nwalletcreatefundedpsbt [{\u0022txid\u0022:\u0022hex\u0022,\u0022vout\u0022:n,\u0022sequence\u0022:n},...] [{\u0022address\u0022:amount},{\u0022data\u0022:\u0022hex\u0022},...] ( locktime options bip32derivs )\nwalletlock\nwalletpassphrase \u0022passphrase\u0022 timeout\nwalletpassphrasechange \u0022oldpassphrase\u0022 \u0022newpassphrase\u0022\nwalletprocesspsbt \u0022psbt\u0022 ( sign \u0022sighashtype\u0022 bip32derivs )\n\n== Zmq ==\ngetzmqnotifications",
+  "error": null,
+  "id": null
+}
+```
+</details>
+<details>
+  
+  <summary>Server response (help_with_Command)</summary>
+ 
+ ```json
+{
+  "result": "addnode \u0022node\u0022 \u0022command\u0022\n\nAttempts to add or remove a node from the addnode list.\nOr try a connection to a node once.\nNodes added using addnode (or -connect) are protected from DoS disconnection and are not required to be\nfull nodes/support SegWit as other outbound peers are (though such peers will not be synced from).\n\nArguments:\n1. node       (string, required) The node (see getpeerinfo for nodes)\n2. command    (string, required) \u0027add\u0027 to add a node to the list, \u0027remove\u0027 to remove a node from the list, \u0027onetry\u0027 to try a connection to the node once\n\nResult:\nnull    (json null)\n\nExamples:\n\u003E bitcoin-cli addnode \u0022192.168.0.6:8333\u0022 \u0022onetry\u0022\n\u003E curl --user myusername --data-binary \u0027{\u0022jsonrpc\u0022: \u00221.0\u0022, \u0022id\u0022: \u0022curltest\u0022, \u0022method\u0022: \u0022addnode\u0022, \u0022params\u0022: [\u0022192.168.0.6:8333\u0022, \u0022onetry\u0022]}\u0027 -H \u0027content-type: text/plain;\u0027 http://127.0.0.1:8332/\n",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### logging
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+ServerControl serverControl = new ServerControl(bitcoinClient);
 
-  
+List<LoggingCategories> include = new List<LoggingCategories>();
+include.Add(LoggingCategories.addrman);
+include.Add(LoggingCategories.estimatefee);
+
+List<LoggingCategories> exclude = new List<LoggingCategories>();
+exclude.Add(LoggingCategories.libevent);
+exclude.Add(LoggingCategories.proxy);
+
+string logging = await serverControl.Logging();
+string logging_filtered = await serverControl.Logging(include, exclude);
+            
+Console.WriteLine(logging);
+Console.WriteLine(logging_filtered);
+
 ```
 
 <details>
@@ -1415,14 +1487,82 @@ CONTROL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "net": false,
+    "tor": false,
+    "mempool": false,
+    "http": false,
+    "bench": false,
+    "zmq": false,
+    "walletdb": false,
+    "rpc": false,
+    "estimatefee": true,
+    "addrman": true,
+    "selectcoins": false,
+    "reindex": false,
+    "cmpctblock": false,
+    "rand": false,
+    "prune": false,
+    "proxy": false,
+    "mempoolrej": false,
+    "libevent": false,
+    "coindb": false,
+    "qt": false,
+    "leveldb": false,
+    "validation": false
+  },
+  "error": null,
+  "id": null
+}
+```
+</details>
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+{
+  "result": {
+    "net": false,
+    "tor": false,
+    "mempool": false,
+    "http": false,
+    "bench": false,
+    "zmq": false,
+    "walletdb": false,
+    "rpc": false,
+    "estimatefee": true,
+    "addrman": true,
+    "selectcoins": false,
+    "reindex": false,
+    "cmpctblock": false,
+    "rand": false,
+    "prune": false,
+    "proxy": false,
+    "mempoolrej": false,
+    "libevent": false,
+    "coindb": false,
+    "qt": false,
+    "leveldb": false,
+    "validation": false
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### stop
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+ServerControl serverControl = new ServerControl(bitcoinClient);
 
+string stop = await serverControl.StopServer();
+            
+Console.WriteLine(stop);
   
 ```
 
@@ -1431,15 +1571,24 @@ CONTROL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "Bitcoin Core stopping",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### uptime
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+ServerControl serverControl = new ServerControl(bitcoinClient);
 
-  
+string uptime = await serverControl.Uptime();
+            
+Console.WriteLine(uptime);
 ```
 
 <details>
@@ -1447,7 +1596,11 @@ CONTROL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": 17,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
