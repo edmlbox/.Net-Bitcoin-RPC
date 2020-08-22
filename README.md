@@ -2055,7 +2055,13 @@ Console.WriteLine(prioritisetransaction);
 ### submitblock
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+Mining mining = new Mining(bitcoinClient);
 
+string hexdata = "0100000000000000000000000000000000000000000000000000000000000000000000003BA3EDFD7A7B12B27AC72C3E67768F617FC81BC3888A51323A9FB8AA4B1E5E4A29AB5F49FFFF001D1DAC2B7C0101000000010000000000000000000000000000000000000000000000000000000000000000FFFFFFFF4D04FFFF001D0104455468652054696D65732030332F4A616E2F32303039204368616E63656C6C6F72206F6E206272696E6B206F66207365636F6E64206261696C6F757420666F722062616E6B73FFFFFFFF0100F2052A01000000434104678AFDB0FE5548271967F1A67130B7105CD6A828E03909A67962E0EA1F61DEB649F6BC3F4CEF38C4F35504E51EC112DE5C384DF7BA0B8D578A4C702B6BF11D5FAC00000000";
+
+string submitblock = await mining.SubmitBlock(hexdata);
+Console.WriteLine(submitblock);
   
 ```
 
@@ -2064,14 +2070,24 @@ Console.WriteLine(prioritisetransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "inconclusive",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### submitheader
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+Mining mining = new Mining(bitcoinClient);
 
+string hexdata = "0100000000000000000000000000000000000000000000000000000000000000000000003BA3EDFD7A7B12B27AC72C3E67768F617FC81BC3888A51323A9FB8AA4B1E5E4A29AB5F49FFFF001D1DAC2B7C0101000000010000000000000000000000000000000000000000000000000000000000000000FFFFFFFF4D04FFFF001D0104455468652054696D65732030332F4A616E2F32303039204368616E63656C6C6F72206F6E206272696E6B206F66207365636F6E64206261696C6F757420666F722062616E6B73FFFFFFFF0100F2052A01000000434104678AFDB0FE5548271967F1A67130B7105CD6A828E03909A67962E0EA1F61DEB649F6BC3F4CEF38C4F35504E51EC112DE5C384DF7BA0B8D578A4C702B6BF11D5FAC00000000";
+
+string submitheader = await mining.SubmitHeader(hexdata);
+Console.WriteLine(submitheader);
   
 ```
 
@@ -2080,7 +2096,14 @@ Console.WriteLine(prioritisetransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": {
+    "code": -25,
+    "message": "Must submit previous header (0000000000000000000000000000000000000000000000000000000000000000) first"
+  },
+  "id": null
+}
 ```
 </details>
 
@@ -2093,24 +2116,53 @@ NETWORK
 ### addnode
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+Network network = new Network(bitcoinClient);
 
+string addnode = await network.AddNode("43.225.62.107:8333", NodeCommand.add);
+string removeNode = await network.AddNode("43.225.62.107:8333", NodeCommand.remove);
+            
+Console.WriteLine(addnode);
+Console.WriteLine(removeNode);
   
 ```
 
 <details>
   
-  <summary>Server response</summary>
+  <summary>Server response (addnode)</summary>
  
  ```json
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
+```
+</details>
 
+<details>
+  
+  <summary>Server response (removeNode)</summary>
+ 
+ ```json
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### clearbanned
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+            
+Network network = new Network(bitcoinClient);
 
-  
+string clearbanned = await network.ClearBanned();
+
+Console.WriteLine(clearbanned);
 ```
 
 <details>
@@ -2118,15 +2170,25 @@ NETWORK
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### disconnectnode
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+Network network = new Network(bitcoinClient);
 
-  
+string disconnectnode_byAddress = await network.DisconnectNode("134.209.27.213:8333");
+string disconnectnode_byNodeId = await network.DisconnectNode(2);
+            
+Console.WriteLine(disconnectnode_byAddress);
+Console.WriteLine(disconnectnode_byNodeId);
 ```
 
 <details>
@@ -2134,31 +2196,109 @@ NETWORK
   <summary>Server response</summary>
  
  ```json
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
+```
+</details>
 
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getaddednodeinfo
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+Network network = new Network(bitcoinClient);
+            
+string getaddednodeinfo_All = await network.GetAddedNodeInfo();
+string getaddednodeinfo_Specific = await network.GetAddedNodeInfo("47.113.95.224:8333");
 
+Console.WriteLine(getaddednodeinfo_All);
+Console.WriteLine(getaddednodeinfo_Specific);
   
 ```
 
 <details>
   
-  <summary>Server response</summary>
+  <summary>Server response (getaddednodeinfo_All)</summary>
  
  ```json
+{
+  "result": [
+    {
+      "addednode": "195.206.105.22:8333",
+      "connected": true,
+      "addresses": [
+        {
+          "address": "195.206.105.22:8333",
+          "connected": "outbound"
+        }
+      ]
+    },
+    {
+      "addednode": "47.113.95.224:8333",
+      "connected": true,
+      "addresses": [
+        {
+          "address": "47.113.95.224:8333",
+          "connected": "outbound"
+        }
+      ]
+    }
+  ],
+  "error": null,
+  "id": null
+}
+```
+</details>
 
+<details>
+  
+  <summary>Server response (getaddednodeinfo_Specific)</summary>
+ 
+ ```json
+{
+  "result": [
+    {
+      "addednode": "47.113.95.224:8333",
+      "connected": true,
+      "addresses": [
+        {
+          "address": "47.113.95.224:8333",
+          "connected": "outbound"
+        }
+      ]
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getconnectioncount
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+            
+Network network = new Network(bitcoinClient);
+            
+string getconnectioncount = await network.GetConnectionCount();
 
-  
+Console.WriteLine(getconnectioncount);
 ```
 
 <details>
@@ -2166,15 +2306,24 @@ NETWORK
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": 13,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getnettotals
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+            
+Network network = new Network(bitcoinClient);
 
-  
+string getnettotals = await network.GetNetTotals();
+
+Console.WriteLine(getnettotals);
 ```
 
 <details>
@@ -2182,15 +2331,36 @@ NETWORK
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "totalbytesrecv": 18109462,
+    "totalbytessent": 1276312,
+    "timemillis": 1598093153465,
+    "uploadtarget": {
+      "timeframe": 86400,
+      "target": 0,
+      "target_reached": false,
+      "serve_historical_blocks": true,
+      "bytes_left_in_cycle": 0,
+      "time_left_in_cycle": 0
+    }
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getnetworkinfo
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+            
+Network network = new Network(bitcoinClient);
 
-  
+string getnetworkinfo = await network.GetNetworkInfo();
+
+Console.WriteLine(getnetworkinfo);
 ```
 
 <details>
@@ -2198,15 +2368,64 @@ NETWORK
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "version": 200000,
+    "subversion": "/Satoshi:0.20.0/",
+    "protocolversion": 70015,
+    "localservices": "0000000000000408",
+    "localservicesnames": [
+      "WITNESS",
+      "NETWORK_LIMITED"
+    ],
+    "localrelay": true,
+    "timeoffset": 0,
+    "networkactive": true,
+    "connections": 13,
+    "networks": [
+      {
+        "name": "ipv4",
+        "limited": false,
+        "reachable": true,
+        "proxy": "",
+        "proxy_randomize_credentials": false
+      },
+      {
+        "name": "ipv6",
+        "limited": false,
+        "reachable": true,
+        "proxy": "",
+        "proxy_randomize_credentials": false
+      },
+      {
+        "name": "onion",
+        "limited": true,
+        "reachable": false,
+        "proxy": "",
+        "proxy_randomize_credentials": false
+      }
+    ],
+    "relayfee": 0.00001000,
+    "incrementalfee": 0.00001000,
+    "localaddresses": [],
+    "warnings": ""
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getnodeaddresses
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+            
+Network network = new Network(bitcoinClient);
 
-  
+string getnodeaddresses = await network.GetNodeAddresses();
+
+Console.WriteLine(getnodeaddresses);  
 ```
 
 <details>
@@ -2214,15 +2433,31 @@ NETWORK
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "time": 1596549781,
+      "services": 1033,
+      "address": "45.16.97.187",
+      "port": 8333
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getpeerinfo
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+            
+Network network = new Network(bitcoinClient);
 
-  
+string getpeerinfo = await network.GetPeerInfo();
+
+Console.WriteLine(getpeerinfo);
 ```
 
 <details>
@@ -2230,15 +2465,834 @@ NETWORK
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "id": 0,
+      "addr": "144.76.15.207:8333",
+      "addrlocal": "37.229.74.123:50977",
+      "addrbind": "192.168.1.5:50977",
+      "services": "0000000000000409",
+      "servicesnames": [
+        "NETWORK",
+        "WITNESS",
+        "NETWORK_LIMITED"
+      ],
+      "relaytxes": true,
+      "lastsend": 1598093295,
+      "lastrecv": 1598093295,
+      "bytessent": 151214,
+      "bytesrecv": 15275081,
+      "conntime": 1598092011,
+      "timeoffset": 2,
+      "pingtime": 0.034179,
+      "minping": 0.032542,
+      "version": 70015,
+      "subver": "/Satoshi:0.19.1/",
+      "inbound": false,
+      "addnode": false,
+      "startingheight": 644827,
+      "banscore": 0,
+      "synced_headers": 644830,
+      "synced_blocks": 644830,
+      "inflight": [],
+      "whitelisted": false,
+      "permissions": [],
+      "minfeefilter": 0.00001000,
+      "bytessent_per_msg": {
+        "addr": 750,
+        "feefilter": 32,
+        "getaddr": 24,
+        "getblocktxn": 3709,
+        "getdata": 21943,
+        "getheaders": 1053,
+        "headers": 25,
+        "inv": 119041,
+        "notfound": 338,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 99,
+        "sendheaders": 24,
+        "tx": 3322,
+        "verack": 24,
+        "version": 126
+      },
+      "bytesrecv_per_msg": {
+        "addr": 31282,
+        "block": 12859953,
+        "blocktxn": 2040192,
+        "cmpctblock": 44859,
+        "feefilter": 32,
+        "getdata": 579,
+        "getheaders": 1053,
+        "headers": 916,
+        "inv": 64652,
+        "notfound": 898,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 229721,
+        "verack": 24,
+        "version": 126
+      }
+    },
+    {
+      "id": 1,
+      "addr": "212.51.144.42:8333",
+      "addrlocal": "37.229.74.123:50979",
+      "addrbind": "192.168.1.5:50979",
+      "services": "0000000000000409",
+      "servicesnames": [
+        "NETWORK",
+        "WITNESS",
+        "NETWORK_LIMITED"
+      ],
+      "relaytxes": true,
+      "lastsend": 1598093294,
+      "lastrecv": 1598093294,
+      "bytessent": 146260,
+      "bytesrecv": 390925,
+      "conntime": 1598092012,
+      "timeoffset": 1,
+      "pingtime": 0.042737,
+      "minping": 0.040768,
+      "version": 70015,
+      "subver": "/Satoshi:0.20.0/",
+      "inbound": false,
+      "addnode": false,
+      "startingheight": 644827,
+      "banscore": 0,
+      "synced_headers": 644830,
+      "synced_blocks": 644830,
+      "inflight": [],
+      "whitelisted": false,
+      "permissions": [],
+      "minfeefilter": 0.00001000,
+      "bytessent_per_msg": {
+        "addr": 980,
+        "feefilter": 32,
+        "getaddr": 24,
+        "getdata": 28915,
+        "getheaders": 1053,
+        "headers": 25,
+        "inv": 114287,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "verack": 24,
+        "version": 126
+      },
+      "bytesrecv_per_msg": {
+        "addr": 30722,
+        "feefilter": 32,
+        "getheaders": 1053,
+        "headers": 424,
+        "inv": 70011,
+        "notfound": 1003,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 286736,
+        "verack": 24,
+        "version": 126
+      }
+    },
+    {
+      "id": 3,
+      "addr": "46.166.173.49:8333",
+      "addrlocal": "37.229.74.123:50985",
+      "addrbind": "192.168.1.5:50985",
+      "services": "0000000000000409",
+      "servicesnames": [
+        "NETWORK",
+        "WITNESS",
+        "NETWORK_LIMITED"
+      ],
+      "relaytxes": true,
+      "lastsend": 1598093297,
+      "lastrecv": 1598093296,
+      "bytessent": 167931,
+      "bytesrecv": 156606,
+      "conntime": 1598092024,
+      "timeoffset": 0,
+      "pingtime": 0.081446,
+      "minping": 0.044578,
+      "version": 70015,
+      "subver": "/Satoshi:0.20.0/",
+      "inbound": false,
+      "addnode": false,
+      "startingheight": 644827,
+      "banscore": 0,
+      "synced_headers": 644830,
+      "synced_blocks": 644830,
+      "inflight": [],
+      "whitelisted": false,
+      "permissions": [],
+      "minfeefilter": 0.00001000,
+      "bytessent_per_msg": {
+        "addr": 835,
+        "feefilter": 32,
+        "getaddr": 24,
+        "getdata": 6307,
+        "getheaders": 1053,
+        "headers": 106,
+        "inv": 151145,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 7485,
+        "verack": 24,
+        "version": 126
+      },
+      "bytesrecv_per_msg": {
+        "addr": 30832,
+        "feefilter": 32,
+        "getdata": 909,
+        "getheaders": 1053,
+        "headers": 424,
+        "inv": 33095,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 89317,
+        "verack": 24,
+        "version": 126
+      }
+    },
+    {
+      "id": 6,
+      "addr": "18.232.70.84:8333",
+      "addrlocal": "37.229.74.123:50991",
+      "addrbind": "192.168.1.5:50991",
+      "services": "000000000000040d",
+      "servicesnames": [
+        "NETWORK",
+        "BLOOM",
+        "WITNESS",
+        "NETWORK_LIMITED"
+      ],
+      "relaytxes": true,
+      "lastsend": 1598093296,
+      "lastrecv": 1598093297,
+      "bytessent": 156391,
+      "bytesrecv": 707387,
+      "conntime": 1598092032,
+      "timeoffset": -1,
+      "pingtime": 0.123588,
+      "minping": 0.122352,
+      "version": 70015,
+      "subver": "/Satoshi:0.16.0/",
+      "inbound": false,
+      "addnode": false,
+      "startingheight": 644827,
+      "banscore": 0,
+      "synced_headers": 644830,
+      "synced_blocks": 644830,
+      "inflight": [],
+      "whitelisted": false,
+      "permissions": [],
+      "minfeefilter": 0.00001000,
+      "bytessent_per_msg": {
+        "addr": 1150,
+        "feefilter": 32,
+        "getaddr": 24,
+        "getdata": 52647,
+        "getheaders": 1053,
+        "inv": 96300,
+        "notfound": 205,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 4036,
+        "verack": 24,
+        "version": 126
+      },
+      "bytesrecv_per_msg": {
+        "addr": 30637,
+        "feefilter": 32,
+        "getdata": 571,
+        "headers": 424,
+        "inv": 85687,
+        "notfound": 2810,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 586282,
+        "verack": 24,
+        "version": 126
+      }
+    },
+    {
+      "id": 7,
+      "addr": "54.184.180.139:8333",
+      "addrlocal": "37.229.74.123:50993",
+      "addrbind": "192.168.1.5:50993",
+      "services": "0000000000000409",
+      "servicesnames": [
+        "NETWORK",
+        "WITNESS",
+        "NETWORK_LIMITED"
+      ],
+      "relaytxes": true,
+      "lastsend": 1598093295,
+      "lastrecv": 1598093275,
+      "bytessent": 146325,
+      "bytesrecv": 479359,
+      "conntime": 1598092038,
+      "timeoffset": 1,
+      "pingtime": 0.205379,
+      "minping": 0.193812,
+      "version": 70015,
+      "subver": "/Satoshi:0.19.0.1/",
+      "inbound": false,
+      "addnode": false,
+      "startingheight": 644828,
+      "banscore": 0,
+      "synced_headers": 644830,
+      "synced_blocks": 644830,
+      "inflight": [],
+      "whitelisted": false,
+      "permissions": [],
+      "minfeefilter": 0.00001000,
+      "bytessent_per_msg": {
+        "addr": 1225,
+        "feefilter": 32,
+        "getaddr": 24,
+        "getdata": 20333,
+        "getheaders": 1053,
+        "headers": 25,
+        "inv": 121090,
+        "notfound": 61,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 1538,
+        "verack": 24,
+        "version": 126
+      },
+      "bytesrecv_per_msg": {
+        "addr": 30692,
+        "feefilter": 32,
+        "getdata": 266,
+        "getheaders": 1053,
+        "headers": 318,
+        "inv": 60916,
+        "notfound": 1360,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 383776,
+        "verack": 24,
+        "version": 128
+      }
+    },
+    {
+      "id": 12,
+      "addr": "189.34.14.93:8333",
+      "addrlocal": "37.229.74.123:51004",
+      "addrbind": "192.168.1.5:51004",
+      "services": "0000000000000409",
+      "servicesnames": [
+        "NETWORK",
+        "WITNESS",
+        "NETWORK_LIMITED"
+      ],
+      "relaytxes": false,
+      "lastsend": 1598093258,
+      "lastrecv": 1598093281,
+      "bytessent": 2103,
+      "bytesrecv": 2822,
+      "conntime": 1598092058,
+      "timeoffset": -1,
+      "pingtime": 0.285172,
+      "minping": 0.284823,
+      "version": 70015,
+      "subver": "/Satoshi:0.19.1/",
+      "inbound": false,
+      "addnode": false,
+      "startingheight": 644828,
+      "banscore": 0,
+      "synced_headers": 644830,
+      "synced_blocks": 644830,
+      "inflight": [],
+      "whitelisted": false,
+      "permissions": [],
+      "minfeefilter": 0.00000000,
+      "bytessent_per_msg": {
+        "getheaders": 1053,
+        "headers": 106,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "verack": 24,
+        "version": 126
+      },
+      "bytesrecv_per_msg": {
+        "addr": 475,
+        "feefilter": 32,
+        "getheaders": 1053,
+        "headers": 318,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "verack": 24,
+        "version": 126
+      }
+    },
+    {
+      "id": 14,
+      "addr": "116.202.245.89:8333",
+      "addrlocal": "37.229.74.123:51006",
+      "addrbind": "192.168.1.5:51006",
+      "services": "0000000000000409",
+      "servicesnames": [
+        "NETWORK",
+        "WITNESS",
+        "NETWORK_LIMITED"
+      ],
+      "relaytxes": true,
+      "lastsend": 1598093294,
+      "lastrecv": 1598093290,
+      "bytessent": 139552,
+      "bytesrecv": 389815,
+      "conntime": 1598092059,
+      "timeoffset": 0,
+      "pingtime": 0.03402,
+      "minping": 0.033238,
+      "version": 70015,
+      "subver": "/Satoshi:0.20.0(Gunbot Official Node, by Gunthy.org)/",
+      "inbound": false,
+      "addnode": false,
+      "startingheight": 644828,
+      "banscore": 0,
+      "synced_headers": 644830,
+      "synced_blocks": 644830,
+      "inflight": [],
+      "whitelisted": false,
+      "permissions": [],
+      "minfeefilter": 0.00001000,
+      "bytessent_per_msg": {
+        "addr": 1015,
+        "feefilter": 32,
+        "getaddr": 24,
+        "getdata": 23829,
+        "getheaders": 1053,
+        "headers": 106,
+        "inv": 112549,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "verack": 24,
+        "version": 126
+      },
+      "bytesrecv_per_msg": {
+        "addr": 30522,
+        "feefilter": 32,
+        "getheaders": 1053,
+        "headers": 318,
+        "inv": 63694,
+        "notfound": 449,
+        "ping": 352,
+        "pong": 352,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 292766,
+        "verack": 24,
+        "version": 163
+      }
+    },
+    {
+      "id": 16,
+      "addr": "98.146.119.124:8333",
+      "addrbind": "192.168.1.5:51087",
+      "services": "0000000000000409",
+      "servicesnames": [
+        "NETWORK",
+        "WITNESS",
+        "NETWORK_LIMITED"
+      ],
+      "relaytxes": true,
+      "lastsend": 1598093294,
+      "lastrecv": 1598093294,
+      "bytessent": 104412,
+      "bytesrecv": 263484,
+      "conntime": 1598092438,
+      "timeoffset": 1,
+      "pingtime": 0.206196,
+      "minping": 0.204188,
+      "version": 70015,
+      "subver": "/Satoshi:0.19.0.1/",
+      "inbound": false,
+      "addnode": true,
+      "startingheight": 644828,
+      "banscore": 0,
+      "synced_headers": 644830,
+      "synced_blocks": 644830,
+      "inflight": [],
+      "whitelisted": false,
+      "permissions": [],
+      "minfeefilter": 0.00001000,
+      "bytessent_per_msg": {
+        "addr": 540,
+        "feefilter": 32,
+        "getaddr": 24,
+        "getdata": 16462,
+        "getheaders": 1053,
+        "headers": 106,
+        "inv": 84304,
+        "ping": 256,
+        "pong": 256,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 1139,
+        "verack": 24,
+        "version": 126
+      },
+      "bytesrecv_per_msg": {
+        "addr": 30532,
+        "feefilter": 32,
+        "getdata": 244,
+        "getheaders": 1053,
+        "headers": 318,
+        "inv": 43883,
+        "notfound": 557,
+        "ping": 256,
+        "pong": 256,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 186111,
+        "verack": 24,
+        "version": 128
+      }
+    },
+    {
+      "id": 19,
+      "addr": "18.217.164.147:8333",
+      "addrlocal": "37.229.74.123:51113",
+      "addrbind": "192.168.1.5:51113",
+      "services": "000000000000040d",
+      "servicesnames": [
+        "NETWORK",
+        "BLOOM",
+        "WITNESS",
+        "NETWORK_LIMITED"
+      ],
+      "relaytxes": false,
+      "lastsend": 1598093214,
+      "lastrecv": 1598093214,
+      "bytessent": 1719,
+      "bytesrecv": 2293,
+      "conntime": 1598092733,
+      "timeoffset": 0,
+      "pingtime": 0.142939,
+      "minping": 0.141931,
+      "version": 70015,
+      "subver": "/Satoshi:0.18.1/",
+      "inbound": false,
+      "addnode": false,
+      "startingheight": 644828,
+      "banscore": 0,
+      "synced_headers": 644830,
+      "synced_blocks": 644830,
+      "inflight": [],
+      "whitelisted": false,
+      "permissions": [],
+      "minfeefilter": 0.00000000,
+      "bytessent_per_msg": {
+        "getheaders": 1053,
+        "headers": 106,
+        "ping": 160,
+        "pong": 160,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "verack": 24,
+        "version": 126
+      },
+      "bytesrecv_per_msg": {
+        "addr": 330,
+        "feefilter": 32,
+        "getheaders": 1053,
+        "headers": 318,
+        "ping": 160,
+        "pong": 160,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "verack": 24,
+        "version": 126
+      }
+    },
+    {
+      "id": 23,
+      "addr": "75.3.206.157:8333",
+      "addrlocal": "37.229.74.123:51127",
+      "addrbind": "192.168.1.5:51127",
+      "services": "0000000000000409",
+      "servicesnames": [
+        "NETWORK",
+        "WITNESS",
+        "NETWORK_LIMITED"
+      ],
+      "relaytxes": true,
+      "lastsend": 1598093293,
+      "lastrecv": 1598093295,
+      "bytessent": 65134,
+      "bytesrecv": 147046,
+      "conntime": 1598092767,
+      "timeoffset": -1,
+      "pingtime": 0.160426,
+      "minping": 0.158789,
+      "version": 70015,
+      "subver": "/Satoshi:0.20.0/",
+      "inbound": false,
+      "addnode": false,
+      "startingheight": 644828,
+      "banscore": 0,
+      "synced_headers": 644830,
+      "synced_blocks": 644830,
+      "inflight": [],
+      "whitelisted": false,
+      "permissions": [],
+      "minfeefilter": 0.00001000,
+      "bytessent_per_msg": {
+        "addr": 585,
+        "feefilter": 32,
+        "getaddr": 24,
+        "getdata": 8309,
+        "getheaders": 1053,
+        "headers": 212,
+        "inv": 54359,
+        "ping": 160,
+        "pong": 160,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "verack": 24,
+        "version": 126
+      },
+      "bytesrecv_per_msg": {
+        "addr": 30277,
+        "feefilter": 32,
+        "getheaders": 1053,
+        "headers": 212,
+        "inv": 27289,
+        "notfound": 219,
+        "ping": 160,
+        "pong": 160,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 87404,
+        "verack": 24,
+        "version": 126
+      }
+    },
+    {
+      "id": 26,
+      "addr": "13.126.144.12:8333",
+      "addrlocal": "37.229.74.123:51130",
+      "addrbind": "192.168.1.5:51130",
+      "services": "0000000000000409",
+      "servicesnames": [
+        "NETWORK",
+        "WITNESS",
+        "NETWORK_LIMITED"
+      ],
+      "relaytxes": true,
+      "lastsend": 1598093296,
+      "lastrecv": 1598093297,
+      "bytessent": 64434,
+      "bytesrecv": 125106,
+      "conntime": 1598092769,
+      "timeoffset": 0,
+      "pingtime": 0.146912,
+      "minping": 0.146912,
+      "version": 70015,
+      "subver": "/Satoshi:0.19.1/",
+      "inbound": false,
+      "addnode": false,
+      "startingheight": 644829,
+      "banscore": 0,
+      "synced_headers": 644830,
+      "synced_blocks": 644830,
+      "inflight": [],
+      "whitelisted": false,
+      "permissions": [],
+      "minfeefilter": 0.00001000,
+      "bytessent_per_msg": {
+        "addr": 415,
+        "feefilter": 32,
+        "getaddr": 24,
+        "getdata": 6439,
+        "getheaders": 1053,
+        "headers": 106,
+        "inv": 55805,
+        "ping": 160,
+        "pong": 160,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "verack": 24,
+        "version": 126
+      },
+      "bytesrecv_per_msg": {
+        "addr": 30252,
+        "feefilter": 32,
+        "getheaders": 1053,
+        "headers": 212,
+        "inv": 29435,
+        "ping": 160,
+        "pong": 160,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 63562,
+        "verack": 24,
+        "version": 126
+      }
+    },
+    {
+      "id": 29,
+      "addr": "47.113.95.224:8333",
+      "addrlocal": "37.229.74.123:51146",
+      "addrbind": "192.168.1.5:51146",
+      "services": "0000000000000409",
+      "servicesnames": [
+        "NETWORK",
+        "WITNESS",
+        "NETWORK_LIMITED"
+      ],
+      "relaytxes": true,
+      "lastsend": 1598093295,
+      "lastrecv": 1598093297,
+      "bytessent": 41451,
+      "bytesrecv": 67214,
+      "conntime": 1598092972,
+      "timeoffset": 1,
+      "pingtime": 0.464409,
+      "minping": 0.246331,
+      "version": 70015,
+      "subver": "/Satoshi:0.19.0.1/",
+      "inbound": false,
+      "addnode": true,
+      "startingheight": 644829,
+      "banscore": 0,
+      "synced_headers": 644830,
+      "synced_blocks": 644830,
+      "inflight": [],
+      "whitelisted": false,
+      "permissions": [],
+      "minfeefilter": 0.00001000,
+      "bytessent_per_msg": {
+        "addr": 250,
+        "feefilter": 32,
+        "getaddr": 24,
+        "getdata": 1261,
+        "getheaders": 1053,
+        "headers": 106,
+        "inv": 38293,
+        "ping": 96,
+        "pong": 96,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "verack": 24,
+        "version": 126
+      },
+      "bytesrecv_per_msg": {
+        "addr": 30192,
+        "feefilter": 32,
+        "getheaders": 1053,
+        "headers": 212,
+        "inv": 19168,
+        "notfound": 61,
+        "ping": 96,
+        "pong": 96,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "tx": 16062,
+        "verack": 24,
+        "version": 128
+      }
+    },
+    {
+      "id": 32,
+      "addr": "195.206.105.22:8333",
+      "addrbind": "192.168.1.5:51166",
+      "services": "0000000000000409",
+      "servicesnames": [
+        "NETWORK",
+        "WITNESS",
+        "NETWORK_LIMITED"
+      ],
+      "relaytxes": true,
+      "lastsend": 1598093294,
+      "lastrecv": 1598093294,
+      "bytessent": 1519,
+      "bytesrecv": 1497,
+      "conntime": 1598093293,
+      "timeoffset": 0,
+      "pingtime": 0.278642,
+      "minping": 0.278642,
+      "version": 70015,
+      "subver": "/Satoshi:0.19.0.1/",
+      "inbound": false,
+      "addnode": true,
+      "startingheight": 644830,
+      "banscore": 0,
+      "synced_headers": 644830,
+      "synced_blocks": 644830,
+      "inflight": [],
+      "whitelisted": false,
+      "permissions": [],
+      "minfeefilter": 0.00001000,
+      "bytessent_per_msg": {
+        "feefilter": 32,
+        "getaddr": 24,
+        "getheaders": 1053,
+        "headers": 106,
+        "ping": 32,
+        "pong": 32,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "verack": 24,
+        "version": 126
+      },
+      "bytesrecv_per_msg": {
+        "feefilter": 32,
+        "getheaders": 1053,
+        "headers": 106,
+        "ping": 32,
+        "pong": 32,
+        "sendcmpct": 66,
+        "sendheaders": 24,
+        "verack": 24,
+        "version": 128
+      }
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listbanned
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+            
+Network network = new Network(bitcoinClient);
 
-  
+string listbanned = await network.ListBanned();
+
+Console.WriteLine(listbanned);
 ```
 
 <details>
@@ -2246,15 +3300,24 @@ NETWORK
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### ping
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+            
+Network network = new Network(bitcoinClient);
 
-  
+string ping = await network.Ping();
+
+Console.WriteLine(ping);
 ```
 
 <details>
@@ -2262,14 +3325,30 @@ NETWORK
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### setban
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+            
+Network network = new Network(bitcoinClient);
 
+SetBan setBan = new SetBan();
+setBan.Absolute = true;
+setBan.BanCommand = BanCommand.add;
+setBan.Subnet = "192.168.0.6";
+setBan.BanTime = 86400;
+
+string setban = await network.SetBan(setBan);
+
+Console.WriteLine(setban);
   
 ```
 
@@ -2278,15 +3357,24 @@ NETWORK
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### setnetworkactive
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
 
-  
+Network network = new Network(bitcoinClient);
+
+string setnetworkactive = await network.SetNetworkActive(true);
+
+Console.WriteLine(setnetworkactive);  
 ```
 
 <details>
@@ -2294,7 +3382,11 @@ NETWORK
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": true,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
