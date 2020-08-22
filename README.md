@@ -1298,8 +1298,13 @@ Console.WriteLine(scantxoutset);
 ### verifychain
 -----
 ```csharp    
- 
-  
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Blockchain blockchain = new Blockchain(bitcoinClient);
+           
+string verifychain = await blockchain.Verifychain();
+
+Console.WriteLine(verifychain);
 ```
 
 <details>
@@ -1307,7 +1312,11 @@ Console.WriteLine(scantxoutset);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": true,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
