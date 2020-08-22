@@ -2003,8 +2003,13 @@ Console.WriteLine(getmininginfo);
 ### getnetworkhashps
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
 
-  
+Mining mining = new Mining(bitcoinClient);
+
+string getnetworkhashps = await mining.GetNetworkHashPS();
+
+Console.WriteLine(getnetworkhashps);
 ```
 
 <details>
@@ -2012,14 +2017,25 @@ Console.WriteLine(getmininginfo);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": 23772946303410.9,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### prioritisetransaction
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Mining mining = new Mining(bitcoinClient);
 
+string txid = "4f642090847babf1e09e63e6be63a446c5327a30c5b6d41cd533b90a2df8ef01";
+string prioritisetransaction = await mining.PrioritiseTransaction(txid, 2);
+            
+Console.WriteLine(BitcoinRpc.Debug.JsonRequest.GetRequestAsString(true));
+Console.WriteLine(prioritisetransaction);
   
 ```
 
@@ -2028,7 +2044,11 @@ Console.WriteLine(getmininginfo);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": true,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
