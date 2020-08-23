@@ -4183,7 +4183,20 @@ UTIL
 ### createmultisig
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Util util = new Util(bitcoinClient);
 
+int nRequired = 4;
+List<string> publicKeys = new List<string>
+{
+    "034fab17259fc38d1ef5cfef0d41bc770d571052ff77aa543fc42926c9cfc7e5ca",
+    "0259ddbb4b6b46cb166175ec41bdf4e6be91b0a7eaf9bfa08ce880dfa6dda40363",
+    "039369ebfe09dc44bd0864a2063b72ee3ecf11f2754a28c4bfd9a9e88031b93a30",
+    "039c54dcacf5b675560745054c39988136d1b4fd312e69c22fdb68816f36999fa9"
+};
+
+string createmultisig= await util.CreateMultisig(nRequired, publicKeys,AddressType.bech32);
+Console.WriteLine(createmultisig);
   
 ```
 
@@ -4192,15 +4205,28 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "address": "tb1qu04n9l6ps64n4uy84e5khh7nld77hkxqam29wsupd3t5uklvmcdqx3m6c0",
+    "redeemScript": "5421034fab17259fc38d1ef5cfef0d41bc770d571052ff77aa543fc42926c9cfc7e5ca210259ddbb4b6b46cb166175ec41bdf4e6be91b0a7eaf9bfa08ce880dfa6dda4036321039369ebfe09dc44bd0864a2063b72ee3ecf11f2754a28c4bfd9a9e88031b93a3021039c54dcacf5b675560745054c39988136d1b4fd312e69c22fdb68816f36999fa954ae",
+    "descriptor": "wsh(multi(4,034fab17259fc38d1ef5cfef0d41bc770d571052ff77aa543fc42926c9cfc7e5ca,0259ddbb4b6b46cb166175ec41bdf4e6be91b0a7eaf9bfa08ce880dfa6dda40363,039369ebfe09dc44bd0864a2063b72ee3ecf11f2754a28c4bfd9a9e88031b93a30,039c54dcacf5b675560745054c39988136d1b4fd312e69c22fdb68816f36999fa9))#wtp4909w"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### deriveaddresses
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Util util = new Util(bitcoinClient);
 
-  
+string deriveaddresses = await util.DeriveAddresses("wsh(multi(4,034fab17259fc38d1ef5cfef0d41bc770d571052ff77aa543fc42926c9cfc7e5ca,0259ddbb4b6b46cb166175ec41bdf4e6be91b0a7eaf9bfa08ce880dfa6dda40363,039369ebfe09dc44bd0864a2063b72ee3ecf11f2754a28c4bfd9a9e88031b93a30,039c54dcacf5b675560745054c39988136d1b4fd312e69c22fdb68816f36999fa9))#wtp4909w");
+
+Console.WriteLine(deriveaddresses);
 ```
 
 <details>
@@ -4208,15 +4234,28 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    "tb1qu04n9l6ps64n4uy84e5khh7nld77hkxqam29wsupd3t5uklvmcdqx3m6c0"
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### estimatesmartfee
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+            
+Util util = new Util(bitcoinClient);
 
-  
+int confTarget = 6;
+EstimateMode estimateMode = EstimateMode.CONSERVATIVE;
+
+string estimatesmartfee = await util.EstimateSmartFee(confTarget, estimateMode);
+Console.WriteLine(estimatesmartfee);
 ```
 
 <details>
@@ -4224,15 +4263,30 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "feerate": 0.00061476,
+    "blocks": 6
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getdescriptorinfo
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");           
+Util util = new Util(bitcoinClient);
 
-  
+int confTarget = 6;
+EstimateMode estimateMode = EstimateMode.CONSERVATIVE;
+
+string descriptor = "wsh(multi(1,xpub661MyMwAqRbcFW31YEwpkMuc5THy2PSt5bDMsktWQcFF8syAmRUapSCGu8ED9W6oDMSgv6Zz8idoc4a6mr8BDzTJY47LJhkJ8UB7WEGuduB/1/0/*,xpub69H7F5d8KSRgmmdJg2KhpAK8SR3DjMwAdkxj3ZuxV27CprR9LgpeyGmXUbC6wb7ERfvrnKZjXoUmmDznezpbZb7ap6r1D3tgFxHmwMkQTPH/0/0/*))";
+
+string getdescriptorinfo = await util.GetDescriptorInfo(descriptor);           
+Console.WriteLine(getdescriptorinfo);  
 ```
 
 <details>
@@ -4240,15 +4294,32 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "descriptor": "wsh(multi(1,xpub661MyMwAqRbcFW31YEwpkMuc5THy2PSt5bDMsktWQcFF8syAmRUapSCGu8ED9W6oDMSgv6Zz8idoc4a6mr8BDzTJY47LJhkJ8UB7WEGuduB/1/0/*,xpub69H7F5d8KSRgmmdJg2KhpAK8SR3DjMwAdkxj3ZuxV27CprR9LgpeyGmXUbC6wb7ERfvrnKZjXoUmmDznezpbZb7ap6r1D3tgFxHmwMkQTPH/0/0/*))#t2zpj2eu",
+    "checksum": "t2zpj2eu",
+    "isrange": true,
+    "issolvable": true,
+    "hasprivatekeys": false
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### signmessagewithprivkey
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Util util = new Util(bitcoinClient);
 
-  
+//Only legacy supported.
+string privKey = "cVD8v4Zprw2NRkNfqhNtgVrh4LuguYcZkwcjb3s6so3TLJqt2AAw";
+string msg = "Hello World";
+string signmessagewithprivkey = await util.SignMessageWithPrivKey(privKey, msg);
+
+Console.WriteLine(signmessagewithprivkey);
 ```
 
 <details>
@@ -4256,15 +4327,24 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "H79SeYYWoy/ZmcYUQQ\u002BAB\u002Bp34nYow5p7vZH9vtxKKpVKHvqUdtbscJOfOClVZokO3o1QmzLVCHB23ZONYE1UfG4=",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### validateaddress
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+Util util = new Util(bitcoinClient);
 
-  
+string address = "bc1qn7epr0z8t0gn5zlxpask5j0d0647zus4nj3fvj";
+string validateaddress = await util.ValidateAddress(address);
+            
+Console.WriteLine(validateaddress);
 ```
 
 <details>
@@ -4272,14 +4352,35 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "isvalid": true,
+    "address": "bc1qn7epr0z8t0gn5zlxpask5j0d0647zus4nj3fvj",
+    "scriptPubKey": "00149fb211bc475bd13a0be60f616a49ed7eabe17215",
+    "isscript": false,
+    "iswitness": true,
+    "witness_version": 0,
+    "witness_program": "9fb211bc475bd13a0be60f616a49ed7eabe17215"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### verifymessage
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Util util = new Util(bitcoinClient);
 
+//Only legacy address supported.
+string address = "muWkDUiLRXVFMmKTXkNtfoxgsJppUSXPKi";
+string signature = "H79SeYYWoy/ZmcYUQQ\u002BAB\u002Bp34nYow5p7vZH9vtxKKpVKHvqUdtbscJOfOClVZokO3o1QmzLVCHB23ZONYE1UfG4=";
+string msg = "Hello World";
+string verifymessage = await util.VerifyMessage(address, signature, msg);
+
+Console.WriteLine(verifymessage);
   
 ```
 
@@ -4288,7 +4389,11 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": true,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
