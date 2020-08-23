@@ -6,6 +6,6 @@ namespace BitcoinRpc.RequestModels.RawTransactions
 {
    public class RawInputs
     {
-        public List<RawInput> Inputs { get; } = new List<RawInput>();
+        public List<RawInput> Inputs { get; set; } = new List<RawInput>();
     }
 }
