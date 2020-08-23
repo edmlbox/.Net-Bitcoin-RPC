@@ -3531,13 +3531,22 @@ BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:
 RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
 List<PSBTInput> pSBTInputs = new List<PSBTInput>();
-PSBTInput pSBTInput1 = new PSBTInput("cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80",0);
+
+PSBTInput pSBTInput1 = new PSBTInput("cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80", 0);
 PSBTInput pSBTInput2 = new PSBTInput("3514897207fa4c12189a9b1336eac1909b94293a72b311f2b187fe53cef905bd", 0);
 
+pSBTInputs.Add(pSBTInput1);
+pSBTInputs.Add(pSBTInput2);
+
 List<PSBTOutput> pSBTOutputs = new List<PSBTOutput>();
-PSBTOutput pSBTOutput1 = new PSBTOutput("tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",0.0005f);
+            
+PSBTOutput pSBTOutput1 = new PSBTOutput("tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k", 0.0005f);
 PSBTOutput pSBTOutput2 = new PSBTOutput("tb1qg3gt75avpyr72d2ndzame0ldrajpnyzk7syq0l", 0.0004f);
 PSBTOutput pSBTOutput3 = new PSBTOutput("tb1qz00pk0pq49pxunagsdnxexv6cypet2lkavjuez", 0.0008f);
+            
+pSBTOutputs.Add(pSBTOutput1);
+pSBTOutputs.Add(pSBTOutput2);
+pSBTOutputs.Add(pSBTOutput3);
 
 string hexData = "48656c6c6f20576f726c64";
 
@@ -3552,7 +3561,7 @@ Console.WriteLine(createpsbt);
  
  ```json
 {
-  "result": "cHNidP8BACACAAAAAAEAAAAAAAAAAA1qC0hlbGxvIFdvcmxkAAAAAAAA",
+  "result": "cHNidP8BAM8CAAAAAoCdNIKmuXd3Olj/OvU/ukgVAkwHjQfw4uPsR8vwqf3LAAAAAAD/////vQX5zlP\u002Bh7HyEbNyOimUm5DB6jYTm5oYEkz6B3KJFDUAAAAAAP////8EUMMAAAAAAAAWABT5mJmHRssbs0N3B1p50NnElFadIUCcAAAAAAAAFgAURFC/U6wJB\u002BU1U2i7vL/tH2QZkFaAOAEAAAAAABYAFBPeGzwgqUJuT6iDZmyZmsEDlav2AAAAAAAAAAANagtIZWxsbyBXb3JsZAAAAAAAAAAAAAAA",
   "error": null,
   "id": null
 }
@@ -3562,8 +3571,27 @@ Console.WriteLine(createpsbt);
 ### createrawtransaction
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+RawInputs rawInputs = new RawInputs();
+            
+RawInput rawInput1 = new RawInput("cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80", 0);
+RawInput rawInput2 = new RawInput("ebf7b4cfe5a4aaf3c9faede04369527e14cc7c9766c448c765b6d64e85bee1a8", 0);
+RawInput rawInput3 = new RawInput("3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501", 0);
+
+rawInputs.Inputs.Add(rawInput1);
+rawInputs.Inputs.Add(rawInput2);
+rawInputs.Inputs.Add(rawInput3);
+
+RawOutputs rawOutputs = new RawOutputs();
+RawOutput rawOutput = new RawOutput("tb1qg3gt75avpyr72d2ndzame0ldrajpnyzk7syq0l",0.0001f);
+
+rawOutputs.Outputs.Add(rawOutput);
+
+string createrawtransaction = await rawTransaction.CreateRawTransaction(rawInputs, rawOutputs);
+
+Console.WriteLine(createrawtransaction);
 ```
 
 <details>
@@ -3571,7 +3599,11 @@ Console.WriteLine(createpsbt);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "0200000003809d3482a6b977773a58ff3af53fba4815024c078d07f0e2e3ec47cbf0a9fdcb0000000000ffffffffa8e1be854ed6b665c748c466977ccc147e526943e0edfac9f3aaa4e5cfb4f7eb0000000000ffffffff01151c428db500966314adce5b36e2750beb68418185d0fbad5dda5644d489320000000000ffffffff0110270000000000001600144450bf53ac0907e5355368bbbcbfed1f6419905600000000",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
