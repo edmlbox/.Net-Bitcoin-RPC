@@ -3399,7 +3399,15 @@ RAWTRANSACTIONS
 ### analyzepsbt
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
 
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
+
+string PSBT = "cHNidP8BAH0CAAAAAXz0qBDXO+uQOsNVaUcorfJafZYydCv5kGUTLaFs/r2HAAAAAAD+////AugDAAAAAAAAFgAUlBEbC0zwnx3lVjBHQ8j/OSY8D00DggEAAAAAACIAIIwfpAXvuuV+RHcUKJQhamBeY2kX8NQjEHnXq7nAxI0kAAAAAAABASughgEAAAAAACIAIF7irfIOj9QsEsbGg+4bmfHAIfxHGagcdw2PSeqZV1i9IgICykuckuH/D6RW3lBdbEqbEqHDxjQObhF8l5eQRDa64ftIMEUCIQD81o45GQb5Sl957dP64X4xj0QXzoMA8JTSBjbFRC3nrAIgCi1Ku1pSArpmyap0ZiZmAq8LRqis+cBdVeHJE9Da7WcBIgIC/NzEeTxfWJoNRzy7vS+dJSjAlu71hTAThp31g1LONFdHMEQCIBymHkm6ugBcdmllS0XhFHlGYglnrhtJOYk6ET865tYcAiAaBi9klfVfRnTP2KmHb7ZumIWEPzYRsXv2yUWn17Z3NAEBBUdSIQL83MR5PF9Ymg1HPLu9L50lKMCW7vWFMBOGnfWDUs40VyECykuckuH/D6RW3lBdbEqbEqHDxjQObhF8l5eQRDa64ftSriIGAspLnJLh/w+kVt5QXWxKmxKhw8Y0Dm4RfJeXkEQ2uuH7GGuz1AMsAACAAQAAgAAAAIAAAAAAAAAAACIGAvzcxHk8X1iaDUc8u70vnSUowJbu9YUwE4ad9YNSzjRXGHd0/yAsAACAAQAAgAAAAIAAAAAAAAAAAAAAAQFHUiEDLB2e+6+bTRK5ciRgj64xzggam4YgzswByu9oxg3wZ3UhA/jRhjYGYlDGSAoiCvs6tlL6CEU/gcH8yAq4NOqm8SEXUq4iAgMsHZ77r5tNErlyJGCPrjHOCBqbhiDOzAHK72jGDfBndRh3dP8gLAAAgAEAAIAAAACAAAAAAAIAAAAiAgP40YY2BmJQxkgKIgr7OrZS+ghFP4HB/MgKuDTqpvEhFxhrs9QDLAAAgAEAAIAAAACAAAAAAAIAAAAA";
+
+string analyzepsbt = await rawTransaction.AnalyzePSBT(PSBT);
+
+Console.WriteLine(analyzepsbt);
   
 ```
 
@@ -3408,14 +3416,42 @@ RAWTRANSACTIONS
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "inputs": [
+      {
+        "has_utxo": true,
+        "is_final": false,
+        "next": "updater"
+      }
+    ],
+    "estimated_vsize": 181,
+    "estimated_feerate": 0.00001000,
+    "fee": 0.00000181,
+    "next": "updater"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### combinepsbt
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
+           
+List<string> pSBTs = new List<string>
+            {
+                "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEBAwQBAAAAAQQiACCMI1MXN0O1ld+0oHtyuo5C43l9p06H/n2ddJfjsgKJAwEFR1IhAwidwQx6xttU+RMpr2FzM9s4jOrQwjH3IzedG5kDCwLcIQI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc1KuIgYCOt2QTz1tz1nduQaw3uI1Kbf/ue1Q5ehhUZJoYCIfDnMQ2QxqTwAAAIAAAACAAwAAgCIGAwidwQx6xttU+RMpr2FzM9s4jOrQwjH3IzedG5kDCwLcENkMak8AAACAAAAAgAIAAIAAIgIDqaTDf1mW06ol26xrVwrwZQOUSSlCRgs1R1Ptnuylh3EQ2QxqTwAAAIAAAACABAAAgAAiAgJ/Y5l1fS7/VaE2rQLGhLGDi2VW5fG2s0KCqUtrUAUQlhDZDGpPAAAAgAAAAIAFAACAAA==",
+                "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU210gwRQIhAPYQOLMI3B2oZaNIUnRvAVdyk0IIxtJEVDk82ZvfIhd3AiAFbmdaZ1ptCgK4WxTl4pB02KJam1dgvqKBb2YZEKAG6gEBAwQBAAAAAQRHUiEClYO/Oa4KYJdHrRma3dY0+mEIVZ1sXNObTCGD8auW4H8hAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXUq4iBgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfxDZDGpPAAAAgAAAAIAAAACAIgYC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtcQ2QxqTwAAAIAAAACAAQAAgAABASAAwusLAAAAABepFLf1+vQOPUClpFmx2zU18rcvqSHohyICAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zRzBEAiBl9FulmYtZon/+GnvtAWrx8fkNVLOqj3RQql9WolEDvQIgf3JHA60e25ZoCyhLVtT/y4j3+3Weq74IqjDym4UTg9IBAQMEAQAAAAEEIgAgjCNTFzdDtZXftKB7crqOQuN5fadOh/59nXSX47ICiQMBBUdSIQMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3CECOt2QTz1tz1nduQaw3uI1Kbf/ue1Q5ehhUZJoYCIfDnNSriIGAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zENkMak8AAACAAAAAgAMAAIAiBgMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3BDZDGpPAAAAgAAAAIACAACAACICA6mkw39ZltOqJdusa1cK8GUDlEkpQkYLNUdT7Z7spYdxENkMak8AAACAAAAAgAQAAIAAIgICf2OZdX0u/1WhNq0CxoSxg4tlVuXxtrNCgqlLa1AFEJYQ2QxqTwAAAIAAAACABQAAgAA="            
+            };
+            
+string combinepsbt = await rawTransaction.CombinePSBT(pSBTs);
+
+Console.WriteLine(combinepsbt);
   
 ```
 
@@ -3424,14 +3460,29 @@ RAWTRANSACTIONS
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw\u002BHaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l\u002BErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW\u002Bqk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4\u002BtT3O\u002BjOCPIBwUUylWn3ZVE8VfBZ5EyYRGMASICAtq2H/SaFNtqfQKwzR\u002B7ePxLGDErW05U2uTbovv\u002B9TbXSDBFAiEA9hA4swjcHahlo0hSdG8BV3KTQgjG0kRUOTzZm98iF3cCIAVuZ1pnWm0KArhbFOXikHTYolqbV2C\u002BooFvZhkQoAbqAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui\u002B/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty\u002BpIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE\u002BmWzThAlF2xIijaXwEiAgI63ZBPPW3PWd25BrDe4jUpt/\u002B57VDl6GFRkmhgIh8Oc0cwRAIgZfRbpZmLWaJ//hp77QFq8fH5DVSzqo90UKpfVqJRA70CIH9yRwOtHtuWaAsoS1bU/8uI9/t1nqu\u002BCKow8puFE4PSAQEDBAEAAAABBCIAIIwjUxc3Q7WV37Sge3K6jkLjeX2nTof\u002BfZ10l\u002BOyAokDAQVHUiEDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwhAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zUq4iBgI63ZBPPW3PWd25BrDe4jUpt/\u002B57VDl6GFRkmhgIh8OcxDZDGpPAAAAgAAAAIADAACAIgYDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtwQ2QxqTwAAAIAAAACAAgAAgAAiAgOppMN/WZbTqiXbrGtXCvBlA5RJKUJGCzVHU\u002B2e7KWHcRDZDGpPAAAAgAAAAIAEAACAACICAn9jmXV9Lv9VoTatAsaEsYOLZVbl8bazQoKpS2tQBRCWENkMak8AAACAAAAAgAUAAIAA",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### combinerawtransaction
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
+List<string> rawTxs = new List<string>
+{
+  "02000000000180969800000000001600149fb211bc475bd13a0be60f616a49ed7eabe1721500000000",
+  "02000000000100350c0000000000160014d94869d7af11277d3e17220d741b9c2e95f09da500000000"
+};
+
+string combinerawtransaction = await rawTransaction.CombineRawTransaction(rawTxs);
+
+Console.WriteLine(combinerawtransaction);
   
 ```
 
@@ -3440,15 +3491,24 @@ RAWTRANSACTIONS
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "02000000000180969800000000001600149fb211bc475bd13a0be60f616a49ed7eabe1721500000000",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### converttopsbt
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string rawTx = "02000000000180969800000000001600149fb211bc475bd13a0be60f616a49ed7eabe1721500000000";
+string converttopsbt = await rawTransaction.ConvertToPSBT(rawTx);
+
+Console.WriteLine(converttopsbt);
 ```
 
 <details>
@@ -3456,15 +3516,43 @@ RAWTRANSACTIONS
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "cHNidP8BACkCAAAAAAGAlpgAAAAAABYAFJ\u002ByEbxHW9E6C\u002BYPYWpJ7X6r4XIVAAAAAAAA",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### createpsbt
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+List<PSBTInput> pSBTInputs = new List<PSBTInput>();
+
+PSBTInput pSBTInput1 = new PSBTInput("cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80", 0);
+PSBTInput pSBTInput2 = new PSBTInput("3514897207fa4c12189a9b1336eac1909b94293a72b311f2b187fe53cef905bd", 0);
+
+pSBTInputs.Add(pSBTInput1);
+pSBTInputs.Add(pSBTInput2);
+
+List<PSBTOutput> pSBTOutputs = new List<PSBTOutput>();
+            
+PSBTOutput pSBTOutput1 = new PSBTOutput("tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k", 0.0005f);
+PSBTOutput pSBTOutput2 = new PSBTOutput("tb1qg3gt75avpyr72d2ndzame0ldrajpnyzk7syq0l", 0.0004f);
+PSBTOutput pSBTOutput3 = new PSBTOutput("tb1qz00pk0pq49pxunagsdnxexv6cypet2lkavjuez", 0.0008f);
+            
+pSBTOutputs.Add(pSBTOutput1);
+pSBTOutputs.Add(pSBTOutput2);
+pSBTOutputs.Add(pSBTOutput3);
+
+string hexData = "48656c6c6f20576f726c64";
+
+string createpsbt = await rawTransaction.CreatePSBT(pSBTInputs, pSBTOutputs, hexData);
+
+Console.WriteLine(createpsbt);
 ```
 
 <details>
@@ -3472,15 +3560,38 @@ RAWTRANSACTIONS
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "cHNidP8BAM8CAAAAAoCdNIKmuXd3Olj/OvU/ukgVAkwHjQfw4uPsR8vwqf3LAAAAAAD/////vQX5zlP\u002Bh7HyEbNyOimUm5DB6jYTm5oYEkz6B3KJFDUAAAAAAP////8EUMMAAAAAAAAWABT5mJmHRssbs0N3B1p50NnElFadIUCcAAAAAAAAFgAURFC/U6wJB\u002BU1U2i7vL/tH2QZkFaAOAEAAAAAABYAFBPeGzwgqUJuT6iDZmyZmsEDlav2AAAAAAAAAAANagtIZWxsbyBXb3JsZAAAAAAAAAAAAAAA",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### createrawtransaction
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+RawInputs rawInputs = new RawInputs();
+            
+RawInput rawInput1 = new RawInput("cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80", 0);
+RawInput rawInput2 = new RawInput("ebf7b4cfe5a4aaf3c9faede04369527e14cc7c9766c448c765b6d64e85bee1a8", 0);
+RawInput rawInput3 = new RawInput("3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501", 0);
+
+rawInputs.Inputs.Add(rawInput1);
+rawInputs.Inputs.Add(rawInput2);
+rawInputs.Inputs.Add(rawInput3);
+
+RawOutputs rawOutputs = new RawOutputs();
+RawOutput rawOutput = new RawOutput("tb1qg3gt75avpyr72d2ndzame0ldrajpnyzk7syq0l",0.0001f);
+
+rawOutputs.Outputs.Add(rawOutput);
+
+string createrawtransaction = await rawTransaction.CreateRawTransaction(rawInputs, rawOutputs);
+
+Console.WriteLine(createrawtransaction);
 ```
 
 <details>
@@ -3488,15 +3599,24 @@ RAWTRANSACTIONS
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "0200000003809d3482a6b977773a58ff3af53fba4815024c078d07f0e2e3ec47cbf0a9fdcb0000000000ffffffffa8e1be854ed6b665c748c466977ccc147e526943e0edfac9f3aaa4e5cfb4f7eb0000000000ffffffff01151c428db500966314adce5b36e2750beb68418185d0fbad5dda5644d489320000000000ffffffff0110270000000000001600144450bf53ac0907e5355368bbbcbfed1f6419905600000000",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### decodepsbt
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string pSBT = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU210gwRQIhAPYQOLMI3B2oZaNIUnRvAVdyk0IIxtJEVDk82ZvfIhd3AiAFbmdaZ1ptCgK4WxTl4pB02KJam1dgvqKBb2YZEKAG6gEBAwQBAAAAAQRHUiEClYO/Oa4KYJdHrRma3dY0+mEIVZ1sXNObTCGD8auW4H8hAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXUq4iBgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfxDZDGpPAAAAgAAAAIAAAACAIgYC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtcQ2QxqTwAAAIAAAACAAQAAgAABASAAwusLAAAAABepFLf1+vQOPUClpFmx2zU18rcvqSHohyICAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zRzBEAiBl9FulmYtZon/+GnvtAWrx8fkNVLOqj3RQql9WolEDvQIgf3JHA60e25ZoCyhLVtT/y4j3+3Weq74IqjDym4UTg9IBAQMEAQAAAAEEIgAgjCNTFzdDtZXftKB7crqOQuN5fadOh/59nXSX47ICiQABBUdSIQMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3CECOt2QTz1tz1nduQaw3uI1Kbf/ue1Q5ehhUZJoYCIfDnNSriIGAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zENkMak8AAACAAAAAgAMAAIAiBgMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3BDZDGpPAAAAgAAAAIACAACAACICA6mkw39ZltOqJdusa1cK8GUDlEkpQkYLNUdT7Z7spYdxENkMak8AAACAAAAAgAQAAIAAIgICf2OZdX0u/1WhNq0CxoSxg4tlVuXxtrNCgqlLa1AFEJYQ2QxqTwAAAIAAAACABQAAgAA=";
+
+string decodepsbt = await rawTransaction.DecodePSBT(pSBT);
+Console.WriteLine(decodepsbt);
 ```
 
 <details>
@@ -3504,14 +3624,214 @@ RAWTRANSACTIONS
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "tx": {
+      "txid": "82efd652d7ab1197f01a5f4d9a30cb4c68bb79ab6fec58dfa1bf112291d1617b",
+      "hash": "82efd652d7ab1197f01a5f4d9a30cb4c68bb79ab6fec58dfa1bf112291d1617b",
+      "version": 2,
+      "size": 154,
+      "vsize": 154,
+      "weight": 616,
+      "locktime": 0,
+      "vin": [
+        {
+          "txid": "75ddabb27b8845f5247975c8a5ba7c6f336c4570708ebe230caf6db5217ae858",
+          "vout": 0,
+          "scriptSig": {
+            "asm": "",
+            "hex": ""
+          },
+          "sequence": 4294967295
+        },
+        {
+          "txid": "1dea7cd05979072a3578cab271c02244ea8a090bbb46aa680a65ecd027048d83",
+          "vout": 1,
+          "scriptSig": {
+            "asm": "",
+            "hex": ""
+          },
+          "sequence": 4294967295
+        }
+      ],
+      "vout": [
+        {
+          "value": 1.49990000,
+          "n": 0,
+          "scriptPubKey": {
+            "asm": "0 d85c2b71d0060b09c9886aeb815e50991dda124d",
+            "hex": "0014d85c2b71d0060b09c9886aeb815e50991dda124d",
+            "reqSigs": 1,
+            "type": "witness_v0_keyhash",
+            "addresses": [
+              "bc1qmpwzkuwsqc9snjvgdt4czhjsnywa5yjdgwyw6k"
+            ]
+          }
+        },
+        {
+          "value": 1.00000000,
+          "n": 1,
+          "scriptPubKey": {
+            "asm": "0 00aea9a2e5f0f876a588df5546e8742d1d87008f",
+            "hex": "001400aea9a2e5f0f876a588df5546e8742d1d87008f",
+            "reqSigs": 1,
+            "type": "witness_v0_keyhash",
+            "addresses": [
+              "bc1qqzh2ngh97ru8dfvgma25d6r595wcwqy0skmt5z"
+            ]
+          }
+        }
+      ]
+    },
+    "unknown": {},
+    "inputs": [
+      {
+        "non_witness_utxo": {
+          "txid": "75ddabb27b8845f5247975c8a5ba7c6f336c4570708ebe230caf6db5217ae858",
+          "hash": "75ddabb27b8845f5247975c8a5ba7c6f336c4570708ebe230caf6db5217ae858",
+          "version": 2,
+          "size": 187,
+          "vsize": 187,
+          "weight": 748,
+          "locktime": 101,
+          "vin": [
+            {
+              "txid": "8b6f65ab71eeab8b2918acc2ea06b79de08b84680b40ae845fd28b013139d7aa",
+              "vout": 0,
+              "scriptSig": {
+                "asm": "3044022058f6fc7c6a33e1b31548d481c826c015bd30135aad42cd67790dab66d2ad243b02204a1ced2604c6735b6393e5b41691dd78b00f0c5942fb9f751856faa938157dba[ALL]",
+                "hex": "473044022058f6fc7c6a33e1b31548d481c826c015bd30135aad42cd67790dab66d2ad243b02204a1ced2604c6735b6393e5b41691dd78b00f0c5942fb9f751856faa938157dba01"
+              },
+              "sequence": 4294967294
+            }
+          ],
+          "vout": [
+            {
+              "value": 0.50000000,
+              "n": 0,
+              "scriptPubKey": {
+                "asm": "OP_HASH160 0fb9463421696b82c833af241c78c17ddbde4934 OP_EQUAL",
+                "hex": "a9140fb9463421696b82c833af241c78c17ddbde493487",
+                "reqSigs": 1,
+                "type": "scripthash",
+                "addresses": [
+                  "338A1VzFsJXQAiJHeZDzwCvmSv4t1CoYkY"
+                ]
+              }
+            },
+            {
+              "value": 49.49996240,
+              "n": 1,
+              "scriptPubKey": {
+                "asm": "OP_HASH160 29ca74f8a08f81999428185c97b5d852e4063f61 OP_EQUAL",
+                "hex": "a91429ca74f8a08f81999428185c97b5d852e4063f6187",
+                "reqSigs": 1,
+                "type": "scripthash",
+                "addresses": [
+                  "35VzAMxSnefPwn2bnCHs53cEWsMfyHUiZr"
+                ]
+              }
+            }
+          ]
+        },
+        "partial_signatures": {
+          "02dab61ff49a14db6a7d02b0cd1fbb78fc4b18312b5b4e54dae4dba2fbfef536d7": "3045022100f61038b308dc1da865a34852746f015772934208c6d24454393cd99bdf2217770220056e675a675a6d0a02b85b14e5e29074d8a25a9b5760bea2816f661910a006ea01"
+        },
+        "sighash": "ALL",
+        "redeem_script": {
+          "asm": "2 029583bf39ae0a609747ad199addd634fa6108559d6c5cd39b4c2183f1ab96e07f 02dab61ff49a14db6a7d02b0cd1fbb78fc4b18312b5b4e54dae4dba2fbfef536d7 2 OP_CHECKMULTISIG",
+          "hex": "5221029583bf39ae0a609747ad199addd634fa6108559d6c5cd39b4c2183f1ab96e07f2102dab61ff49a14db6a7d02b0cd1fbb78fc4b18312b5b4e54dae4dba2fbfef536d752ae",
+          "type": "multisig"
+        },
+        "bip32_derivs": [
+          {
+            "pubkey": "029583bf39ae0a609747ad199addd634fa6108559d6c5cd39b4c2183f1ab96e07f",
+            "master_fingerprint": "d90c6a4f",
+            "path": "m/0\u0027/0\u0027/0\u0027"
+          },
+          {
+            "pubkey": "02dab61ff49a14db6a7d02b0cd1fbb78fc4b18312b5b4e54dae4dba2fbfef536d7",
+            "master_fingerprint": "d90c6a4f",
+            "path": "m/0\u0027/0\u0027/1\u0027"
+          }
+        ]
+      },
+      {
+        "witness_utxo": {
+          "amount": 2.00000000,
+          "scriptPubKey": {
+            "asm": "OP_HASH160 b7f5faf40e3d40a5a459b1db3535f2b72fa921e8 OP_EQUAL",
+            "hex": "a914b7f5faf40e3d40a5a459b1db3535f2b72fa921e887",
+            "type": "scripthash",
+            "address": "3JTiFf9xWFqryQ7CXK3hMX8oh4GxYxUyAr"
+          }
+        },
+        "partial_signatures": {
+          "023add904f3d6dcf59ddb906b0dee23529b7ffb9ed50e5e86151926860221f0e73": "3044022065f45ba5998b59a27ffe1a7bed016af1f1f90d54b3aa8f7450aa5f56a25103bd02207f724703ad1edb96680b284b56d4ffcb88f7fb759eabbe08aa30f29b851383d201"
+        },
+        "sighash": "ALL",
+        "redeem_script": {
+          "asm": "0 8c2353173743b595dfb4a07b72ba8e42e3797da74e87fe7d9d7497e3b2028900",
+          "hex": "00208c2353173743b595dfb4a07b72ba8e42e3797da74e87fe7d9d7497e3b2028900",
+          "type": "witness_v0_scripthash"
+        },
+        "witness_script": {
+          "asm": "2 03089dc10c7ac6db54f91329af617333db388cead0c231f723379d1b99030b02dc 023add904f3d6dcf59ddb906b0dee23529b7ffb9ed50e5e86151926860221f0e73 2 OP_CHECKMULTISIG",
+          "hex": "522103089dc10c7ac6db54f91329af617333db388cead0c231f723379d1b99030b02dc21023add904f3d6dcf59ddb906b0dee23529b7ffb9ed50e5e86151926860221f0e7352ae",
+          "type": "multisig"
+        },
+        "bip32_derivs": [
+          {
+            "pubkey": "023add904f3d6dcf59ddb906b0dee23529b7ffb9ed50e5e86151926860221f0e73",
+            "master_fingerprint": "d90c6a4f",
+            "path": "m/0\u0027/0\u0027/3\u0027"
+          },
+          {
+            "pubkey": "03089dc10c7ac6db54f91329af617333db388cead0c231f723379d1b99030b02dc",
+            "master_fingerprint": "d90c6a4f",
+            "path": "m/0\u0027/0\u0027/2\u0027"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "bip32_derivs": [
+          {
+            "pubkey": "03a9a4c37f5996d3aa25dbac6b570af0650394492942460b354753ed9eeca58771",
+            "master_fingerprint": "d90c6a4f",
+            "path": "m/0\u0027/0\u0027/4\u0027"
+          }
+        ]
+      },
+      {
+        "bip32_derivs": [
+          {
+            "pubkey": "027f6399757d2eff55a136ad02c684b1838b6556e5f1b6b34282a94b6b50051096",
+            "master_fingerprint": "d90c6a4f",
+            "path": "m/0\u0027/0\u0027/5\u0027"
+          }
+        ]
+      }
+    ],
+    "fee": 0.00010000
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### decoderawtransaction
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
+string rawTx = "0200000003809d3482a6b977773a58ff3af53fba4815024c078d07f0e2e3ec47cbf0a9fdcb0000000000ffffffffa8e1be854ed6b665c748c466977ccc147e526943e0edfac9f3aaa4e5cfb4f7eb0000000000ffffffff01151c428db500966314adce5b36e2750beb68418185d0fbad5dda5644d489320000000000ffffffff0110270000000000001600144450bf53ac0907e5355368bbbcbfed1f6419905600000000";
+
+string decoderawtransaction = await rawTransaction.DecodeRawTransaction(rawTx);
+Console.WriteLine(decoderawtransaction);
   
 ```
 
@@ -3520,7 +3840,63 @@ RAWTRANSACTIONS
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "txid": "98b4eaf1ba98b360e7b3be000efa5d47a51b9c07525597800a518df59d8ecaa6",
+    "hash": "98b4eaf1ba98b360e7b3be000efa5d47a51b9c07525597800a518df59d8ecaa6",
+    "version": 2,
+    "size": 164,
+    "vsize": 164,
+    "weight": 656,
+    "locktime": 0,
+    "vin": [
+      {
+        "txid": "cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80",
+        "vout": 0,
+        "scriptSig": {
+          "asm": "",
+          "hex": ""
+        },
+        "sequence": 4294967295
+      },
+      {
+        "txid": "ebf7b4cfe5a4aaf3c9faede04369527e14cc7c9766c448c765b6d64e85bee1a8",
+        "vout": 0,
+        "scriptSig": {
+          "asm": "",
+          "hex": ""
+        },
+        "sequence": 4294967295
+      },
+      {
+        "txid": "3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501",
+        "vout": 0,
+        "scriptSig": {
+          "asm": "",
+          "hex": ""
+        },
+        "sequence": 4294967295
+      }
+    ],
+    "vout": [
+      {
+        "value": 0.00010000,
+        "n": 0,
+        "scriptPubKey": {
+          "asm": "0 4450bf53ac0907e5355368bbbcbfed1f64199056",
+          "hex": "00144450bf53ac0907e5355368bbbcbfed1f64199056",
+          "reqSigs": 1,
+          "type": "witness_v0_keyhash",
+          "addresses": [
+            "bc1qg3gt75avpyr72d2ndzame0ldrajpnyzk5kln5v"
+          ]
+        }
+      }
+    ]
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
