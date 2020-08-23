@@ -4073,7 +4073,34 @@ Console.WriteLine(joinpsbts);
 ### signrawtransactionwithkey
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
+//Step 1. Create the raw transaction.
+
+RawInputs rawInputs = new RawInputs
+{
+   Inputs = new List<RawInput>() { new RawInput("6524df1e00a403ab459f1d3a265cfa1864d1cac4ea0b81854be455a25bd6c92e", 0) }
+};
+
+RawOutputs rawOutputs = new RawOutputs()
+{
+   Outputs = new List<RawOutput> { new RawOutput("tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k", 0.00001f) }
+;
+
+//The response object.
+string response = await rawTransaction.CreateRawTransaction(rawInputs, rawOutputs);
+
+//Deserialize the response.
+dynamic deserialized = JsonConvert.DeserializeObject(response);
+
+//Get the hex string.
+string result = deserialized.result; // "02000000012ec9d65ba255e44b85810beac4cad16418fa5c263a1d9f45ab03a4001edf24650000000000ffffffff01e803000000000000160014f998998746cb1bb34377075a79d0d9c494569d2100000000"
+
+//Step 2. Sign the raw transaction with private key.
+string signrawtransactionwithkey = await rawTransaction.SignRawTransactionWithKey(result, new List<string> { "cSPSK16wrGeeNhhS97zgUDfvEkahRa7uGmG1UKnpzxKhe8Vdppg1" });
+
+Console.WriteLine(signrawtransactionwithkey);
   
 ```
 
@@ -4082,7 +4109,14 @@ Console.WriteLine(joinpsbts);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "hex": "020000000001012ec9d65ba255e44b85810beac4cad16418fa5c263a1d9f45ab03a4001edf24650000000000ffffffff01e803000000000000160014f998998746cb1bb34377075a79d0d9c494569d2102473044022039fc28874fc1fbf14c4297a4160acfb9793d341f32c61ccc27818fff5d47433102203c091fa28c69e3b2a337b560e20823f0a1b0aa7069d5f98dbe325a6807caa19e012102fc6958eee747f2471d4f34d5e4d7639de5c1abc32dbf05d876554cd7af66608900000000",
+    "complete": true
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
