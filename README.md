@@ -3610,8 +3610,13 @@ Console.WriteLine(createrawtransaction);
 ### decodepsbt
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string pSBT = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU210gwRQIhAPYQOLMI3B2oZaNIUnRvAVdyk0IIxtJEVDk82ZvfIhd3AiAFbmdaZ1ptCgK4WxTl4pB02KJam1dgvqKBb2YZEKAG6gEBAwQBAAAAAQRHUiEClYO/Oa4KYJdHrRma3dY0+mEIVZ1sXNObTCGD8auW4H8hAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXUq4iBgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfxDZDGpPAAAAgAAAAIAAAACAIgYC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtcQ2QxqTwAAAIAAAACAAQAAgAABASAAwusLAAAAABepFLf1+vQOPUClpFmx2zU18rcvqSHohyICAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zRzBEAiBl9FulmYtZon/+GnvtAWrx8fkNVLOqj3RQql9WolEDvQIgf3JHA60e25ZoCyhLVtT/y4j3+3Weq74IqjDym4UTg9IBAQMEAQAAAAEEIgAgjCNTFzdDtZXftKB7crqOQuN5fadOh/59nXSX47ICiQABBUdSIQMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3CECOt2QTz1tz1nduQaw3uI1Kbf/ue1Q5ehhUZJoYCIfDnNSriIGAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zENkMak8AAACAAAAAgAMAAIAiBgMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3BDZDGpPAAAAgAAAAIACAACAACICA6mkw39ZltOqJdusa1cK8GUDlEkpQkYLNUdT7Z7spYdxENkMak8AAACAAAAAgAQAAIAAIgICf2OZdX0u/1WhNq0CxoSxg4tlVuXxtrNCgqlLa1AFEJYQ2QxqTwAAAIAAAACABQAAgAA=";
+
+string decodepsbt = await rawTransaction.DecodePSBT(pSBT);
+Console.WriteLine(decodepsbt);
 ```
 
 <details>
@@ -3619,14 +3624,214 @@ Console.WriteLine(createrawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "tx": {
+      "txid": "82efd652d7ab1197f01a5f4d9a30cb4c68bb79ab6fec58dfa1bf112291d1617b",
+      "hash": "82efd652d7ab1197f01a5f4d9a30cb4c68bb79ab6fec58dfa1bf112291d1617b",
+      "version": 2,
+      "size": 154,
+      "vsize": 154,
+      "weight": 616,
+      "locktime": 0,
+      "vin": [
+        {
+          "txid": "75ddabb27b8845f5247975c8a5ba7c6f336c4570708ebe230caf6db5217ae858",
+          "vout": 0,
+          "scriptSig": {
+            "asm": "",
+            "hex": ""
+          },
+          "sequence": 4294967295
+        },
+        {
+          "txid": "1dea7cd05979072a3578cab271c02244ea8a090bbb46aa680a65ecd027048d83",
+          "vout": 1,
+          "scriptSig": {
+            "asm": "",
+            "hex": ""
+          },
+          "sequence": 4294967295
+        }
+      ],
+      "vout": [
+        {
+          "value": 1.49990000,
+          "n": 0,
+          "scriptPubKey": {
+            "asm": "0 d85c2b71d0060b09c9886aeb815e50991dda124d",
+            "hex": "0014d85c2b71d0060b09c9886aeb815e50991dda124d",
+            "reqSigs": 1,
+            "type": "witness_v0_keyhash",
+            "addresses": [
+              "bc1qmpwzkuwsqc9snjvgdt4czhjsnywa5yjdgwyw6k"
+            ]
+          }
+        },
+        {
+          "value": 1.00000000,
+          "n": 1,
+          "scriptPubKey": {
+            "asm": "0 00aea9a2e5f0f876a588df5546e8742d1d87008f",
+            "hex": "001400aea9a2e5f0f876a588df5546e8742d1d87008f",
+            "reqSigs": 1,
+            "type": "witness_v0_keyhash",
+            "addresses": [
+              "bc1qqzh2ngh97ru8dfvgma25d6r595wcwqy0skmt5z"
+            ]
+          }
+        }
+      ]
+    },
+    "unknown": {},
+    "inputs": [
+      {
+        "non_witness_utxo": {
+          "txid": "75ddabb27b8845f5247975c8a5ba7c6f336c4570708ebe230caf6db5217ae858",
+          "hash": "75ddabb27b8845f5247975c8a5ba7c6f336c4570708ebe230caf6db5217ae858",
+          "version": 2,
+          "size": 187,
+          "vsize": 187,
+          "weight": 748,
+          "locktime": 101,
+          "vin": [
+            {
+              "txid": "8b6f65ab71eeab8b2918acc2ea06b79de08b84680b40ae845fd28b013139d7aa",
+              "vout": 0,
+              "scriptSig": {
+                "asm": "3044022058f6fc7c6a33e1b31548d481c826c015bd30135aad42cd67790dab66d2ad243b02204a1ced2604c6735b6393e5b41691dd78b00f0c5942fb9f751856faa938157dba[ALL]",
+                "hex": "473044022058f6fc7c6a33e1b31548d481c826c015bd30135aad42cd67790dab66d2ad243b02204a1ced2604c6735b6393e5b41691dd78b00f0c5942fb9f751856faa938157dba01"
+              },
+              "sequence": 4294967294
+            }
+          ],
+          "vout": [
+            {
+              "value": 0.50000000,
+              "n": 0,
+              "scriptPubKey": {
+                "asm": "OP_HASH160 0fb9463421696b82c833af241c78c17ddbde4934 OP_EQUAL",
+                "hex": "a9140fb9463421696b82c833af241c78c17ddbde493487",
+                "reqSigs": 1,
+                "type": "scripthash",
+                "addresses": [
+                  "338A1VzFsJXQAiJHeZDzwCvmSv4t1CoYkY"
+                ]
+              }
+            },
+            {
+              "value": 49.49996240,
+              "n": 1,
+              "scriptPubKey": {
+                "asm": "OP_HASH160 29ca74f8a08f81999428185c97b5d852e4063f61 OP_EQUAL",
+                "hex": "a91429ca74f8a08f81999428185c97b5d852e4063f6187",
+                "reqSigs": 1,
+                "type": "scripthash",
+                "addresses": [
+                  "35VzAMxSnefPwn2bnCHs53cEWsMfyHUiZr"
+                ]
+              }
+            }
+          ]
+        },
+        "partial_signatures": {
+          "02dab61ff49a14db6a7d02b0cd1fbb78fc4b18312b5b4e54dae4dba2fbfef536d7": "3045022100f61038b308dc1da865a34852746f015772934208c6d24454393cd99bdf2217770220056e675a675a6d0a02b85b14e5e29074d8a25a9b5760bea2816f661910a006ea01"
+        },
+        "sighash": "ALL",
+        "redeem_script": {
+          "asm": "2 029583bf39ae0a609747ad199addd634fa6108559d6c5cd39b4c2183f1ab96e07f 02dab61ff49a14db6a7d02b0cd1fbb78fc4b18312b5b4e54dae4dba2fbfef536d7 2 OP_CHECKMULTISIG",
+          "hex": "5221029583bf39ae0a609747ad199addd634fa6108559d6c5cd39b4c2183f1ab96e07f2102dab61ff49a14db6a7d02b0cd1fbb78fc4b18312b5b4e54dae4dba2fbfef536d752ae",
+          "type": "multisig"
+        },
+        "bip32_derivs": [
+          {
+            "pubkey": "029583bf39ae0a609747ad199addd634fa6108559d6c5cd39b4c2183f1ab96e07f",
+            "master_fingerprint": "d90c6a4f",
+            "path": "m/0\u0027/0\u0027/0\u0027"
+          },
+          {
+            "pubkey": "02dab61ff49a14db6a7d02b0cd1fbb78fc4b18312b5b4e54dae4dba2fbfef536d7",
+            "master_fingerprint": "d90c6a4f",
+            "path": "m/0\u0027/0\u0027/1\u0027"
+          }
+        ]
+      },
+      {
+        "witness_utxo": {
+          "amount": 2.00000000,
+          "scriptPubKey": {
+            "asm": "OP_HASH160 b7f5faf40e3d40a5a459b1db3535f2b72fa921e8 OP_EQUAL",
+            "hex": "a914b7f5faf40e3d40a5a459b1db3535f2b72fa921e887",
+            "type": "scripthash",
+            "address": "3JTiFf9xWFqryQ7CXK3hMX8oh4GxYxUyAr"
+          }
+        },
+        "partial_signatures": {
+          "023add904f3d6dcf59ddb906b0dee23529b7ffb9ed50e5e86151926860221f0e73": "3044022065f45ba5998b59a27ffe1a7bed016af1f1f90d54b3aa8f7450aa5f56a25103bd02207f724703ad1edb96680b284b56d4ffcb88f7fb759eabbe08aa30f29b851383d201"
+        },
+        "sighash": "ALL",
+        "redeem_script": {
+          "asm": "0 8c2353173743b595dfb4a07b72ba8e42e3797da74e87fe7d9d7497e3b2028900",
+          "hex": "00208c2353173743b595dfb4a07b72ba8e42e3797da74e87fe7d9d7497e3b2028900",
+          "type": "witness_v0_scripthash"
+        },
+        "witness_script": {
+          "asm": "2 03089dc10c7ac6db54f91329af617333db388cead0c231f723379d1b99030b02dc 023add904f3d6dcf59ddb906b0dee23529b7ffb9ed50e5e86151926860221f0e73 2 OP_CHECKMULTISIG",
+          "hex": "522103089dc10c7ac6db54f91329af617333db388cead0c231f723379d1b99030b02dc21023add904f3d6dcf59ddb906b0dee23529b7ffb9ed50e5e86151926860221f0e7352ae",
+          "type": "multisig"
+        },
+        "bip32_derivs": [
+          {
+            "pubkey": "023add904f3d6dcf59ddb906b0dee23529b7ffb9ed50e5e86151926860221f0e73",
+            "master_fingerprint": "d90c6a4f",
+            "path": "m/0\u0027/0\u0027/3\u0027"
+          },
+          {
+            "pubkey": "03089dc10c7ac6db54f91329af617333db388cead0c231f723379d1b99030b02dc",
+            "master_fingerprint": "d90c6a4f",
+            "path": "m/0\u0027/0\u0027/2\u0027"
+          }
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "bip32_derivs": [
+          {
+            "pubkey": "03a9a4c37f5996d3aa25dbac6b570af0650394492942460b354753ed9eeca58771",
+            "master_fingerprint": "d90c6a4f",
+            "path": "m/0\u0027/0\u0027/4\u0027"
+          }
+        ]
+      },
+      {
+        "bip32_derivs": [
+          {
+            "pubkey": "027f6399757d2eff55a136ad02c684b1838b6556e5f1b6b34282a94b6b50051096",
+            "master_fingerprint": "d90c6a4f",
+            "path": "m/0\u0027/0\u0027/5\u0027"
+          }
+        ]
+      }
+    ],
+    "fee": 0.00010000
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### decoderawtransaction
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
+string rawTx = "0200000003809d3482a6b977773a58ff3af53fba4815024c078d07f0e2e3ec47cbf0a9fdcb0000000000ffffffffa8e1be854ed6b665c748c466977ccc147e526943e0edfac9f3aaa4e5cfb4f7eb0000000000ffffffff01151c428db500966314adce5b36e2750beb68418185d0fbad5dda5644d489320000000000ffffffff0110270000000000001600144450bf53ac0907e5355368bbbcbfed1f6419905600000000";
+
+string decoderawtransaction = await rawTransaction.DecodeRawTransaction(rawTx);
+Console.WriteLine(decoderawtransaction);
   
 ```
 
@@ -3635,7 +3840,63 @@ Console.WriteLine(createrawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "txid": "98b4eaf1ba98b360e7b3be000efa5d47a51b9c07525597800a518df59d8ecaa6",
+    "hash": "98b4eaf1ba98b360e7b3be000efa5d47a51b9c07525597800a518df59d8ecaa6",
+    "version": 2,
+    "size": 164,
+    "vsize": 164,
+    "weight": 656,
+    "locktime": 0,
+    "vin": [
+      {
+        "txid": "cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80",
+        "vout": 0,
+        "scriptSig": {
+          "asm": "",
+          "hex": ""
+        },
+        "sequence": 4294967295
+      },
+      {
+        "txid": "ebf7b4cfe5a4aaf3c9faede04369527e14cc7c9766c448c765b6d64e85bee1a8",
+        "vout": 0,
+        "scriptSig": {
+          "asm": "",
+          "hex": ""
+        },
+        "sequence": 4294967295
+      },
+      {
+        "txid": "3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501",
+        "vout": 0,
+        "scriptSig": {
+          "asm": "",
+          "hex": ""
+        },
+        "sequence": 4294967295
+      }
+    ],
+    "vout": [
+      {
+        "value": 0.00010000,
+        "n": 0,
+        "scriptPubKey": {
+          "asm": "0 4450bf53ac0907e5355368bbbcbfed1f64199056",
+          "hex": "00144450bf53ac0907e5355368bbbcbfed1f64199056",
+          "reqSigs": 1,
+          "type": "witness_v0_keyhash",
+          "addresses": [
+            "bc1qg3gt75avpyr72d2ndzame0ldrajpnyzk5kln5v"
+          ]
+        }
+      }
+    ]
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
