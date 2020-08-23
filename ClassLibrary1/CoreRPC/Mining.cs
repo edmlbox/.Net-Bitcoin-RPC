@@ -71,7 +71,7 @@ namespace BitcoinRpc.CoreRPC
         /// <param name="dummy">API-Compatibility for previous API. Must be zero or null.
         /// DEPRECATED.For forward compatibility use named arguments and omit this parameter.</param>
         /// <returns></returns>
-        public async Task<string> PrioritiseTransaction(string txid, int feeDelta, int dummy = 0)
+        public async Task<string> PrioritiseTransaction(string txid, float feeDelta, int dummy = 0)
         {
 
             PrioritiseTransaction prioritiseTransaction = new PrioritiseTransaction(txid, feeDelta, dummy);

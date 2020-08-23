@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,15 +9,22 @@
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <Description>Fill later</Description>
 	  <Copyright>Eduard Karpa</Copyright>
-	  <PackageTags>bitcoin core rpc api library</PackageTags>
+	  <PackageTags>bitcoin core rpc api library wrapper</PackageTags>
 	  <PackageId>BitcoinRPC</PackageId>
 	  <AssemblyVersion>1.0.0.1</AssemblyVersion>
 	  <FileVersion>1.0.0.1</FileVersion>
-	  <Version>1.0.1</Version>
+	  <Version>1.0.7</Version>
+	  <PackageProjectUrl>https://github.com/edmlbox/.Net-Bitcoin-RPC</PackageProjectUrl>
+	  <RepositoryUrl>https://github.com/edmlbox/.Net-Bitcoin-RPC</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile></DocumentationFile>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+	   <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
 
   <ItemGroup>

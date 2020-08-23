@@ -536,6 +536,11 @@ namespace BitcoinRpc
                         CaseWriter.WalletProcessPSBT(methodName, guesType, writer);
                         break;
                     }
+                case "logging":
+                    {
+                        CaseWriter.Logging(methodName, guesType, writer);
+                        break;
+                    }
 
 
 

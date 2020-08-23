@@ -16,9 +16,9 @@ namespace BitcoinRpc.RequestModels.Mining
 
         /**<summary>The fee value (in satoshis) to add (or subtract, if negative).
             Note, that this value is not a fee rate. It is a value to modify absolute fee of the TX. The fee is not actually paid, only the algorithm for selecting transactions into a block considers the transaction as it would have paid a higher (or lower) fee.</summary>**/
-        public int FeeDelta { get; set; }
+        public float FeeDelta { get; set; }
 
-        public PrioritiseTransaction(string txid, int feeDelta, int dummy = 0)
+        public PrioritiseTransaction(string txid, float feeDelta, int dummy = 0)
         {
             this.Txid = txid;
             this.Dummy = dummy;
