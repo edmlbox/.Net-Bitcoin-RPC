@@ -3903,8 +3903,13 @@ Console.WriteLine(decoderawtransaction);
 ### decodescript
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string script = "0200000003809d3482a6b977773a58ff3af53fba4815024c078d07f0e2e3ec47cbf0a9fdcb0000000000ffffffffa8e1be854ed6b665c748c466977ccc147e526943e0edfac9f3aaa4e5cfb4f7eb0000000000ffffffff01151c428db500966314adce5b36e2750beb68418185d0fbad5dda5644d489320000000000ffffffff0110270000000000001600144450bf53ac0907e5355368bbbcbfed1f6419905600000000";
+
+string decodescript = await rawTransaction.DecodeScript(script);
+Console.WriteLine(decodescript);
 ```
 
 <details>
@@ -3912,15 +3917,38 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "asm": "0 0 3448192 OP_SIZE OP_RIPEMD160 OP_NOP10 OP_NIP OP_NIP 58ff3af53fba4815024c078d07f0e2e3ec47cbf0a9fdcb0000000000ffffffffa8e1be854ed6b665c748c466977ccc147e526943e0edfac9f3aa OP_MAX OP_UNKNOWN OP_UNKNOWN OP_NOP5 OP_UNKNOWN OP_UNKNOWN 0 0 0 0 0 OP_INVALIDOPCODE OP_INVALIDOPCODE OP_INVALIDOPCODE OP_INVALIDOPCODE 21 428db500966314adce5b36e2750beb68418185d0fbad5dda5644d489 [error]",
+    "type": "nonstandard",
+    "p2sh": "3EtVi2wJgGJtUjWxLLddEyeSvrmaSFv57n",
+    "segwit": {
+      "asm": "0 e4ca92b571f04183de76fea713cf54c90ece8617ba57b42facad65844783b76e",
+      "hex": "0020e4ca92b571f04183de76fea713cf54c90ece8617ba57b42facad65844783b76e",
+      "reqSigs": 1,
+      "type": "witness_v0_scripthash",
+      "addresses": [
+        "bc1qun9f9dt37pqc8hnkl6n38n65ey8vapshhftmgtav44jcg3urkahq68tkds"
+      ],
+      "p2sh-segwit": "31ogGQQLx5acnSLjqJ3wCHTrowXp2S3tNs"
+    }
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### finalizepsbt
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string pSBT = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU210gwRQIhAPYQOLMI3B2oZaNIUnRvAVdyk0IIxtJEVDk82ZvfIhd3AiAFbmdaZ1ptCgK4WxTl4pB02KJam1dgvqKBb2YZEKAG6gEBAwQBAAAAAQRHUiEClYO/Oa4KYJdHrRma3dY0+mEIVZ1sXNObTCGD8auW4H8hAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXUq4iBgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfxDZDGpPAAAAgAAAAIAAAACAIgYC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtcQ2QxqTwAAAIAAAACAAQAAgAABASAAwusLAAAAABepFLf1+vQOPUClpFmx2zU18rcvqSHohyICAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zRzBEAiBl9FulmYtZon/+GnvtAWrx8fkNVLOqj3RQql9WolEDvQIgf3JHA60e25ZoCyhLVtT/y4j3+3Weq74IqjDym4UTg9IBAQMEAQAAAAEEIgAgjCNTFzdDtZXftKB7crqOQuN5fadOh/59nXSX47ICiQABBUdSIQMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3CECOt2QTz1tz1nduQaw3uI1Kbf/ue1Q5ehhUZJoYCIfDnNSriIGAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zENkMak8AAACAAAAAgAMAAIAiBgMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3BDZDGpPAAAAgAAAAIACAACAACICA6mkw39ZltOqJdusa1cK8GUDlEkpQkYLNUdT7Z7spYdxENkMak8AAACAAAAAgAQAAIAAIgICf2OZdX0u/1WhNq0CxoSxg4tlVuXxtrNCgqlLa1AFEJYQ2QxqTwAAAIAAAACABQAAgAA=";
+
+string finalizepsbt = await rawTransaction.FinalizePSBT(pSBT);
+Console.WriteLine(finalizepsbt);  
 ```
 
 <details>
@@ -3928,15 +3956,27 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "psbt": "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw\u002BHaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l\u002BErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW\u002Bqk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU210gwRQIhAPYQOLMI3B2oZaNIUnRvAVdyk0IIxtJEVDk82ZvfIhd3AiAFbmdaZ1ptCgK4WxTl4pB02KJam1dgvqKBb2YZEKAG6gEBAwQBAAAAAQRHUiEClYO/Oa4KYJdHrRma3dY0\u002BmEIVZ1sXNObTCGD8auW4H8hAtq2H/SaFNtqfQKwzR\u002B7ePxLGDErW05U2uTbovv\u002B9TbXUq4iBgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfxDZDGpPAAAAgAAAAIAAAACAIgYC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui\u002B/71NtcQ2QxqTwAAAIAAAACAAQAAgAABASAAwusLAAAAABepFLf1\u002BvQOPUClpFmx2zU18rcvqSHohyICAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zRzBEAiBl9FulmYtZon/\u002BGnvtAWrx8fkNVLOqj3RQql9WolEDvQIgf3JHA60e25ZoCyhLVtT/y4j3\u002B3Weq74IqjDym4UTg9IBAQMEAQAAAAEEIgAgjCNTFzdDtZXftKB7crqOQuN5fadOh/59nXSX47ICiQABBUdSIQMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3CECOt2QTz1tz1nduQaw3uI1Kbf/ue1Q5ehhUZJoYCIfDnNSriIGAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zENkMak8AAACAAAAAgAMAAIAiBgMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3BDZDGpPAAAAgAAAAIACAACAACICA6mkw39ZltOqJdusa1cK8GUDlEkpQkYLNUdT7Z7spYdxENkMak8AAACAAAAAgAQAAIAAIgICf2OZdX0u/1WhNq0CxoSxg4tlVuXxtrNCgqlLa1AFEJYQ2QxqTwAAAIAAAACABQAAgAA=",
+    "complete": false
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### fundrawtransaction
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string rawTx = "0200000001809d3482a6b977773a58ff3af53fba4815024c078d07f0e2e3ec47cbf0a9fdcb0100000000ffffffff018813000000000000160014f998998746cb1bb34377075a79d0d9c494569d2100000000";
+
+string fundrawtransaction = await rawTransaction.FundRawTransaction(rawTx);
+Console.WriteLine(fundrawtransaction);
 ```
 
 <details>
@@ -3944,15 +3984,28 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "hex": "0200000001809d3482a6b977773a58ff3af53fba4815024c078d07f0e2e3ec47cbf0a9fdcb0100000000ffffffff028813000000000000160014f998998746cb1bb34377075a79d0d9c494569d217b4b010000000000160014691dbebc30ecd822976d054be083fb6af3bd97ec00000000",
+    "fee": 0.00000141,
+    "changepos": 1
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getrawtransaction
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string txid = "cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80";
+string getrawtransaction = await rawTransaction.GetRawTransaction(txid);
+
+Console.WriteLine(getrawtransaction);
 ```
 
 <details>
@@ -3960,14 +4013,28 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "02000000000101a8e1be854ed6b665c748c466977ccc147e526943e0edfac9f3aaa4e5cfb4f7eb0000000000fdffffff02ab241200000000001600147fd0e5fbb32a78ac2ced83fbc26be7d63e1f91fa905f0100000000001600147733bcaec8bf310756b795c691706057e11942050247304402204c7b2c1fb29ab7305c733e92463603357b932e6062c6c4e288e7d8a35564f52102205fd821196711e4708e7ce8c7ecb7dbed3e78b670964b6856b1684776e11df1690121033b5e7d8865da58d0f9e4e83e529f472de94a1817c709c18e3cd1e07d0530c3646a961b00",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### joinpsbts
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
+List<string> pSBTs = new List<string>
+            {          "cHNidP8BAHUCAAAAASaBcTce3/KF6Tet7qSze3gADAVmy7OtZGQXE8pCFxv2AAAAAAD+////AtPf9QUAAAAAGXapFNDFmQPFusKGh2DpD9UhpGZap2UgiKwA4fUFAAAAABepFDVF5uM7gyxHBQ8k0+65PJwDlIvHh7MuEwAAAQD9pQEBAAAAAAECiaPHHqtNIOA3G7ukzGmPopXJRjr6Ljl/hTPMti+VZ+UBAAAAFxYAFL4Y0VKpsBIDna89p95PUzSe7LmF/////4b4qkOnHf8USIk6UwpyN+9rRgi7st0tAXHmOuxqSJC0AQAAABcWABT+Pp7xp0XpdNkCxDVZQ6vLNL1TU/////8CAMLrCwAAAAAZdqkUhc/xCX/Z4Ai7NK9wnGIZeziXikiIrHL++E4sAAAAF6kUM5cluiHv1irHU6m80GfWx6ajnQWHAkcwRAIgJxK+IuAnDzlPVoMR3HyppolwuAJf3TskAinwf4pfOiQCIAGLONfc0xTnNMkna9b7QPZzMlvEuqFEyADS8vAtsnZcASED0uFWdJQbrUqZY3LLh+GFbTZSYG2YVi/jnF6efkE/IQUCSDBFAiEA0SuFLYXc2WHS9fSrZgZU327tzHlMDDPOXMMJ/7X85Y0CIGczio4OFyXBl/saiK9Z9R5E5CVbIBZ8hoQDHAXR8lkqASECI7cr7vCWXRC+B3jv7NYfysb3mk6haTkzgHNEZPhPKrMAAAAAAAAA",
+                "cHNidP8BAKACAAAAAqsJSaCMWvfEm4IS9Bfi8Vqz9cM9zxU4IagTn4d6W3vkAAAAAAD+////qwlJoIxa98SbghL0F+LxWrP1wz3PFTghqBOfh3pbe+QBAAAAAP7///8CYDvqCwAAAAAZdqkUdopAu9dAy+gdmI5x3ipNXHE5ax2IrI4kAAAAAAAAGXapFG9GILVT+glechue4O/p+gOcykWXiKwAAAAAAAEHakcwRAIgR1lmF5fAGwNrJZKJSGhiGDR9iYZLcZ4ff89X0eURZYcCIFMJ6r9Wqk2Ikf/REf3xM286KdqGbX+EhtdVRs7tr5MZASEDXNxh/HupccC1AaZGoqg7ECy0OIEhfKaC3Ibi1z+ogpIAAQEgAOH1BQAAAAAXqRQ1RebjO4MsRwUPJNPuuTycA5SLx4cBBBYAFIXRNTfy4mVAWjTbr6nj3aAfuCMIAAAA",
+                "cHNidP8BAFUCAAAAASeaIyOl37UfxF8iD6WLD8E+HjNCeSqF1+Ns1jM7XLw5AAAAAAD/////AaBa6gsAAAAAGXapFP/pwAYQl8w7Y28ssEYPpPxCfStFiKwAAAAAAAEBIJVe6gsAAAAAF6kUY0UgD2jRieGtwN8cTRbqjxTA2+uHIgIDsTQcy6doO2r08SOM1ul+cWfVafrEfx5I1HVBhENVvUZGMEMCIAQktY7/qqaU4VWepck7v9SokGQiQFXN8HC2dxRpRC0HAh9cjrD+plFtYLisszrWTt5g6Hhb+zqpS5m9+GFR25qaAQEEIgAgdx/RitRZZm3Unz1WTj28QvTIR3TjYK2haBao7UiNVoEBBUdSIQOxNBzLp2g7avTxI4zW6X5xZ9Vp+sR/HkjUdUGEQ1W9RiED3lXR4drIBeP4pYwfv5uUwC89uq/hJ/78pJlfJvggg71SriIGA7E0HMunaDtq9PEjjNbpfnFn1Wn6xH8eSNR1QYRDVb1GELSmumcAAACAAAAAgAQAAIAiBgPeVdHh2sgF4/iljB+/m5TALz26r+En/vykmV8m+CCDvRC0prpnAAAAgAAAAIAFAACAAAA="
+            };
+
+string joinpsbts = await rawTransaction.JoinPSBTS(pSBTs);
+Console.WriteLine(joinpsbts);
   
 ```
 
@@ -3976,7 +4043,11 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "cHNidP8BAP1WAQIAAAAEJoFxNx7f8oXpN63upLN7eAAMBWbLs61kZBcTykIXG/YAAAAAAP7///\u002BrCUmgjFr3xJuCEvQX4vFas/XDPc8VOCGoE5\u002BHelt75AAAAAAA/v///yeaIyOl37UfxF8iD6WLD8E\u002BHjNCeSqF1\u002BNs1jM7XLw5AAAAAAD/////qwlJoIxa98SbghL0F\u002BLxWrP1wz3PFTghqBOfh3pbe\u002BQBAAAAAP7///8FoFrqCwAAAAAZdqkU/\u002BnABhCXzDtjbyywRg\u002Bk/EJ9K0WIrADh9QUAAAAAF6kUNUXm4zuDLEcFDyTT7rk8nAOUi8eH09/1BQAAAAAZdqkU0MWZA8W6woaHYOkP1SGkZlqnZSCIrGA76gsAAAAAGXapFHaKQLvXQMvoHZiOcd4qTVxxOWsdiKyOJAAAAAAAABl2qRRvRiC1U/oJXnIbnuDv6foDnMpFl4isAAAAAAABAMwBAAAAAomjxx6rTSDgNxu7pMxpj6KVyUY6\u002Bi45f4UzzLYvlWflAQAAABcWABS\u002BGNFSqbASA52vPafeT1M0nuy5hf////\u002BG\u002BKpDpx3/FEiJOlMKcjfva0YIu7LdLQFx5jrsakiQtAEAAAAXFgAU/j6e8adF6XTZAsQ1WUOryzS9U1P/////AgDC6wsAAAAAGXapFIXP8Ql/2eAIuzSvcJxiGXs4l4pIiKxy/vhOLAAAABepFDOXJboh79Yqx1OpvNBn1semo50FhwAAAAAAAAEBIJVe6gsAAAAAF6kUY0UgD2jRieGtwN8cTRbqjxTA2\u002BuHAQQiACB3H9GK1FlmbdSfPVZOPbxC9MhHdONgraFoFqjtSI1WgQEFR1IhA7E0HMunaDtq9PEjjNbpfnFn1Wn6xH8eSNR1QYRDVb1GIQPeVdHh2sgF4/iljB\u002B/m5TALz26r\u002BEn/vykmV8m\u002BCCDvVKuIgYDsTQcy6doO2r08SOM1ul\u002BcWfVafrEfx5I1HVBhENVvUYQtKa6ZwAAAIAAAACABAAAgCIGA95V0eHayAXj\u002BKWMH7\u002BblMAvPbqv4Sf\u002B/KSZXyb4IIO9ELSmumcAAACAAAAAgAUAAIAAAQEgAOH1BQAAAAAXqRQ1RebjO4MsRwUPJNPuuTycA5SLx4cBBBYAFIXRNTfy4mVAWjTbr6nj3aAfuCMIAAAAAAAA",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
