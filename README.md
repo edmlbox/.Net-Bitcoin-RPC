@@ -4123,8 +4123,13 @@ Console.WriteLine(signrawtransactionwithkey);
 ### testmempoolaccept
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string rawTx = "020000000001012ec9d65ba255e44b85810beac4cad16418fa5c263a1d9f45ab03a4001edf24650000000000ffffffff01e803000000000000160014f998998746cb1bb34377075a79d0d9c494569d2102473044022039fc28874fc1fbf14c4297a4160acfb9793d341f32c61ccc27818fff5d47433102203c091fa28c69e3b2a337b560e20823f0a1b0aa7069d5f98dbe325a6807caa19e012102fc6958eee747f2471d4f34d5e4d7639de5c1abc32dbf05d876554cd7af66608900000000";
+
+string testmempoolaccept = await rawTransaction.TestMemPoolAccept(rawTx);
+Console.WriteLine(testmempoolaccept); 
 ```
 
 <details>
@@ -4132,15 +4137,29 @@ Console.WriteLine(signrawtransactionwithkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "txid": "2d7ecff0b455774f9740b8e11c12ec873479b46de92082bf2a12015baf63366e",
+      "allowed": true
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### utxoupdatepsbt
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string pSBT = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAAAAAA=";
+
+string utxoupdatepsbt = await rawTransaction.UtxoUpdatePSBT(pSBT);
+Console.WriteLine(utxoupdatepsbt);
 ```
 
 <details>
@@ -4148,7 +4167,11 @@ Console.WriteLine(signrawtransactionwithkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw\u002BHaliN9VRuh0LR2HAI8AAAAAAAAAAAA=",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
