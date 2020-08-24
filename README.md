@@ -4405,8 +4405,13 @@ WALLET
 ### abandontransaction
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string txid = "6524df1e00a403ab459f1d3a265cfa1864d1cac4ea0b81854be455a25bd6c92e";
+string abandontransaction = await wallet.AbandonTransaction(txid);
+
+Console.WriteLine(abandontransaction);
 ```
 
 <details>
@@ -4414,14 +4419,27 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": {
+    "code": -5,
+    "message": "Transaction not eligible for abandonment"
+  },
+  "id": null
+}
 ```
 </details>
 
 ### abortrescan
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string abortrescan = await wallet.AbortRescan();
 
+Console.WriteLine(abortrescan);
   
 ```
 
@@ -4430,15 +4448,31 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": true,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### addmultisigaddress
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+List<string> keys = new List<string>()
+{
+    "tb1qwuemetkghucsw44hjhrfzurq2ls3jss9lwfj62",
+    "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076"
+};
+
+int nRequired = 2;
+AddressType addressType = AddressType.bech32;
+
+string addmultisigaddress = await wallet.AddMultisigAddress(nRequired, keys, addressType);
+Console.WriteLine(addmultisigaddress);
 ```
 
 <details>
@@ -4446,15 +4480,28 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "address": "tb1qs2axh0ldwzh9w4uqnpja5p8caqr676tzchh63vlheke2kuhf2d7s0nxmux",
+    "redeemScript": "522102fc6958eee747f2471d4f34d5e4d7639de5c1abc32dbf05d876554cd7af66608921024f10e363d21c591612197a8b7cdc2debcb8250555cf8a44d9d6aeafcc14c0ae952ae",
+    "descriptor": "wsh(multi(2,[6e528489/0\u0027/0\u0027/0\u0027]02fc6958eee747f2471d4f34d5e4d7639de5c1abc32dbf05d876554cd7af666089,[9b6a804e/0\u0027/0\u0027/3\u0027]024f10e363d21c591612197a8b7cdc2debcb8250555cf8a44d9d6aeafcc14c0ae9))#4afx49du"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### backupwallet
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string backupwallet = await wallet.BackupWallet("backup.dat");
+            
+Console.WriteLine(backupwallet);
 ```
 
 <details>
@@ -4462,15 +4509,24 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### bumpfee
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string txid = "6524df1e00a403ab459f1d3a265cfa1864d1cac4ea0b81854be455a25bd6c92e";
+string bumpfee = await wallet.BumpFee(txid);
 
-  
+Console.WriteLine(bumpfee);
 ```
 
 <details>
@@ -4478,15 +4534,42 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": {
+    "code": -4,
+    "message": "Transaction has been mined, or is conflicted with a mined transaction"
+  },
+  "id": null
+}
 ```
 </details>
 
 ### createwallet
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+//required
+string walletName = "tomate";
+
+//optional. wallet password.
+string passphrase = "12345";
+
+//optional
+bool disablePrivateKeys = false;
+
+//optional
+bool blank = false;
+            
+//optional
+bool avoidReuse = false;
+
+string createwallet = await wallet.CreateWallet(walletName, disablePrivateKeys, blank, passphrase, avoidReuse);
+
+Console.WriteLine(createwallet);
+
 ```
 
 <details>
@@ -4494,15 +4577,27 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "name": "tomate",
+    "warning": ""
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### dumpprivkey
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
 
-  
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string dumpprivkey = await wallet.DumpPrivKey("tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076");
+
+Console.WriteLine(dumpprivkey);
 ```
 
 <details>
@@ -4510,15 +4605,26 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "cQLanjPtqTSrPgLDV7oKgvv3HJXca9sakzzRZNjcUpaHt2a2A3h6",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### dumpwallet
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
 
-  
+List<string> wallets = await MultipleWallet.GetWallets(bitcoinClient);
+
+Wallet wallet = new Wallet(bitcoinClient);
+
+string dumpprivkey = await wallet.DumpWallet("walletDump.txt");
+
+Console.WriteLine(dumpprivkey);
 ```
 
 <details>
@@ -4526,6 +4632,13 @@ WALLET
   <summary>Server response</summary>
  
  ```json
+  {
+  "result": {
+    "filename": "E:\\Bitcoin\\walletDump.txt"
+  },
+  "error": null,
+  "id": null
+}
 
 ```
 </details>
