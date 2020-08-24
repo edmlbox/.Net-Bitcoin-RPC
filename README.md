@@ -4646,8 +4646,13 @@ Console.WriteLine(dumpprivkey);
 ### encryptwallet
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient, "orange");
 
-  
+string passphrase = "12345";
+string encryptwallet = await wallet.EncryptWallet(passphrase);
+
+Console.WriteLine(encryptwallet);
 ```
 
 <details>
@@ -4655,15 +4660,24 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "wallet encrypted; The keypool has been flushed and a new HD seed was generated (if you are using HD). You need to make a new backup.",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getaddressesbylabel
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string label = "one";
+string getaddressesbylabel = await wallet.GetAddressesByLabel(label);
+
+Console.WriteLine(getaddressesbylabel);  
 ```
 
 <details>
@@ -4671,15 +4685,31 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "tb1qnh3ahpknxnycpxva5vftt9mn0l6zyv74qxnfag": {
+      "purpose": "receive"
+    },
+    "tb1qhhjmmg5pgjtlcux2mlky3lq5mv0zlzfzhdeq6j": {
+      "purpose": "receive"
+    }
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getaddressinfo
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");           
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string address = "tb1qa6rs93lmdxsq2v3mnumna7wheenxr6tcax39j6";
+string getaddressinfo = await wallet.GetAddressInfo(address);
+
+Console.WriteLine(getaddressinfo); 
 ```
 
 <details>
@@ -4687,15 +4717,44 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "address": "tb1qa6rs93lmdxsq2v3mnumna7wheenxr6tcax39j6",
+    "scriptPubKey": "0014ee8702c7fb69a005323b9f373ef9d7ce6661e978",
+    "ismine": true,
+    "solvable": true,
+    "desc": "wpkh([df099759/0\u0027/0\u0027/14\u0027]027b6340ec261f9f9df90407d8033988c77476dedf36afd1ba7405f1d3b89ac600)#qcypltg8",
+    "iswatchonly": false,
+    "isscript": false,
+    "iswitness": true,
+    "witness_version": 0,
+    "witness_program": "ee8702c7fb69a005323b9f373ef9d7ce6661e978",
+    "pubkey": "027b6340ec261f9f9df90407d8033988c77476dedf36afd1ba7405f1d3b89ac600",
+    "ischange": false,
+    "timestamp": 1597225442,
+    "hdkeypath": "m/0\u0027/0\u0027/14\u0027",
+    "hdseedid": "e58c31d9d60daaa1f19fa3a2508c178e9d72f725",
+    "hdmasterfingerprint": "df099759",
+    "labels": [
+      ""
+    ]
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getbalance
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string getbalance = await wallet.GetBalance();
+
+Console.WriteLine(getbalance); 
 ```
 
 <details>
@@ -4703,15 +4762,24 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": 0.00020000,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getbalances
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string getbalances = await wallet.GetBalances();
+
+Console.WriteLine(getbalances); 
 ```
 
 <details>
@@ -4719,15 +4787,35 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "mine": {
+      "trusted": 0.03794156,
+      "untrusted_pending": 0.00000000,
+      "immature": 0.00000000
+    }
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getnewaddress
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+//Optional.
+AddressType addressType = AddressType.bech32;
+
+//Optional.
+string label = "best address";
+
+string getnewaddress = await wallet.GetNewAddress(label, addressType);
+
+Console.WriteLine(getnewaddress);  
 ```
 
 <details>
@@ -4735,15 +4823,26 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "bc1qrz74rd4v7lryfqu2cudckql4ta200ye6apjpnk",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getrawchangeaddress
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+//Optional.
+AddressType addressType = AddressType.bech32;
+
+string getrawchangeaddress = await wallet.GetRawChangeAddress(addressType);
+
+Console.WriteLine(getrawchangeaddress);  
 ```
 
 <details>
@@ -4751,15 +4850,26 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "bc1qv450gz0t5uw0hrt5xkvnegm2wvlrpg0y9pq452",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getreceivedbyaddress
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
 
-  
+Wallet wallet = new Wallet(bitcoinClient);
+
+string address = "tb1qqvegzkql09s694kaa0czzav4ragmcnmwqg6ynk";
+            
+string getreceivedbyaddress = await wallet.GetReceivedByAddress(address);
+
+Console.WriteLine(getreceivedbyaddress); 
 ```
 
 <details>
@@ -4767,14 +4877,24 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": 0.00019890,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getreceivedbylabel
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string label = "one";
+string getreceivedbylabel = await wallet.GetReceivedByLabel(label);
 
+Console.WriteLine(getreceivedbylabel)
   
 ```
 
@@ -4783,15 +4903,24 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": 0.01000000,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### gettransaction
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string txid = "39c2b0dac1b7d986cd9042b72c4228ea78bb0439a6062062f0b5d98ac9cb013d";
+string gettransaction = await wallet.GetTransaction(txid);
 
-  
+Console.WriteLine(gettransaction);  
 ```
 
 <details>
@@ -4799,15 +4928,50 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "amount": -0.00059859,
+    "fee": -0.00000141,
+    "confirmations": 1026,
+    "blockhash": "00000000b99db7eba7428632c355e5554ebbb84d0d3b5d0e105f21c3f6dfb1f9",
+    "blockheight": 1807234,
+    "blockindex": 195,
+    "blocktime": 1597417309,
+    "txid": "39c2b0dac1b7d986cd9042b72c4228ea78bb0439a6062062f0b5d98ac9cb013d",
+    "walletconflicts": [],
+    "time": 1597416426,
+    "timereceived": 1597416426,
+    "bip125-replaceable": "no",
+    "comment": "suck",
+    "to": "comto",
+    "details": [
+      {
+        "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+        "category": "send",
+        "amount": -0.00059859,
+        "vout": 0,
+        "fee": -0.00000141,
+        "abandoned": false
+      }
+    ],
+    "hex": "02000000000101e297d407f4d71d2bb96be4bac2d38921da8a74be436d601512802fd1d1ea4b6f0000000000fdffffff02d3e9000000000000160014f998998746cb1bb34377075a79d0d9c494569d21794a2a00000000001600146bdb400743f59e6c86b910003e018516334a8f7b02473044022008a4ecf385e4ecdad091f67d3617cc4225c21d8a9c0a94ece1535df578b26566022079538f621ab333eaeac95325a61d7eb5ce30976603e32a8bb0e6695fcd004fb40121021c5814c662bf0a4ca156eb31ffb8c664e167a965aa0c60acf36c757ba758a1f03d931b00"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getunconfirmedbalance
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string getunconfirmedbalance = await wallet.GetUnconfirmedBalance();
 
-  
+Console.WriteLine(getunconfirmedbalance);
 ```
 
 <details>
@@ -4815,15 +4979,24 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": 0.01000000,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getwalletinfo
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient, "boss");
 
-  
+string getwalletinfo = await wallet.GetWalletInfo();
+
+Console.WriteLine(getwalletinfo);  
 ```
 
 <details>
@@ -4831,15 +5004,47 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "walletname": "boss",
+    "walletversion": 169900,
+    "balance": 0.03794156,
+    "unconfirmed_balance": 0.01000000,
+    "immature_balance": 0.00000000,
+    "txcount": 72,
+    "keypoololdest": 1597417444,
+    "keypoolsize": 999,
+    "hdseedid": "468c02ca66ad6fc391406fafa19ff009ab78debd",
+    "keypoolsize_hd_internal": 1000,
+    "paytxfee": 0.00000000,
+    "private_keys_enabled": true,
+    "avoid_reuse": false,
+    "scanning": false
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### importaddress
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+//Required.
+string address = "mtXWDB6k5yC5v7TcwKZHB89SUp85yCKshy";
+            
+//Optional.
+string label = "label";
+
+//Optional.
+bool rescan = false;
+
+string importaddress = await wallet.ImportAddress(address, label, rescan);
+
+Console.WriteLine(importaddress); 
 ```
 
 <details>
@@ -4847,15 +5052,36 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### importmulti
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+List<MultiData> multiDatas = new List<MultiData>();
+
+MultiData MultiData = new MultiData()
+{
+      Desc = "addr(mtXWDB6k5yC5v7TcwKZHB89SUp85yCKshy)",
+      Label = "imported",
+      WatchOnly=true,
+                
+};
+            
+MultiData.SetTimestamp(CreationTime.Now);
+
+string importmulti = await wallet.ImportMulti(multiDatas);
+
+Console.WriteLine(importmulti); 
 ```
 
 <details>
@@ -4863,14 +5089,29 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### importprivkey
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
+//Required.
+string privKey = "cPF57iFYMW9wwegtpoZxN6ouJ2LWjxCHZokfaBTmaV3g9wcdpYzc";
+
+//Optional.
+bool rescan = false;
+
+string importprivkey = await wallet.ImportPrivKey(privKey, rescan);
+
+Console.WriteLine(importprivkey);
   
 ```
 
@@ -4879,15 +5120,26 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### importprunedfunds
 -----
 ```csharp    
-
-  
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string rawTx = "0100000001f3f6a909f8521adb57d898d2985834e632374e770fd9e2b98656f1bf1fdfd427010000006b48304502203a776322ebf8eb8b58cc6ced4f2574f4c73aa664edce0b0022690f2f6f47c521022100b82353305988cb0ebd443089a173ceec93fe4dbfe98d74419ecc84a6a698e31d012103c5c1bc61f60ce3d6223a63cedbece03b12ef9f0068f2f3c4a7e7f06c523c3664ffffffff0260e31600000000001976a914977ae6e32349b99b72196cb62b5ef37329ed81b488ac063d1000000000001976a914f76bc4190f3d8e2315e5c11c59cfc8be9df747e388ac00000000";
+            
+string txOutProof = "00000020eaff1b2556050adcfd6994ecf108e925d07743aa529fe6f528010000000000001da0a71c89d160cae71e342a449342d2195768e39a9ed8d9e7e48409a44481e233c33f5fffff001d1e3525e1d00100000adae8f7bc7e19f44570ed252b4ee1dddf4d15fc3578ee92a3b4b8e7a32b797091effafc7601cab2f5a39c9422660c4c8d2d0b0bcd17be9824c98698e5542946061d78ace3258b0ff8dc09bcaa63fadfdfa71a136423570e5dfc63abccafd9ae9b234efd2c4dc22048acbd1163b3d524e0fb54e5e2c23719885f9730d08a76c1daaa70ac6019e0b5a1f3295232f6a1aeee541e68b2fd63403fd3ae2b6d945362ae527ca4689075ed2717cef6bf26ca0e68cc45aec7c9c5a665b8b02d7c27aabd8fa8e1be854ed6b665c748c466977ccc147e526943e0edfac9f3aaa4e5cfb4f7ebac2e3ec7aac342b5a9cb200be28d4e58fb7547b9a1f8252d9878ad42541e84e632ecbf55b2cbdfec9074ecbf9f6908024db8e80838d43959184107523031864f9a03005d7e09315b1bb076a227751cb31d2b077335c71af555013bce0424fe1003b5d500";
+          
+string importprunedfunds = await wallet.ImportPrunedFunds(rawTx, txOutProof);
+Console.WriteLine(importprunedfunds);  
 ```
 
 <details>
@@ -4895,15 +5147,29 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": {
+    "code": -5,
+    "message": "Transaction given doesn\u0027t exist in proof"
+  },
+  "id": null
+}
 ```
 </details>
 
 ### importpubkey
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string pubKey = "024b840f7aa5881b9b9b0022e1808d1083738ce11239f890345adea7df4a0f9702";
+bool rescan = false;
+
+string importpubkey = await wallet.ImportPubkey(pubKey, rescan);
+
+Console.WriteLine(importpubkey);
 ```
 
 <details>
@@ -4911,15 +5177,24 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### importwallet
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
+           
+string fileName = "walletDump.txt";
+string importwallet = await wallet.ImportWallet(fileName);
 
-  
+Console.WriteLine(importwallet);
 ```
 
 <details>
@@ -4927,15 +5202,24 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### keypoolrefill
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
+                    
+int newSize = 100;
+string keypoolrefill = await wallet.KeyPoolRefill(newSize);
 
-  
+Console.WriteLine(keypoolrefill);
 ```
 
 <details>
@@ -4943,15 +5227,24 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listaddressgroupings
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string listaddressgroupings = await wallet.ListAddressGroupings();
 
-  
+Console.WriteLine(listaddressgroupings);  
 ```
 
 <details>
@@ -4959,15 +5252,75 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    [
+      [
+        "tb1qrvstcs4r60kxpqhcf0phhz2uwe36khfd3jww4t",
+        0.00000000
+      ],
+      [
+        "tb1qg3gt75avpyr72d2ndzame0ldrajpnyzk7syq0l",
+        0.00000000,
+        ""
+      ],
+      [
+        "tb1q208y4ftpp5r4ssuj73ve2hqey6sl97tj36wsqd",
+        0.00000000
+      ],
+      [
+        "tb1qwuemetkghucsw44hjhrfzurq2ls3jss9lwfj62",
+        0.01090000,
+        ""
+      ],
+      [
+        "tb1q0vgtreynmdpwfnetu2qesxxkj4c3ys0uhkze6c",
+        0.00000000
+      ],
+      [
+        "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076",
+        0.00080000,
+        ""
+      ],
+      [
+        "tb1qhwafkc0kdmktd4wksdrywukrrh7ugpasega5dz",
+        0.00000000
+      ],
+      [
+        "tb1qck5tv8cwwgtdf4xemgg4d0m3jl5pt9cnlyqkfg",
+        0.00000000
+      ],
+      [
+        "tb1qmnqprxwfm250fs0s0zt7matf84qmk98p0l72kt",
+        0.00000000
+      ],
+      [
+        "tb1qa98l6du0qjc02pyrq2at07zszqm33wuvjmnq9n",
+        0.00000000
+      ],
+      [
+        "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+        0.00000000,
+        ""
+      ]
+    ]
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listlabels
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient, "");
 
-  
+string listlabels = await wallet.ListLabels();
+
+Console.WriteLine(listlabels); 
 ```
 
 <details>
@@ -4975,15 +5328,31 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    "",
+    "John Doe",
+    "apple",
+    "best Address",
+    "cherry",
+    "one"
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listlockunspent
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string listlockunspent = await wallet.ListLockUnspent();
+
+Console.WriteLine(listlockunspent);  
 ```
 
 <details>
@@ -4991,15 +5360,37 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "txid": "3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501",
+      "vout": 0
+    },
+    {
+      "txid": "cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80",
+      "vout": 0
+    },
+    {
+      "txid": "11a461bbe76f06a67e9695f43e0108c0f5b8a3a0243c01d8b2528ff6de3961f1",
+      "vout": 0
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listreceivedbyaddress
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string listreceivedbyaddress = await wallet.ListReceivedByAddress();
+
+Console.WriteLine(listreceivedbyaddress);  
 ```
 
 <details>
@@ -5007,7 +5398,42 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "address": "tb1qqvegzkql09s694kaa0czzav4ragmcnmwqg6ynk",
+      "amount": 0.00019890,
+      "confirmations": 963,
+      "label": "ddddd",
+      "txids": [
+        "3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501"
+      ]
+    },
+    {
+      "address": "tb1qgflg6yl8au445lt6xfddlvfumvp6d6z3g9wegt",
+      "amount": 0.01100000,
+      "confirmations": 5,
+      "label": "",
+      "txids": [
+        "d51acb8f691f1a7de84ecc338e1fbcb0b19908b192d8ddd05a5f62abf1b32029",
+        "8ddf6b7b33b1dba884f5f8c7869c2e2f8f89573c8fb28e5b27d9d904e007546b"
+      ]
+    },
+    {
+      "address": "tb1qwmxm8tshffmphupk7wr6j443uechlap7pver9e",
+      "amount": 0.06130442,
+      "confirmations": 1028,
+      "label": "",
+      "txids": [
+        "ccaa4c9ac0d1a54e0ef137be53f5be00eda8c88e57ed261e9e621ad2e8de1858",
+        "cda20c686f38983907b38d8404df79916f23b3ccd02561f33666ac290814448b",
+        "3f2a689bdcb7efe12d94b77ea0f5970a68eb8226b6a0db62e1b0cc94a46a3698"
+      ]
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
@@ -5015,7 +5441,13 @@ Console.WriteLine(dumpprivkey);
 -----
 ```csharp    
 
-  
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
+
+string listreceivedbylabel = await wallet.ListReceivedByLabel();
+
+Console.WriteLine(listreceivedbylabel); 
 ```
 
 <details>
@@ -5023,15 +5455,35 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "amount": 0.07230442,
+      "confirmations": 5,
+      "label": ""
+    },
+    {
+      "amount": 0.00019890,
+      "confirmations": 963,
+      "label": "ddddd"
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listsinceblock
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string listsinceblock = await wallet.ListSinceBlock();
+
+Console.WriteLine(listsinceblock);
 ```
 
 <details>
@@ -5039,15 +5491,416 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "transactions": [
+      {
+        "address": "tb1qqvegzkql09s694kaa0czzav4ragmcnmwqg6ynk",
+        "category": "receive",
+        "amount": 0.00019890,
+        "label": "ddddd",
+        "vout": 0,
+        "confirmations": 963,
+        "blockhash": "00000000000000f7eda6b3c891cc0f5239711fd118bcd167d156ecff0a04d5d6",
+        "blockheight": 1807302,
+        "blockindex": 41,
+        "blocktime": 1597484398,
+        "txid": "3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501",
+        "walletconflicts": [],
+        "time": 1597483770,
+        "timereceived": 1597483770,
+        "bip125-replaceable": "no"
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1040,
+        "blockhash": "00000000fb3efbec6ebe89436b2388825beca38aee09179925b7d1651b27e018",
+        "blockheight": 1807225,
+        "blockindex": 144,
+        "blocktime": 1597409600,
+        "txid": "c1e5d3718ff4ff0dfd5f50bd09d7c36c30a1ce203228041422411b8dbf28f501",
+        "walletconflicts": [],
+        "time": 1597409548,
+        "timereceived": 1597409548,
+        "bip125-replaceable": "no",
+        "comment": "commmm",
+        "abandoned": false
+      },
+ ...
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00000856,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1043,
+        "blockhash": "0000000041b2713cdb39acf33f23a13958c9f17b417edb0298929b349a756c52",
+        "blockheight": 1807222,
+        "blockindex": 292,
+        "blocktime": 1597406145,
+        "txid": "f75488995e7798671522d72a2572e3c59dc99cd5697a3fa7712cfc3b7612a4c8",
+        "walletconflicts": [],
+        "time": 1597405740,
+        "timereceived": 1597405740,
+        "bip125-replaceable": "no",
+        "comment": "Some Comment",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00000855,
+        "vout": 0,
+        "fee": -0.00000145,
+        "confirmations": 1042,
+        "blockhash": "00000000000001344fd8f0567312d5588219839d7665f566705e90f474075931",
+        "blockheight": 1807223,
+        "blockindex": 60,
+        "blocktime": 1597407196,
+        "txid": "ffc7550455b99809dc99943f330ac6e03361972680475afc4a9bbfcb0fb62bcb",
+        "walletconflicts": [],
+        "time": 1597406613,
+        "timereceived": 1597406613,
+        "bip125-replaceable": "no",
+        "comment": "Some Comment",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1040,
+        "blockhash": "00000000fb3efbec6ebe89436b2388825beca38aee09179925b7d1651b27e018",
+        "blockheight": 1807225,
+        "blockindex": 381,
+        "blocktime": 1597409600,
+        "txid": "deb3ae9407331440b8151d66dbade001d851daf2892323f2e93ef4adbd6a06cd",
+        "walletconflicts": [],
+        "time": 1597409368,
+        "timereceived": 1597409368,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00000856,
+        "vout": 0,
+        "fee": -0.00000144,
+        "confirmations": 1042,
+        "blockhash": "00000000000001344fd8f0567312d5588219839d7665f566705e90f474075931",
+        "blockheight": 1807223,
+        "blockindex": 102,
+        "blocktime": 1597407196,
+        "txid": "eb02550d87192fc775a7303dc25df7e8b2cf4abd8fc9b1341c0fccbbc25cdccf",
+        "walletconflicts": [],
+        "time": 1597406840,
+        "timereceived": 1597406840,
+        "bip125-replaceable": "no",
+        "comment": "Some Comment",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1041,
+        "blockhash": "00000000f3033e79df7a23f0e7c148fcf987294c4efd6a1bd5645244f6475faa",
+        "blockheight": 1807224,
+        "blockindex": 346,
+        "blocktime": 1597408398,
+        "txid": "8b78cf3258640cfdd99904e7da0ea49b9cf9c5a56f1699f4b90bfc8ba34f6ad0",
+        "walletconflicts": [],
+        "time": 1597407792,
+        "timereceived": 1597407792,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "2NF2TWBfHqgDpff2xWRB1DJR3C3kWUaQrsS",
+        "category": "send",
+        "amount": -0.00020000,
+        "vout": 0,
+        "fee": -0.00141858,
+        "confirmations": 1026,
+        "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+        "blockheight": 1807239,
+        "blockindex": 1,
+        "blocktime": 1597422210,
+        "txid": "aff347e3bf1803d33548b3b440506d7df6275ce4fae6c548f9076de0f46a63d1",
+        "walletconflicts": [],
+        "time": 1597420923,
+        "timereceived": 1597420923,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+        "category": "send",
+        "amount": -0.00050000,
+        "vout": 0,
+        "fee": -0.00000141,
+        "confirmations": 1032,
+        "blockhash": "00000000f6fa4a3eaf6233a60c26d6b9e08e8f7c5dd33b97ef456086c273b484",
+        "blockheight": 1807233,
+        "blockindex": 126,
+        "blocktime": 1597416108,
+        "txid": "12e20f0b5de4fc6065055792bcdca79e9e454d7b7265d9a8e42941e9924b83d2",
+        "walletconflicts": [],
+        "time": 1597416062,
+        "timereceived": 1597416062,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1040,
+        "blockhash": "00000000fb3efbec6ebe89436b2388825beca38aee09179925b7d1651b27e018",
+        "blockheight": 1807225,
+        "blockindex": 143,
+        "blocktime": 1597409600,
+        "txid": "098eab880fd384ceb67a3d10b0909ced7b2747f3f95dcf689a2f3d4b69bde9d5",
+        "walletconflicts": [],
+        "time": 1597409391,
+        "timereceived": 1597409391,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00000856,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1042,
+        "blockhash": "00000000000001344fd8f0567312d5588219839d7665f566705e90f474075931",
+        "blockheight": 1807223,
+        "blockindex": 105,
+        "blocktime": 1597407196,
+        "txid": "d36b75b7b339b276cbee0442777cb8d39a9663601c03cfe22b1da37b1e03edda",
+        "walletconflicts": [],
+        "time": 1597406974,
+        "timereceived": 1597406974,
+        "bip125-replaceable": "no",
+        "comment": "Some Comment",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1040,
+        "blockhash": "00000000fb3efbec6ebe89436b2388825beca38aee09179925b7d1651b27e018",
+        "blockheight": 1807225,
+        "blockindex": 386,
+        "blocktime": 1597409600,
+        "txid": "753932efdf10d8c73e3a71a8ee14907e096d704458c9ebcff8354ef2d0afbfe1",
+        "walletconflicts": [],
+        "time": 1597409585,
+        "timereceived": 1597409585,
+        "bip125-replaceable": "no",
+        "comment": "commmm",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00000855,
+        "vout": 1,
+        "fee": -0.00000145,
+        "confirmations": 1042,
+        "blockhash": "00000000000001344fd8f0567312d5588219839d7665f566705e90f474075931",
+        "blockheight": 1807223,
+        "blockindex": 61,
+        "blocktime": 1597407196,
+        "txid": "e255b24a54e998c9efb03e3cd997c974fd31a3dff3b5ff10c45da341494550e2",
+        "walletconflicts": [],
+        "time": 1597406288,
+        "timereceived": 1597406288,
+        "bip125-replaceable": "no",
+        "comment": "Some Comment",
+        "abandoned": false
+      },
+      {
+        "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+        "category": "send",
+        "amount": -0.00059859,
+        "vout": 1,
+        "fee": -0.00000141,
+        "confirmations": 1031,
+        "blockhash": "00000000b99db7eba7428632c355e5554ebbb84d0d3b5d0e105f21c3f6dfb1f9",
+        "blockheight": 1807234,
+        "blockindex": 194,
+        "blocktime": 1597417309,
+        "txid": "6f4bead1d12f801215606d43be748ada2189d3c2bae46bb92b1dd7f407d497e2",
+        "walletconflicts": [],
+        "time": 1597416354,
+        "timereceived": 1597416354,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1041,
+        "blockhash": "00000000f3033e79df7a23f0e7c148fcf987294c4efd6a1bd5645244f6475faa",
+        "blockheight": 1807224,
+        "blockindex": 345,
+        "blocktime": 1597408398,
+        "txid": "f47003d462ce015eced4168903c14e41d6398974272abed0d56126cf24e5cee4",
+        "walletconflicts": [],
+        "time": 1597407726,
+        "timereceived": 1597407726,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 0,
+        "fee": -0.00000144,
+        "confirmations": 1041,
+        "blockhash": "00000000f3033e79df7a23f0e7c148fcf987294c4efd6a1bd5645244f6475faa",
+        "blockheight": 1807224,
+        "blockindex": 356,
+        "blocktime": 1597408398,
+        "txid": "eb7ae3d68e2b983be1f1604f8fd468a3ac990dbe88fc97bc99e4eea5f43df1e8",
+        "walletconflicts": [],
+        "time": 1597407980,
+        "timereceived": 1597407980,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1041,
+        "blockhash": "00000000f3033e79df7a23f0e7c148fcf987294c4efd6a1bd5645244f6475faa",
+        "blockheight": 1807224,
+        "blockindex": 248,
+        "blocktime": 1597408398,
+        "txid": "8e2180ff4225faa677bdced807cb5ff01c4f93bf7c03f32768a8a83ca4acf3ec",
+        "walletconflicts": [],
+        "time": 1597408095,
+        "timereceived": 1597408095,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076",
+        "category": "send",
+        "amount": -0.00020000,
+        "label": "",
+        "vout": 1,
+        "fee": -0.00140859,
+        "confirmations": 1026,
+        "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+        "blockheight": 1807239,
+        "blockindex": 3,
+        "blocktime": 1597422210,
+        "txid": "11a461bbe76f06a67e9695f43e0108c0f5b8a3a0243c01d8b2528ff6de3961f1",
+        "walletconflicts": [],
+        "time": 1597420844,
+        "timereceived": 1597420844,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+        "category": "send",
+        "amount": -0.00020000,
+        "vout": 0,
+        "fee": -0.00000172,
+        "confirmations": 1046,
+        "blockhash": "00000000db93593441a3ad991d32ca1e0dda463bb19aa13de3cf89b54ebd2293",
+        "blockheight": 1807219,
+        "blockindex": 328,
+        "blocktime": 1597402898,
+        "txid": "f4542c60d0ca72a00e3b43b0cbf9dbf7066a4951fbcee600c1c2964cbfee3cfa",
+        "walletconflicts": [],
+        "time": 1597402794,
+        "timereceived": 1597402794,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "tb1qwuemetkghucsw44hjhrfzurq2ls3jss9lwfj62",
+        "category": "send",
+        "amount": -0.00010000,
+        "label": "",
+        "vout": 1,
+        "fee": -0.00000172,
+        "confirmations": 1046,
+        "blockhash": "00000000db93593441a3ad991d32ca1e0dda463bb19aa13de3cf89b54ebd2293",
+        "blockheight": 1807219,
+        "blockindex": 328,
+        "blocktime": 1597402898,
+        "txid": "f4542c60d0ca72a00e3b43b0cbf9dbf7066a4951fbcee600c1c2964cbfee3cfa",
+        "walletconflicts": [],
+        "time": 1597402794,
+        "timereceived": 1597402794,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 0,
+        "fee": -0.00000144,
+        "confirmations": 1041,
+        "blockhash": "00000000f3033e79df7a23f0e7c148fcf987294c4efd6a1bd5645244f6475faa",
+        "blockheight": 1807224,
+        "blockindex": 355,
+        "blocktime": 1597408398,
+        "txid": "465ce8083ac1aec6133b6e6bde23ea778363a93c63f2db5e92396981828be6fd",
+        "walletconflicts": [],
+        "time": 1597407974,
+        "timereceived": 1597407974,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      }
+    ],
+    "removed": [],
+    "lastblock": "0000000071a161910e348bdf3b6b2691cb93d3265b217165863659cfc5b40d5c"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listtransactions
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string listtransactions = await wallet.ListTransactions();
+
+Console.WriteLine(listtransactions); 
 ```
 
 <details>
@@ -5055,15 +5908,209 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+      "category": "send",
+      "amount": -0.00059859,
+      "vout": 0,
+      "fee": -0.00000141,
+      "confirmations": 1031,
+      "blockhash": "00000000b99db7eba7428632c355e5554ebbb84d0d3b5d0e105f21c3f6dfb1f9",
+      "blockheight": 1807234,
+      "blockindex": 195,
+      "blocktime": 1597417309,
+      "txid": "39c2b0dac1b7d986cd9042b72c4228ea78bb0439a6062062f0b5d98ac9cb013d",
+      "walletconflicts": [],
+      "time": 1597416426,
+      "timereceived": 1597416426,
+      "bip125-replaceable": "no",
+      "comment": "suck",
+      "to": "comto",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+      "category": "send",
+      "amount": -0.00059859,
+      "vout": 1,
+      "fee": -0.00000141,
+      "confirmations": 1031,
+      "blockhash": "00000000b99db7eba7428632c355e5554ebbb84d0d3b5d0e105f21c3f6dfb1f9",
+      "blockheight": 1807234,
+      "blockindex": 250,
+      "blocktime": 1597417309,
+      "txid": "9259992982e759964ea3b8a57c2e4962ac89ffdfc7ed78b9a8b745255be19fa4",
+      "walletconflicts": [],
+      "time": 1597416711,
+      "timereceived": 1597416711,
+      "bip125-replaceable": "no",
+      "comment": "suck",
+      "to": "comto",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qwmxm8tshffmphupk7wr6j443uechlap7pver9e",
+      "category": "receive",
+      "amount": 0.01683033,
+      "label": "",
+      "vout": 0,
+      "confirmations": 1028,
+      "blockhash": "000000009e0491f8f205d4f71544cf4c74ab2821a1406b24fb816b3aaaa683ad",
+      "blockheight": 1807237,
+      "blockindex": 300,
+      "blocktime": 1597420574,
+      "txid": "3f2a689bdcb7efe12d94b77ea0f5970a68eb8226b6a0db62e1b0cc94a46a3698",
+      "walletconflicts": [],
+      "time": 1597420165,
+      "timereceived": 1597420165,
+      "bip125-replaceable": "no"
+    },
+    {
+      "address": "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076",
+      "category": "send",
+      "amount": -0.00020000,
+      "label": "",
+      "vout": 1,
+      "fee": -0.00140859,
+      "confirmations": 1026,
+      "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+      "blockheight": 1807239,
+      "blockindex": 3,
+      "blocktime": 1597422210,
+      "txid": "11a461bbe76f06a67e9695f43e0108c0f5b8a3a0243c01d8b2528ff6de3961f1",
+      "walletconflicts": [],
+      "time": 1597420844,
+      "timereceived": 1597420844,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "2NF2TWBfHqgDpff2xWRB1DJR3C3kWUaQrsS",
+      "category": "send",
+      "amount": -0.00020000,
+      "vout": 0,
+      "fee": -0.00141858,
+      "confirmations": 1026,
+      "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+      "blockheight": 1807239,
+      "blockindex": 1,
+      "blocktime": 1597422210,
+      "txid": "aff347e3bf1803d33548b3b440506d7df6275ce4fae6c548f9076de0f46a63d1",
+      "walletconflicts": [],
+      "time": 1597420923,
+      "timereceived": 1597420923,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "2NF2TWBfHqgDpff2xWRB1DJR3C3kWUaQrsS",
+      "category": "send",
+      "amount": -0.00020000,
+      "vout": 0,
+      "fee": -0.00141858,
+      "confirmations": 1026,
+      "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+      "blockheight": 1807239,
+      "blockindex": 2,
+      "blocktime": 1597422210,
+      "txid": "8903339fa21b5856e8ba9ed0828a9f03888ace9d551a2c24e3d19f9e3c3f9220",
+      "walletconflicts": [],
+      "time": 1597421084,
+      "timereceived": 1597421084,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qqvegzkql09s694kaa0czzav4ragmcnmwqg6ynk",
+      "category": "receive",
+      "amount": 0.00019890,
+      "label": "ddddd",
+      "vout": 0,
+      "confirmations": 963,
+      "blockhash": "00000000000000f7eda6b3c891cc0f5239711fd118bcd167d156ecff0a04d5d6",
+      "blockheight": 1807302,
+      "blockindex": 41,
+      "blocktime": 1597484398,
+      "txid": "3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501",
+      "walletconflicts": [],
+      "time": 1597483770,
+      "timereceived": 1597483770,
+      "bip125-replaceable": "no"
+    },
+    {
+      "address": "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076",
+      "category": "send",
+      "amount": -0.00080000,
+      "label": "",
+      "vout": 1,
+      "fee": -0.00000141,
+      "confirmations": 291,
+      "blockhash": "00000000a6119fc55b2562e3898ff2a41a9e880020694f203955608e3b0b857d",
+      "blockheight": 1807974,
+      "blockindex": 430,
+      "blocktime": 1598014259,
+      "txid": "ebf7b4cfe5a4aaf3c9faede04369527e14cc7c9766c448c765b6d64e85bee1a8",
+      "walletconflicts": [],
+      "time": 1598013143,
+      "timereceived": 1598013143,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qwuemetkghucsw44hjhrfzurq2ls3jss9lwfj62",
+      "category": "send",
+      "amount": -0.00090000,
+      "label": "",
+      "vout": 1,
+      "fee": -0.00000141,
+      "confirmations": 286,
+      "blockhash": "00000000d8cd50ceee79f11c7a19eaf39edbb99a54aedc778bbcae127ef1bdf3",
+      "blockheight": 1807979,
+      "blockindex": 287,
+      "blocktime": 1598019699,
+      "txid": "cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80",
+      "walletconflicts": [],
+      "time": 1598018608,
+      "timereceived": 1598018608,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qgflg6yl8au445lt6xfddlvfumvp6d6z3g9wegt",
+      "category": "receive",
+      "amount": 0.01000000,
+      "label": "",
+      "vout": 1,
+      "confirmations": 5,
+      "blockhash": "00000000136a11a9752faa1b074bdbd77e84ae291659e8cf102b64ed41de62da",
+      "blockheight": 1808260,
+      "blockindex": 64,
+      "blocktime": 1598286739,
+      "txid": "d51acb8f691f1a7de84ecc338e1fbcb0b19908b192d8ddd05a5f62abf1b32029",
+      "walletconflicts": [],
+      "time": 1598286265,
+      "timereceived": 1598286265,
+      "bip125-replaceable": "no"
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listunspent
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string listunspent = await wallet.ListUnspent();
+
+Console.WriteLine(listunspent);
 ```
 
 <details>
@@ -5071,7 +6118,196 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+      "category": "send",
+      "amount": -0.00059859,
+      "vout": 0,
+      "fee": -0.00000141,
+      "confirmations": 1031,
+      "blockhash": "00000000b99db7eba7428632c355e5554ebbb84d0d3b5d0e105f21c3f6dfb1f9",
+      "blockheight": 1807234,
+      "blockindex": 195,
+      "blocktime": 1597417309,
+      "txid": "39c2b0dac1b7d986cd9042b72c4228ea78bb0439a6062062f0b5d98ac9cb013d",
+      "walletconflicts": [],
+      "time": 1597416426,
+      "timereceived": 1597416426,
+      "bip125-replaceable": "no",
+      "comment": "suck",
+      "to": "comto",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+      "category": "send",
+      "amount": -0.00059859,
+      "vout": 1,
+      "fee": -0.00000141,
+      "confirmations": 1031,
+      "blockhash": "00000000b99db7eba7428632c355e5554ebbb84d0d3b5d0e105f21c3f6dfb1f9",
+      "blockheight": 1807234,
+      "blockindex": 250,
+      "blocktime": 1597417309,
+      "txid": "9259992982e759964ea3b8a57c2e4962ac89ffdfc7ed78b9a8b745255be19fa4",
+      "walletconflicts": [],
+      "time": 1597416711,
+      "timereceived": 1597416711,
+      "bip125-replaceable": "no",
+      "comment": "suck",
+      "to": "comto",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qwmxm8tshffmphupk7wr6j443uechlap7pver9e",
+      "category": "receive",
+      "amount": 0.01683033,
+      "label": "",
+      "vout": 0,
+      "confirmations": 1028,
+      "blockhash": "000000009e0491f8f205d4f71544cf4c74ab2821a1406b24fb816b3aaaa683ad",
+      "blockheight": 1807237,
+      "blockindex": 300,
+      "blocktime": 1597420574,
+      "txid": "3f2a689bdcb7efe12d94b77ea0f5970a68eb8226b6a0db62e1b0cc94a46a3698",
+      "walletconflicts": [],
+      "time": 1597420165,
+      "timereceived": 1597420165,
+      "bip125-replaceable": "no"
+    },
+    {
+      "address": "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076",
+      "category": "send",
+      "amount": -0.00020000,
+      "label": "",
+      "vout": 1,
+      "fee": -0.00140859,
+      "confirmations": 1026,
+      "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+      "blockheight": 1807239,
+      "blockindex": 3,
+      "blocktime": 1597422210,
+      "txid": "11a461bbe76f06a67e9695f43e0108c0f5b8a3a0243c01d8b2528ff6de3961f1",
+      "walletconflicts": [],
+      "time": 1597420844,
+      "timereceived": 1597420844,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "2NF2TWBfHqgDpff2xWRB1DJR3C3kWUaQrsS",
+      "category": "send",
+      "amount": -0.00020000,
+      "vout": 0,
+      "fee": -0.00141858,
+      "confirmations": 1026,
+      "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+      "blockheight": 1807239,
+      "blockindex": 1,
+      "blocktime": 1597422210,
+      "txid": "aff347e3bf1803d33548b3b440506d7df6275ce4fae6c548f9076de0f46a63d1",
+      "walletconflicts": [],
+      "time": 1597420923,
+      "timereceived": 1597420923,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "2NF2TWBfHqgDpff2xWRB1DJR3C3kWUaQrsS",
+      "category": "send",
+      "amount": -0.00020000,
+      "vout": 0,
+      "fee": -0.00141858,
+      "confirmations": 1026,
+      "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+      "blockheight": 1807239,
+      "blockindex": 2,
+      "blocktime": 1597422210,
+      "txid": "8903339fa21b5856e8ba9ed0828a9f03888ace9d551a2c24e3d19f9e3c3f9220",
+      "walletconflicts": [],
+      "time": 1597421084,
+      "timereceived": 1597421084,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qqvegzkql09s694kaa0czzav4ragmcnmwqg6ynk",
+      "category": "receive",
+      "amount": 0.00019890,
+      "label": "ddddd",
+      "vout": 0,
+      "confirmations": 963,
+      "blockhash": "00000000000000f7eda6b3c891cc0f5239711fd118bcd167d156ecff0a04d5d6",
+      "blockheight": 1807302,
+      "blockindex": 41,
+      "blocktime": 1597484398,
+      "txid": "3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501",
+      "walletconflicts": [],
+      "time": 1597483770,
+      "timereceived": 1597483770,
+      "bip125-replaceable": "no"
+    },
+    {
+      "address": "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076",
+      "category": "send",
+      "amount": -0.00080000,
+      "label": "",
+      "vout": 1,
+      "fee": -0.00000141,
+      "confirmations": 291,
+      "blockhash": "00000000a6119fc55b2562e3898ff2a41a9e880020694f203955608e3b0b857d",
+      "blockheight": 1807974,
+      "blockindex": 430,
+      "blocktime": 1598014259,
+      "txid": "ebf7b4cfe5a4aaf3c9faede04369527e14cc7c9766c448c765b6d64e85bee1a8",
+      "walletconflicts": [],
+      "time": 1598013143,
+      "timereceived": 1598013143,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qwuemetkghucsw44hjhrfzurq2ls3jss9lwfj62",
+      "category": "send",
+      "amount": -0.00090000,
+      "label": "",
+      "vout": 1,
+      "fee": -0.00000141,
+      "confirmations": 286,
+      "blockhash": "00000000d8cd50ceee79f11c7a19eaf39edbb99a54aedc778bbcae127ef1bdf3",
+      "blockheight": 1807979,
+      "blockindex": 287,
+      "blocktime": 1598019699,
+      "txid": "cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80",
+      "walletconflicts": [],
+      "time": 1598018608,
+      "timereceived": 1598018608,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qgflg6yl8au445lt6xfddlvfumvp6d6z3g9wegt",
+      "category": "receive",
+      "amount": 0.01000000,
+      "label": "",
+      "vout": 1,
+      "confirmations": 5,
+      "blockhash": "00000000136a11a9752faa1b074bdbd77e84ae291659e8cf102b64ed41de62da",
+      "blockheight": 1808260,
+      "blockindex": 64,
+      "blocktime": 1598286739,
+      "txid": "d51acb8f691f1a7de84ecc338e1fbcb0b19908b192d8ddd05a5f62abf1b32029",
+      "walletconflicts": [],
+      "time": 1598286265,
+      "timereceived": 1598286265,
+      "bip125-replaceable": "no"
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
@@ -5079,7 +6315,13 @@ Console.WriteLine(dumpprivkey);
 -----
 ```csharp    
 
-  
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
+
+string listwalletdir = await wallet.ListWalletDir();
+
+Console.WriteLine(listwalletdir);
 ```
 
 <details>
@@ -5087,7 +6329,38 @@ Console.WriteLine(dumpprivkey);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "wallets": [
+      {
+        "name": "apple"
+      },
+      {
+        "name": "banana"
+      },
+      {
+        "name": "boss"
+      },
+      {
+        "name": "cherry"
+      },
+      {
+        "name": "cherryw"
+      },
+      {
+        "name": "orange"
+      },
+      {
+        "name": "tomate"
+      },
+      {
+        "name": ""
+      }
+    ]
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
