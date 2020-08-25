@@ -28,7 +28,8 @@ BLOCKCHAIN
 **[getbestblockhash](#getbestblockhash),** **[getblock](#getblock)**, **[getblockchaininfo](#getblockchaininfo)**, **[getblockcount](#getblockcount)**, **[getblockhash](#getblockhash)**,  **[getblockheader](#getblockheader)**,  **[getblockstats](#getblockstats)**,  **[getchaintips](#getchaintips)**,  **[getchaintxstats](#getchaintxstats)**,  **[getdifficulty](#getdifficulty)**,  **[getmempoolancestors](#getmempoolancestors)**,  **[getmempooldescendants](#getmempooldescendants)**,  **[getmempoolentry](#getmempoolentry)**,  **[getmempoolinfo](#getmempoolinfo)**, **[getrawmempool](#getrawmempool)**, **[gettxout](#gettxout)**, **[gettxoutproof](#gettxoutproof)**, **[gettxoutsetinfo](#gettxoutsetinfo)**, **[preciousblock](#preciousblock)**, **[pruneblockchain](#pruneblockchain)**, **[savemempool](#savemempool)**, **[scantxoutset](#scantxoutset)**, **[verifychain](#verifychain)**, **[verifytxoutproof](#verifytxoutproof)**
 
 
-### getbestblockhash
+### getbestblockhash  
+##### Returns the hash of the best (tip) block in the most-work fully-validated chain.
 -----
 ```csharp    
   BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -54,6 +55,7 @@ BLOCKCHAIN
 </details>
 
 ### getblock
+##### If verbosity is 0, returns a string that is serialized, hex-encoded data for block 'hash'. If verbosity is 1, returns an Object ##### with information about block <hash>. If verbosity is 2, returns an Object with information about block <hash> and information ##### about each transaction.
 -----
 ```csharp
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -198,6 +200,7 @@ Console.WriteLine(getbestblockhash_VerbosityTwo);
 </details>
 
 ### getblockchaininfo
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -263,6 +266,7 @@ Console.WriteLine(getblockchaininfo);
 </details>
 
 ### getblockcount
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -288,6 +292,7 @@ Console.WriteLine(getblockcount);
 </details>
 
 ### getblockhash
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -313,6 +318,7 @@ Console.WriteLine(getblockhash);
 </details>
 
 ### getblockheader
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -369,6 +375,7 @@ Console.WriteLine(getblockheader_Json);
 </details>
 
 ### getblockstats
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -510,6 +517,7 @@ Console.WriteLine(getblockstats_with_filter);
 </details>
 
 ### getchaintips
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -566,6 +574,7 @@ Console.WriteLine(getchaintips);
 </details>
 
 ### getchaintxstats
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -651,6 +660,7 @@ Console.WriteLine(getchaintxstats_nblocks_finalBlockhash);
 </details>
 
 ### getdifficulty
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -676,6 +686,7 @@ Console.WriteLine(getdifficulty);
 </details>
 
 ### getmempoolancestors
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");            
@@ -701,6 +712,7 @@ Console.WriteLine(getmempoolancestors);
 </details>
 
 ### getmempooldescendants
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");           
@@ -726,6 +738,7 @@ Console.WriteLine(getmempooldescendants);
 </details>
 
 ### getmempoolentry
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");         
@@ -774,6 +787,7 @@ Console.WriteLine(getmempoolentry);
 </details>
 
 ### getmempoolinfo
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -807,6 +821,7 @@ Console.WriteLine(getmempoolinfo);
 </details>
 
 ### getrawmempool
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -994,6 +1009,7 @@ Console.WriteLine(getrawmempool_ArrayTxIds);
 </details>
 
 ### gettxout
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1033,6 +1049,7 @@ Console.WriteLine(gettxout);
 </details>
 
 ### gettxoutproof
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1080,6 +1097,7 @@ Console.WriteLine(gettxoutproof_InThisBlock);
 </details>
 
 ### gettxoutsetinfo
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1114,6 +1132,7 @@ Console.WriteLine(gettxoutsetinfo);
 </details>
 
 ### preciousblock
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1139,6 +1158,7 @@ Console.WriteLine(preciousblock);
 </details>
 
 ### pruneblockchain
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -1182,6 +1202,7 @@ Console.WriteLine(pruneblockchain_UpToUnixEpochTime);
 </details>
 
 ### savemempool
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -1207,6 +1228,7 @@ Console.WriteLine(savemempool);
 </details>
 
 ### scantxoutset
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1280,6 +1302,7 @@ Console.WriteLine(scantxoutset);
 </details>
 
 ### verifychain
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1305,6 +1328,7 @@ Console.WriteLine(verifychain);
 </details>
 
 ### verifytxoutproof
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1339,6 +1363,7 @@ CONTROL
 
 
 ### getmemoryinfo
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1373,6 +1398,7 @@ Console.WriteLine(getmemoryinfo);
 </details>
 
 ### getrpcinfo
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1406,6 +1432,7 @@ Console.WriteLine(getrpcinfo);
 </details>
 
 ### help
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1444,6 +1471,7 @@ Console.WriteLine(help_with_Command);
 </details>
 
 ### logging
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1536,6 +1564,7 @@ Console.WriteLine(logging_filtered);
 </details>
 
 ### stop
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1561,6 +1590,7 @@ Console.WriteLine(stop);
 </details>
 
 ### uptime
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1591,6 +1621,7 @@ GENERATING
 
 
 ### generatetoaddress
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8334", "alice:pass");
@@ -1717,6 +1748,7 @@ Console.WriteLine(generatetoaddress);
 </details>
 
 ### generatetodescriptor
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8334", "alice:pass");
@@ -1760,6 +1792,7 @@ MINING
 
 
 ### getblocktemplate
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1945,6 +1978,7 @@ Console.WriteLine(getblocktemplate);
 </details>
 
 ### getmininginfo
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1979,6 +2013,7 @@ Console.WriteLine(getmininginfo);
 </details>
 
 ### getnetworkhashps
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -2004,6 +2039,7 @@ Console.WriteLine(getnetworkhashps);
 </details>
 
 ### prioritisetransaction
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -2030,6 +2066,7 @@ Console.WriteLine(prioritisetransaction);
 </details>
 
 ### submitblock
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2055,6 +2092,7 @@ Console.WriteLine(submitblock);
 </details>
 
 ### submitheader
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2089,6 +2127,7 @@ NETWORK
 
 
 ### addnode
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2128,6 +2167,7 @@ Console.WriteLine(removeNode);
 </details>
 
 ### clearbanned
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2153,6 +2193,7 @@ Console.WriteLine(clearbanned);
 </details>
 
 ### disconnectnode
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2192,6 +2233,7 @@ Console.WriteLine(disconnectnode_byNodeId);
 </details>
 
 ### getaddednodeinfo
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2263,6 +2305,7 @@ Console.WriteLine(getaddednodeinfo_Specific);
 </details>
 
 ### getconnectioncount
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2288,6 +2331,7 @@ Console.WriteLine(getconnectioncount);
 </details>
 
 ### getnettotals
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2325,6 +2369,7 @@ Console.WriteLine(getnettotals);
 </details>
 
 ### getnetworkinfo
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2390,6 +2435,7 @@ Console.WriteLine(getnetworkinfo);
 </details>
 
 ### getnodeaddresses
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2422,6 +2468,7 @@ Console.WriteLine(getnodeaddresses);
 </details>
 
 ### getpeerinfo
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3257,6 +3304,7 @@ Console.WriteLine(getpeerinfo);
 </details>
 
 ### listbanned
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3282,6 +3330,7 @@ Console.WriteLine(listbanned);
 </details>
 
 ### ping
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3307,6 +3356,7 @@ Console.WriteLine(ping);
 </details>
 
 ### setban
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3338,6 +3388,7 @@ Console.WriteLine(setban);
 </details>
 
 ### setnetworkactive
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3369,6 +3420,7 @@ RAWTRANSACTIONS
 
 
 ### analyzepsbt
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3408,6 +3460,7 @@ Console.WriteLine(analyzepsbt);
 </details>
 
 ### combinepsbt
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3439,6 +3492,7 @@ Console.WriteLine(combinepsbt);
 </details>
 
 ### combinerawtransaction
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3469,6 +3523,7 @@ Console.WriteLine(combinerawtransaction);
 </details>
 
 ### converttopsbt
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3494,6 +3549,7 @@ Console.WriteLine(converttopsbt);
 </details>
 
 ### createpsbt
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -3538,6 +3594,7 @@ Console.WriteLine(createpsbt);
 </details>
 
 ### createrawtransaction
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -3577,6 +3634,7 @@ Console.WriteLine(createrawtransaction);
 </details>
 
 ### decodepsbt
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3792,6 +3850,7 @@ Console.WriteLine(decodepsbt);
 </details>
 
 ### decoderawtransaction
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3869,6 +3928,7 @@ Console.WriteLine(decoderawtransaction);
 </details>
 
 ### decodescript
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3908,6 +3968,7 @@ Console.WriteLine(decodescript);
 </details>
 
 ### finalizepsbt
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3936,6 +3997,7 @@ Console.WriteLine(finalizepsbt);
 </details>
 
 ### fundrawtransaction
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -3965,6 +4027,7 @@ Console.WriteLine(fundrawtransaction);
 </details>
 
 ### getrawtransaction
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -3990,6 +4053,7 @@ Console.WriteLine(getrawtransaction);
 </details>
 
 ### joinpsbts
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4022,6 +4086,7 @@ Console.WriteLine(joinpsbts);
 </details>
 
 ### sendrawtransaction
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4048,6 +4113,7 @@ Console.WriteLine(sendrawtransaction);
 </details>
 
 ### signrawtransactionwithkey
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4097,6 +4163,7 @@ Console.WriteLine(signrawtransactionwithkey);
 </details>
 
 ### testmempoolaccept
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4127,6 +4194,7 @@ Console.WriteLine(testmempoolaccept);
 </details>
 
 ### utxoupdatepsbt
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4157,6 +4225,7 @@ UTIL
 
 
 ### createmultisig
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4193,6 +4262,7 @@ Console.WriteLine(createmultisig);
 </details>
 
 ### deriveaddresses
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4220,6 +4290,7 @@ Console.WriteLine(deriveaddresses);
 </details>
 
 ### estimatesmartfee
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -4250,6 +4321,7 @@ Console.WriteLine(estimatesmartfee);
 </details>
 
 ### getdescriptorinfo
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");           
@@ -4284,6 +4356,7 @@ Console.WriteLine(getdescriptorinfo);
 </details>
 
 ### signmessagewithprivkey
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4311,6 +4384,7 @@ Console.WriteLine(signmessagewithprivkey);
 </details>
 
 ### validateaddress
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -4344,6 +4418,7 @@ Console.WriteLine(validateaddress);
 </details>
 
 ### verifymessage
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4377,6 +4452,7 @@ WALLET
 
 
 ### abandontransaction
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4405,6 +4481,7 @@ Console.WriteLine(abandontransaction);
 </details>
 
 ### abortrescan
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4430,6 +4507,7 @@ Console.WriteLine(abortrescan);
 </details>
 
 ### addmultisigaddress
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4466,6 +4544,7 @@ Console.WriteLine(addmultisigaddress);
 </details>
 
 ### backupwallet
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4491,6 +4570,7 @@ Console.WriteLine(backupwallet);
 </details>
 
 ### bumpfee
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4519,6 +4599,7 @@ Console.WriteLine(bumpfee);
 </details>
 
 ### createwallet
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4561,6 +4642,7 @@ Console.WriteLine(createwallet);
 </details>
 
 ### dumpprivkey
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4586,6 +4668,7 @@ Console.WriteLine(dumpprivkey);
 </details>
 
 ### dumpwallet
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4616,6 +4699,7 @@ Console.WriteLine(dumpprivkey);
 </details>
 
 ### encryptwallet
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4641,6 +4725,7 @@ Console.WriteLine(encryptwallet);
 </details>
 
 ### getaddressesbylabel
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");            
@@ -4673,6 +4758,7 @@ Console.WriteLine(getaddressesbylabel);
 </details>
 
 ### getaddressinfo
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");           
@@ -4718,6 +4804,7 @@ Console.WriteLine(getaddressinfo);
 </details>
 
 ### getbalance
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4743,6 +4830,7 @@ Console.WriteLine(getbalance);
 </details>
 
 ### getbalances
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4774,6 +4862,7 @@ Console.WriteLine(getbalances);
 </details>
 
 ### getnewaddress
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -4804,6 +4893,7 @@ Console.WriteLine(getnewaddress);
 </details>
 
 ### getrawchangeaddress
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -4831,6 +4921,7 @@ Console.WriteLine(getrawchangeaddress);
 </details>
 
 ### getreceivedbyaddress
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4858,6 +4949,7 @@ Console.WriteLine(getreceivedbyaddress);
 </details>
 
 ### getreceivedbylabel
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4883,6 +4975,7 @@ Console.WriteLine(getreceivedbylabel)
 </details>
 
 ### gettransaction
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4934,6 +5027,7 @@ Console.WriteLine(gettransaction);
 </details>
 
 ### getunconfirmedbalance
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4959,6 +5053,7 @@ Console.WriteLine(getunconfirmedbalance);
 </details>
 
 ### getwalletinfo
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4999,6 +5094,7 @@ Console.WriteLine(getwalletinfo);
 </details>
 
 ### importaddress
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -5032,6 +5128,7 @@ Console.WriteLine(importaddress);
 </details>
 
 ### importmulti
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -5069,6 +5166,7 @@ Console.WriteLine(importmulti);
 </details>
 
 ### importprivkey
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -5099,6 +5197,7 @@ Console.WriteLine(importprivkey);
 </details>
 
 ### importprunedfunds
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -5129,6 +5228,7 @@ Console.WriteLine(importprunedfunds);
 </details>
 
 ### importpubkey
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -5156,6 +5256,7 @@ Console.WriteLine(importpubkey);
 </details>
 
 ### importwallet
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -5181,6 +5282,7 @@ Console.WriteLine(importwallet);
 </details>
 
 ### keypoolrefill
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -5206,6 +5308,7 @@ Console.WriteLine(keypoolrefill);
 </details>
 
 ### listaddressgroupings
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -5282,6 +5385,7 @@ Console.WriteLine(listaddressgroupings);
 </details>
 
 ### listlabels
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -5314,6 +5418,7 @@ Console.WriteLine(listlabels);
 </details>
 
 ### listlockunspent
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -5352,6 +5457,7 @@ Console.WriteLine(listlockunspent);
 </details>
 
 ### listreceivedbyaddress
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -5408,6 +5514,7 @@ Console.WriteLine(listreceivedbyaddress);
 </details>
 
 ### listreceivedbylabel
+##### 
 -----
 ```csharp    
 
@@ -5445,6 +5552,7 @@ Console.WriteLine(listreceivedbylabel);
 </details>
 
 ### listsinceblock
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -5862,6 +5970,7 @@ Console.WriteLine(listsinceblock);
 </details>
 
 ### listtransactions
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6072,6 +6181,7 @@ Console.WriteLine(listtransactions);
 </details>
 
 ### listunspent
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6282,6 +6392,7 @@ Console.WriteLine(listunspent);
 </details>
 
 ### listwalletdir
+##### 
 -----
 ```csharp    
 
@@ -6335,6 +6446,7 @@ Console.WriteLine(listwalletdir);
 </details>
 
 ### listwallets
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6369,6 +6481,7 @@ Console.WriteLine(listwallets);
 </details>
 
 ### loadwallet
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6398,6 +6511,7 @@ Console.WriteLine(loadwallet);
 </details>
 
 ### lockunspent
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6423,6 +6537,7 @@ Console.WriteLine(lockunspent);
 </details>
 
 ### removeprunedfunds
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6448,6 +6563,7 @@ Console.WriteLine(removeprunedfunds);
 </details>
 
 ### rescanblockchain
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6482,6 +6598,7 @@ Console.WriteLine(rescanblockchain);
 </details>
 
 ### sendmany
+##### 
 -----
 ```csharp    
 
@@ -6524,6 +6641,7 @@ Console.WriteLine(rescanblockchain);
 </details>
 
 ### sendtoaddress
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6551,6 +6669,7 @@ Console.WriteLine(sendtoaddress);
 </details>
 
 ### sethdseed
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");            
@@ -6578,6 +6697,7 @@ Console.WriteLine(sethdseed);
 </details>
 
 ### setlabel
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");          
@@ -6605,6 +6725,7 @@ Console.WriteLine(setlabel);
 </details>
 
 ### settxfee
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6632,6 +6753,7 @@ Console.WriteLine(settxfee);
 </details>
 
 ### setwalletflag
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6664,6 +6786,7 @@ Console.WriteLine(setwalletflag);
 </details>
 
 ### signmessage
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");            
@@ -6692,6 +6815,7 @@ Console.WriteLine(signmessage);
 </details>
 
 ### signrawtransactionwithwallet
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6720,6 +6844,7 @@ Console.WriteLine(signrawtransactionwithwallet);
 </details>
 
 ### unloadwallet
+##### 
 -----
 ```csharp    
 
@@ -6746,6 +6871,7 @@ Console.WriteLine(unloadwallet);
 </details>
 
 ### walletcreatefundedpsbt
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6789,6 +6915,7 @@ Console.WriteLine(walletcreatefundedpsbt);
 </details>
 
 ### walletlock
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6814,6 +6941,7 @@ Console.WriteLine(walletlock);
 </details>
 
 ### walletpassphrase
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6840,6 +6968,7 @@ Console.WriteLine(walletpassphrase);
 </details>
 
 ### walletpassphrasechange
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6866,6 +6995,7 @@ Console.WriteLine(walletpassphrasechange);
 </details>
 
 ### walletprocesspsbt
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6905,6 +7035,7 @@ ZMQ
 
 
 ### getzmqnotifications
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");           
