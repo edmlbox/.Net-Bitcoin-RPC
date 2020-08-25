@@ -4057,8 +4057,14 @@ Console.WriteLine(joinpsbts);
 ### sendrawtransaction
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string hex = "020000000001012ec9d65ba255e44b85810beac4cad16418fa5c263a1d9f45ab03a4001edf24650000000000ffffffff01e803000000000000160014f998998746cb1bb34377075a79d0d9c494569d2102473044022039fc28874fc1fbf14c4297a4160acfb9793d341f32c61ccc27818fff5d47433102203c091fa28c69e3b2a337b560e20823f0a1b0aa7069d5f98dbe325a6807caa19e012102fc6958eee747f2471d4f34d5e4d7639de5c1abc32dbf05d876554cd7af66608900000000";
+
+string sendrawtransaction = await rawTransaction.SendRawTransaction(hex);
+         
+Console.WriteLine(sendrawtransaction);
 ```
 
 <details>
@@ -6754,7 +6760,13 @@ Console.WriteLine(signrawtransactionwithwallet);
 -----
 ```csharp    
 
-  
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
+
+string unloadwallet = await wallet.UnloadWallet();
+            
+Console.WriteLine(unloadwallet);
 ```
 
 <details>
@@ -6762,15 +6774,38 @@ Console.WriteLine(signrawtransactionwithwallet);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### walletcreatefundedpsbt
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient, "boss");
 
-  
+//The inputs
+List<RawInput> rawInputs = new List<RawInput>();
+RawInput rawInput = new RawInput("486bd2ff1df2431963191aeafdf7683905e6cf65cfdca874793110dba95513c2", 0);
+
+rawInputs.Add(rawInput);
+
+//The outputs
+List<RawOutput> rawOutputs = new List<RawOutput>();
+RawOutput rawOutput = new RawOutput("mi88psRX4MawyLrxjrvwdrg9C6jHVPQifg", 0.0008f);
+
+rawOutputs.Add(rawOutput);
+
+//Data in hex format;
+string hexData = "48656c6c6f20576f726c64";
+
+string walletcreatefundedpsbt = await wallet.WalletCreateFundedPSBT(rawInputs, rawOutputs,hexData: hexData);
+            
+Console.WriteLine(walletcreatefundedpsbt); 
 ```
 
 <details>
@@ -6778,15 +6813,28 @@ Console.WriteLine(signrawtransactionwithwallet);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "psbt": "cHNidP8BAIoCAAAAAcITVanbEDF5dKjcz2XP5gU5aPf96hoZYxlD8h3/0mtIAAAAAAD/////A4A4AQAAAAAAGXapFByXmfCaDDF7dYP94X7McpvZwfVaiKwaCQ4AAAAAABYAFO4RFDd9uMTRJkoogvoLMxdkd9i8AAAAAAAAAAANagtIZWxsbyBXb3JsZAAAAAAAAQEfQEIPAAAAAAAWABQDMoFYH3lhotbd6/AhdZUfUbxPbiIGAkI6KH4mf/sYvHLchYSLXJ2XF5n/vldubJ\u002BO8CdbWhHNEGPT0\u002BUAAACAAAAAgAMAAIAAACICA9SDITfNkb3deCAOi5GOkLJiegguBjehci73SzUsifVJEIGRNdwAAACAAQAAgAEAAIAAAA==",
+    "fee": 0.00000166,
+    "changepos": 1
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### walletlock
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string walletlock = await wallet.WalletLock();
+            
+Console.WriteLine(walletlock); 
 ```
 
 <details>
@@ -6794,15 +6842,25 @@ Console.WriteLine(signrawtransactionwithwallet);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### walletpassphrase
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient, "");
 
-  
+string passphrase = "12345";
+int timeout = 98765431;
+
+string walletpassphrase = await wallet.WalletPassphrase(passphrase, timeout);
+Console.WriteLine(walletpassphrase);
 ```
 
 <details>
@@ -6810,15 +6868,25 @@ Console.WriteLine(signrawtransactionwithwallet);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### walletpassphrasechange
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string oldPassphrase = "12345";
+string newPassphrase = "apple";
+
+string walletpassphrasechange = await wallet.WalletPassphraseChange(oldPassphrase, newPassphrase);
+Console.WriteLine(walletpassphrasechange); 
 ```
 
 <details>
@@ -6826,15 +6894,24 @@ Console.WriteLine(signrawtransactionwithwallet);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### walletprocesspsbt
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient, "");
 
-  
+string psbt = "cHNidP8BAIoCAAAAAcITVanbEDF5dKjcz2XP5gU5aPf96hoZYxlD8h3/0mtIAAAAAAD/////A4A4AQAAAAAAGXapFByXmfCaDDF7dYP94X7McpvZwfVaiKwaCQ4AAAAAABYAFO4RFDd9uMTRJkoogvoLMxdkd9i8AAAAAAAAAAANagtIZWxsbyBXb3JsZAAAAAAAAQEfQEIPAAAAAAAWABQDMoFYH3lhotbd6/AhdZUfUbxPbiIGAkI6KH4mf/sYvHLchYSLXJ2XF5n/vldubJ\u002BO8CdbWhHNEGPT0\u002BUAAACAAAAAgAMAAIAAACICA9SDITfNkb3deCAOi5GOkLJiegguBjehci73SzUsifVJEIGRNdwAAACAAQAAgAEAAIAAAA==";
+            
+string walletprocesspsbt = await wallet.WalletProcessPSBT(psbt);
+Console.WriteLine(walletprocesspsbt); 
 ```
 
 <details>
@@ -6842,7 +6919,14 @@ Console.WriteLine(signrawtransactionwithwallet);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "psbt": "cHNidP8BAIoCAAAAAcITVanbEDF5dKjcz2XP5gU5aPf96hoZYxlD8h3/0mtIAAAAAAD/////A4A4AQAAAAAAGXapFByXmfCaDDF7dYP94X7McpvZwfVaiKwaCQ4AAAAAABYAFO4RFDd9uMTRJkoogvoLMxdkd9i8AAAAAAAAAAANagtIZWxsbyBXb3JsZAAAAAAAAQEfQEIPAAAAAAAWABQDMoFYH3lhotbd6/AhdZUfUbxPbiIGAkI6KH4mf/sYvHLchYSLXJ2XF5n/vldubJ\u002BO8CdbWhHNEGPT0\u002BUAAACAAAAAgAMAAIAAACICA9SDITfNkb3deCAOi5GOkLJiegguBjehci73SzUsifVJEIGRNdwAAACAAQAAgAEAAIAAAA==",
+    "complete": true
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
@@ -6860,8 +6944,13 @@ ZMQ
 ### getzmqnotifications
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");           
 
-  
+ZMQ zMQ = new ZMQ(bitcoinClient);
+
+string getzmqnotifications = await zMQ.GetZMQNotifications();
+
+Console.WriteLine(getzmqnotifications);
 ```
 
 <details>
@@ -6869,7 +6958,11 @@ ZMQ
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
