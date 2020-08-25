@@ -38,7 +38,6 @@ BLOCKCHAIN
   string getbestblockhash = await blockchain.GetBestBlockHash();
   
   Console.WriteLine(getbestblockhash);
-  
 ```
 
 <details>
@@ -69,7 +68,6 @@ string getbestblockhash_VerbosityTwo = await blockchain.GetBlock(blockhash, Verb
 Console.WriteLine(getbestblockhash_VerbosityZero);
 Console.WriteLine(getbestblockhash_VerbosityOne);
 Console.WriteLine(getbestblockhash_VerbosityTwo);
-  
 ```
 
 <details>
@@ -209,7 +207,6 @@ Blockchain blockchain = new Blockchain(bitcoinClient);
 string getblockchaininfo = await blockchain.GetbBlockchainInfo();
 
 Console.WriteLine(getblockchaininfo);
-  
 ```
 
 <details>
@@ -275,7 +272,6 @@ Blockchain blockchain = new Blockchain(bitcoinClient);
 string getblockcount = await blockchain.GetBlockCount();
 
 Console.WriteLine(getblockcount);
-  
 ```
 
 <details>
@@ -301,7 +297,6 @@ Blockchain blockchain = new Blockchain(bitcoinClient);
 string getblockhash = await blockchain.GetBlockHash(1000);
 
 Console.WriteLine(getblockhash);
-  
 ```
 
 <details>
@@ -330,7 +325,6 @@ string getblockheader_Json = await blockchain.GetBlockHeader(blockhash, BlockHea
             
 Console.WriteLine(getblockheader_Hex);
 Console.WriteLine(getblockheader_Json);
-  
 ```
 
 <details>
@@ -400,7 +394,6 @@ string getblockstats_with_filter = await blockchain.GetBlockStats(100, blockStat
 Console.WriteLine(getblockstats_byHeight);
 Console.WriteLine(getblockstats_byBlockhash);
 Console.WriteLine(getblockstats_with_filter);
-  
 ```
 
 <details>
@@ -526,7 +519,6 @@ Blockchain blockchain = new Blockchain(bitcoinClient);
 string getchaintips = await blockchain.GetChainTips();
 
 Console.WriteLine(getchaintips);
-  
 ```
 
 <details>
@@ -592,7 +584,6 @@ string getchaintxstats_nblocks_finalBlockhash = await blockchain.GetChainTxStats
 Console.WriteLine(getchaintxstats);
 Console.WriteLine(getchaintxstats_nblocks);
 Console.WriteLine(getchaintxstats_nblocks_finalBlockhash);
-  
 ```
 
 <details>
@@ -694,7 +685,6 @@ string txid = "e3da017450b456e194cb32f9959808b2ec2dacf8702018edf334eabafe829257"
 string getmempoolancestors = await blockchain.GetMemPoolAncestors(txid);
 
 Console.WriteLine(getmempoolancestors);
-  
 ```
 
 <details>
@@ -720,7 +710,6 @@ string txid = "ebf7b4cfe5a4aaf3c9faede04369527e14cc7c9766c448c765b6d64e85bee1a8"
 string getmempooldescendants = await blockchain.GetMemPoolDescendants(txid);
 
 Console.WriteLine(getmempooldescendants);
-  
 ```
 
 <details>
@@ -746,7 +735,6 @@ string txid = "e3da017450b456e194cb32f9959808b2ec2dacf8702018edf334eabafe829257"
 string getmempoolentry = await blockchain.GetMemPoolEntry(txid);
 
 Console.WriteLine(getmempoolentry);
-  
 ```
 
 <details>
@@ -795,7 +783,6 @@ Blockchain blockchain = new Blockchain(bitcoinClient);
 string getmempoolinfo = await blockchain.GetMemPoolInfo();
 
 Console.WriteLine(getmempoolinfo);
-  
 ```
 
 <details>
@@ -830,7 +817,6 @@ string getrawmempool_ArrayTxIds = await blockchain.GetRawMempool(ReturnFormat.Ar
 
 Console.WriteLine(getrawmempool_Json);
 Console.WriteLine(getrawmempool_ArrayTxIds);
-  
 ```
 
 <details>
@@ -1168,7 +1154,6 @@ string pruneblockchain_UpToUnixEpochTime = await blockchain.PruneBlockchain(Unix
 
 Console.WriteLine(pruneblockchain_UpToHeight);
 Console.WriteLine(pruneblockchain_UpToUnixEpochTime);
-  
 ```
 
 <details>
@@ -1238,7 +1223,6 @@ scanTxOutSet.ScanObjects = new List<string>()
 string scantxoutset = await blockchain.ScanTxOutSet(Scan.Start, scanTxOutSet);
 
 Console.WriteLine(scantxoutset);
-  
 ```
 
 <details>
@@ -1331,7 +1315,6 @@ string hexProof = "000000207a5cd1d7d427da62a4a50fe4c91f92a5d4ad71335c72348808000
 string verifytxoutproof = await blockchain.VerifyTxOutProof(hexProof);
 
 Console.WriteLine(verifytxoutproof);
-  
 ```
 
 <details>
@@ -1479,7 +1462,6 @@ string logging_filtered = await serverControl.Logging(include, exclude);
             
 Console.WriteLine(logging);
 Console.WriteLine(logging_filtered);
-
 ```
 
 <details>
@@ -1563,7 +1545,6 @@ ServerControl serverControl = new ServerControl(bitcoinClient);
 string stop = await serverControl.StopServer();
             
 Console.WriteLine(stop);
-  
 ```
 
 <details>
@@ -1619,7 +1600,6 @@ RegTestGenerate regTestGenerate = new RegTestGenerate(bitcoinClient);
 string generatetoaddress = await regTestGenerate.GenerateToAddress(100, "bcrt1qtljavjnh8584zc2vrl08gkpcuvlawgm8cd9rfx");
 
 Console.WriteLine(generatetoaddress);
-  
 ```
 
 <details>
@@ -1746,7 +1726,6 @@ RegTestGenerate regTestGenerate = new RegTestGenerate(bitcoinClient);
 string generatetodescriptor = await regTestGenerate.GenerateToDescriptor(10, "addr(bcrt1qtljavjnh8584zc2vrl08gkpcuvlawgm8cd9rfx)");
 
 Console.WriteLine(generatetodescriptor);
-  
 ```
 
 <details>
@@ -1793,7 +1772,6 @@ getBlockTemplate.Rules = Rules.segwit;
 
 string getblocktemplate = await mining.GetBlockTemplate(getBlockTemplate);
 Console.WriteLine(getblocktemplate);
-
 ```
 
 <details>
@@ -2036,7 +2014,6 @@ string prioritisetransaction = await mining.PrioritiseTransaction(txid, 2);
             
 Console.WriteLine(BitcoinRpc.Debug.JsonRequest.GetRequestAsString(true));
 Console.WriteLine(prioritisetransaction);
-  
 ```
 
 <details>
@@ -2062,7 +2039,6 @@ string hexdata = "01000000000000000000000000000000000000000000000000000000000000
 
 string submitblock = await mining.SubmitBlock(hexdata);
 Console.WriteLine(submitblock);
-  
 ```
 
 <details>
@@ -2088,7 +2064,6 @@ string hexdata = "01000000000000000000000000000000000000000000000000000000000000
 
 string submitheader = await mining.SubmitHeader(hexdata);
 Console.WriteLine(submitheader);
-  
 ```
 
 <details>
@@ -2124,7 +2099,6 @@ string removeNode = await network.AddNode("43.225.62.107:8333", NodeCommand.remo
             
 Console.WriteLine(addnode);
 Console.WriteLine(removeNode);
-  
 ```
 
 <details>
@@ -2228,7 +2202,6 @@ string getaddednodeinfo_Specific = await network.GetAddedNodeInfo("47.113.95.224
 
 Console.WriteLine(getaddednodeinfo_All);
 Console.WriteLine(getaddednodeinfo_Specific);
-  
 ```
 
 <details>
@@ -3349,7 +3322,6 @@ setBan.BanTime = 86400;
 string setban = await network.SetBan(setBan);
 
 Console.WriteLine(setban);
-  
 ```
 
 <details>
@@ -3408,7 +3380,6 @@ string PSBT = "cHNidP8BAH0CAAAAAXz0qBDXO+uQOsNVaUcorfJafZYydCv5kGUTLaFs/r2HAAAAA
 string analyzepsbt = await rawTransaction.AnalyzePSBT(PSBT);
 
 Console.WriteLine(analyzepsbt);
-  
 ```
 
 <details>
@@ -3452,7 +3423,6 @@ List<string> pSBTs = new List<string>
 string combinepsbt = await rawTransaction.CombinePSBT(pSBTs);
 
 Console.WriteLine(combinepsbt);
-  
 ```
 
 <details>
@@ -3483,7 +3453,6 @@ List<string> rawTxs = new List<string>
 string combinerawtransaction = await rawTransaction.CombineRawTransaction(rawTxs);
 
 Console.WriteLine(combinerawtransaction);
-  
 ```
 
 <details>
@@ -3832,7 +3801,6 @@ string rawTx = "0200000003809d3482a6b977773a58ff3af53fba4815024c078d07f0e2e3ec47
 
 string decoderawtransaction = await rawTransaction.DecodeRawTransaction(rawTx);
 Console.WriteLine(decoderawtransaction);
-  
 ```
 
 <details>
@@ -4038,7 +4006,6 @@ List<string> pSBTs = new List<string>
 
 string joinpsbts = await rawTransaction.JoinPSBTS(pSBTs);
 Console.WriteLine(joinpsbts);
-  
 ```
 
 <details>
@@ -4072,7 +4039,11 @@ Console.WriteLine(sendrawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "2d7ecff0b455774f9740b8e11c12ec873479b46de92082bf2a12015baf63366e",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
@@ -4107,7 +4078,6 @@ string result = deserialized.result; // "02000000012ec9d65ba255e44b85810beac4cad
 string signrawtransactionwithkey = await rawTransaction.SignRawTransactionWithKey(result, new List<string> { "cSPSK16wrGeeNhhS97zgUDfvEkahRa7uGmG1UKnpzxKhe8Vdppg1" });
 
 Console.WriteLine(signrawtransactionwithkey);
-  
 ```
 
 <details>
@@ -4203,7 +4173,6 @@ List<string> publicKeys = new List<string>
 
 string createmultisig= await util.CreateMultisig(nRequired, publicKeys,AddressType.bech32);
 Console.WriteLine(createmultisig);
-  
 ```
 
 <details>
@@ -4387,7 +4356,6 @@ string msg = "Hello World";
 string verifymessage = await util.VerifyMessage(address, signature, msg);
 
 Console.WriteLine(verifymessage);
-  
 ```
 
 <details>
@@ -4446,7 +4414,6 @@ Wallet wallet = new Wallet(bitcoinClient);
 string abortrescan = await wallet.AbortRescan();
 
 Console.WriteLine(abortrescan);
-  
 ```
 
 <details>
@@ -4575,7 +4542,6 @@ bool avoidReuse = false;
 string createwallet = await wallet.CreateWallet(walletName, disablePrivateKeys, blank, passphrase, avoidReuse);
 
 Console.WriteLine(createwallet);
-
 ```
 
 <details>
@@ -4901,7 +4867,6 @@ string label = "one";
 string getreceivedbylabel = await wallet.GetReceivedByLabel(label);
 
 Console.WriteLine(getreceivedbylabel)
-  
 ```
 
 <details>
@@ -5118,7 +5083,6 @@ bool rescan = false;
 string importprivkey = await wallet.ImportPrivKey(privKey, rescan);
 
 Console.WriteLine(importprivkey);
-  
 ```
 
 <details>
@@ -6737,7 +6701,6 @@ string txid = "0200000001c21355a9db10317974a8dccf65cfe6053968f7fdea1a19631943f21
 
 string signrawtransactionwithwallet = await wallet.SignRawTransactionWithWallet(txid);           
 Console.WriteLine(signrawtransactionwithwallet);
-  
 ```
 
 <details>
