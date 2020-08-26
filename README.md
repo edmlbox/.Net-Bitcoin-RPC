@@ -3618,8 +3618,7 @@ Console.WriteLine(combinerawtransaction);
 </details>
 
 ### converttopsbt
-##### Converts a network serialized transaction to a PSBT. This should be used only with createrawtransaction and fundrawtransaction
-createpsbt and walletcreatefundedpsbt should be used for new applications.
+##### Converts a network serialized transaction to a PSBT. This should be used only with createrawtransaction and fundrawtransaction createpsbt and walletcreatefundedpsbt should be used for new applications.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3645,8 +3644,7 @@ Console.WriteLine(converttopsbt);
 </details>
 
 ### createpsbt
-##### Creates a transaction in the Partially Signed Transaction format.
-Implements the Creator role.
+##### Creates a transaction in the Partially Signed Transaction format. Implements the Creator role.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4065,8 +4063,7 @@ Console.WriteLine(decodescript);
 </details>
 
 ### finalizepsbt
-##### Finalize the inputs of a PSBT. If the transaction is fully signed, it will produce a network serialized transaction which can be broadcast with sendrawtransaction. Otherwise a PSBT will be created which has the final_scriptSig and final_scriptWitness fields filled for inputs that are complete.
-Implements the Finalizer and Extractor roles.
+##### Finalize the inputs of a PSBT. If the transaction is fully signed, it will produce a network serialized transaction which can be broadcast with sendrawtransaction. Otherwise a PSBT will be created which has the final_scriptSig and final_scriptWitness fields filled for inputs that are complete. Implements the Finalizer and Extractor roles.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -4151,8 +4148,7 @@ Console.WriteLine(getrawtransaction);
 </details>
 
 ### joinpsbts
-##### Joins multiple distinct PSBTs with different inputs and outputs into one PSBT with inputs and outputs from all of the PSBTs
-No input in any of the PSBTs can be in more than one of the PSBTs.
+##### Joins multiple distinct PSBTs with different inputs and outputs into one PSBT with inputs and outputs from all of the PSBTs No input in any of the PSBTs can be in more than one of the PSBTs.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -4389,8 +4385,7 @@ Console.WriteLine(deriveaddresses);
 </details>
 
 ### estimatesmartfee
-##### Estimates the approximate fee per kilobyte needed for a transaction to begin confirmation within conf_target blocks if possible and return the number of blocks
-for which the estimate is valid. Uses virtual transaction size as defined in BIP 141 (witness data is discounted).
+##### Estimates the approximate fee per kilobyte needed for a transaction to begin confirmation within conf_target blocks if possible and return the number of blocks for which the estimate is valid. Uses virtual transaction size as defined in BIP 141 (witness data is discounted).
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -4581,8 +4576,7 @@ Console.WriteLine(abandontransaction);
 </details>
 
 ### abortrescan
-##### Stops current wallet rescan triggered by an RPC call, e.g. by an importprivkey call.
-Note: Use "getwalletinfo" to query the scanning progress.
+##### Stops current wallet rescan triggered by an RPC call, e.g. by an importprivkey call. Note: Use "getwalletinfo" to query the scanning progress.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6282,8 +6276,7 @@ Console.WriteLine(listtransactions);
 </details>
 
 ### listunspent
-##### Returns array of unspent transaction outputs with between minconf and maxconf (inclusive) confirmations.
-Optionally filter to only include txouts paid to specified addresses.
+##### Returns array of unspent transaction outputs with between minconf and maxconf (inclusive) confirmations. Optionally filter to only include txouts paid to specified addresses.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6613,8 +6606,7 @@ Console.WriteLine(loadwallet);
 </details>
 
 ### lockunspent
-##### Updates list of temporarily unspendable outputs. Temporarily lock (unlock=false) or unlock (unlock=true) specified transaction outputs. If no transaction outputs are specified when unlocking then all current locked transaction outputs are unlocked. A locked transaction output will not be chosen by automatic coin selection, when spending bitcoins. Locks are stored in memory only. Nodes start with zero locked outputs, and the locked output list
-is always cleared (by virtue of process exit) when a node stops or fails.
+##### Updates list of temporarily unspendable outputs. Temporarily lock (unlock=false) or unlock (unlock=true) specified transaction outputs. If no transaction outputs are specified when unlocking then all current locked transaction outputs are unlocked. A locked transaction output will not be chosen by automatic coin selection, when spending bitcoins. Locks are stored in memory only. Nodes start with zero locked outputs, and the locked output list is always cleared (by virtue of process exit) when a node stops or fails.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -6666,8 +6658,7 @@ Console.WriteLine(removeprunedfunds);
 </details>
 
 ### rescanblockchain
-##### Rescan the local blockchain for wallet related transactions.
-Note: Use "getwalletinfo" to query the scanning progress.
+##### Rescan the local blockchain for wallet related transactions. Note: Use "getwalletinfo" to query the scanning progress.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -7019,8 +7010,7 @@ Console.WriteLine(walletcreatefundedpsbt);
 </details>
 
 ### walletlock
-##### Removes the wallet encryption key from memory, locking the wallet. After calling this method, you will need to call walletpassphrase again
-before being able to call any methods which require the wallet to be unlocked.
+##### Removes the wallet encryption key from memory, locking the wallet. After calling this method, you will need to call walletpassphrase again before being able to call any methods which require the wallet to be unlocked.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
