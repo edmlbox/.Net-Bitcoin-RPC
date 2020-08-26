@@ -110,6 +110,9 @@ Console.WriteLine(getbBlockchainInfo);
 ```
 </details>
 
+
+#### Below you can find all BitcoinRPC commands with examples.
+
 BLOCKCHAIN
 -----
 
