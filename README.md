@@ -38,8 +38,10 @@ Select the **Browse tab**, search for [BitcoinRPC](https://www.nuget.org/package
 
 USAGE
 -----
+### Add types to the namespace:
 ```csharp    
- 
+using BitcoinRpc;
+using BitcoinRpc.CoreRPC;
 ```
 
 BLOCKCHAIN
