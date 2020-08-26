@@ -361,7 +361,8 @@ Console.WriteLine(getblockchaininfo);
 </details>
 
 ### getblockcount
-##### 
+##### Returns the height of the most-work fully-validated chain.
+The genesis block has height 0.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -387,7 +388,7 @@ Console.WriteLine(getblockcount);
 </details>
 
 ### getblockhash
-##### Returns the height of the most-work fully-validated chain. The genesis block has height 0.
+##### Returns hash of block in best-block-chain at height provided.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
