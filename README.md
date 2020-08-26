@@ -8,7 +8,7 @@ Table of contents
 <!--ts-->
    * [Installation](#installation)
    * [Usage](#usage)
-   * Core RPC
+   * Core RPC(#Core RPC)
       * [BLOCKCHAIN](#BLOCKCHAIN)
       * [CONTROL](#CONTROL)
       * [GENERATING](#GENERATING)
@@ -111,7 +111,10 @@ Console.WriteLine(getbBlockchainInfo);
 </details>
 
 
-#### Below you can find all BitcoinRPC commands with examples.
+Core RPC
+-----
+**[BLOCKCHAIN](#BLOCKCHAIN)**, **[CONTROL](#CONTROL)**, **[GENERATING](#GENERATING)**, **[MINING](#MINING)**, **[NETWORK](#NETWORK)**, **[RAWTRANSACTIONS](#RAWTRANSACTIONS)**, **[UTIL](#UTIL)**, **[WALLET](#WALLET)**, **[ZMQ](#ZMQ)**
+
 
 BLOCKCHAIN
 -----
