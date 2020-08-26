@@ -7,7 +7,8 @@ Table of contents
    
 <!--ts-->
    * [Installation](#installation)
-   * [Core RPC](#usage)
+   * [Usage](#usage)
+   * Core RPC
       * [BLOCKCHAIN](#BLOCKCHAIN)
       * [CONTROL](#CONTROL)
       * [GENERATING](#GENERATING)
@@ -21,8 +22,9 @@ Table of contents
    * [Dependency](#dependency)
 <!--te-->
 
-Installation
+INSTALLATION
 -----
+
 ### NuGet Package Manager
 In **Solution Explorer**, right-click on your project and choose **Manage NuGet Packages**.
 Select the **Browse tab**, search for [BitcoinRPC](https://www.nuget.org/packages/BitcoinRPC/), select that package in the list, and select **Install**.
@@ -32,6 +34,13 @@ Select the **Browse tab**, search for [BitcoinRPC](https://www.nuget.org/package
 1. Once the console opens, check that the **Default project drop-down list** shows the project into which you want to install the package. If you have a single project in the solution, it is already selected.
 1. Type the next command: **Install-Package BitcoinRPC**
 
+
+
+USAGE
+-----
+```csharp    
+ 
+```
 
 BLOCKCHAIN
 -----
