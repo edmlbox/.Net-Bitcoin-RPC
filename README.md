@@ -8,7 +8,7 @@ Table of contents
 <!--ts-->
    * [Installation](#installation)
    * [Usage](#usage)
-   * [Core RPC](#Core RPC reference)
+   * [Core RPC](#installation)
       * [BLOCKCHAIN](#BLOCKCHAIN)
       * [CONTROL](#CONTROL)
       * [GENERATING](#GENERATING)
