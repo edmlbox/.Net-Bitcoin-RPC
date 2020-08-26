@@ -44,6 +44,72 @@ using BitcoinRpc;
 using BitcoinRpc.CoreRPC;
 ```
 
+### Connect to a node and send a command:
+```csharp
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+string getbBlockchainInfo = await blockchain.GetbBlockchainInfo();
+
+Console.WriteLine(getbBlockchainInfo);
+```
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+{
+  "result": {
+    "chain": "main",
+    "blocks": 645397,
+    "headers": 645397,
+    "bestblockhash": "000000000000000000066375ede5da171433cb80cf68661eaa71123a55799e3f",
+    "difficulty": 17557993035167.3,
+    "mediantime": 1598427110,
+    "verificationprogress": 0.9999997177461921,
+    "initialblockdownload": false,
+    "chainwork": "000000000000000000000000000000000000000012cc279e8fda2b1e12bf7fc4",
+    "size_on_disk": 581074555,
+    "pruned": true,
+    "pruneheight": 644983,
+    "automatic_pruning": true,
+    "prune_target_size": 629145600,
+    "softforks": {
+      "bip34": {
+        "type": "buried",
+        "active": true,
+        "height": 227931
+      },
+      "bip66": {
+        "type": "buried",
+        "active": true,
+        "height": 363725
+      },
+      "bip65": {
+        "type": "buried",
+        "active": true,
+        "height": 388381
+      },
+      "csv": {
+        "type": "buried",
+        "active": true,
+        "height": 419328
+      },
+      "segwit": {
+        "type": "buried",
+        "active": true,
+        "height": 481824
+      }
+    },
+    "warnings": ""
+  },
+  "error": null,
+  "id": null
+}
+```
+</details>
+
 BLOCKCHAIN
 -----
 
