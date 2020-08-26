@@ -113,7 +113,6 @@ Console.WriteLine(getbBlockchainInfo);
 
 Reference
 -----
-BitcoinRPC reference.
 **[BLOCKCHAIN](#BLOCKCHAIN)**, **[CONTROL](#CONTROL)**, **[GENERATING](#GENERATING)**, **[MINING](#MINING)**, **[NETWORK](#NETWORK)**, **[RAWTRANSACTIONS](#RAWTRANSACTIONS)**, **[UTIL](#UTIL)**, **[WALLET](#WALLET)**, **[ZMQ](#ZMQ)**
 
 
