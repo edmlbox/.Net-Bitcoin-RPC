@@ -1,13 +1,14 @@
 # .Net-Bitcoin-RPC
 
-### Bitcoin Core RPC library for .Net. Covers all commands. 
+### Bitcoin Core RPC library for .Net. All commands are covered with examples.
 
 Table of contents
 =================
    
 <!--ts-->
    * [Installation](#installation)
-   * [Core RPC](#usage)
+   * [Usage](#usage)
+   * [Core RPC](#Reference)
       * [BLOCKCHAIN](#BLOCKCHAIN)
       * [CONTROL](#CONTROL)
       * [GENERATING](#GENERATING)
@@ -21,6 +22,100 @@ Table of contents
    * [Dependency](#dependency)
 <!--te-->
 
+INSTALLATION
+-----
+#### Option #1.
+### NuGet Package Manager
+In **Solution Explorer**, right-click on your project and choose **Manage NuGet Packages**.
+Select the **Browse tab**, search for [BitcoinRPC](https://www.nuget.org/packages/BitcoinRPC/), select that package in the list, and select **Install**.
+
+#### Option #2.
+### Package Manager Console
+1. Select the **Tools > NuGet Package Manager > Package Manager Console** menu command.
+1. Once the console opens, check that the **Default project drop-down list** shows the project into which you want to install the package. If you have a single project in the solution, it is already selected.
+1. Type the next command: **Install-Package BitcoinRPC**
+
+
+
+USAGE
+-----
+### Add types to the namespace:
+```csharp    
+using BitcoinRpc;
+using BitcoinRpc.CoreRPC;
+```
+
+### Connect to a node and send a command:
+```csharp
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+
+Blockchain blockchain = new Blockchain(bitcoinClient);
+
+string getbBlockchainInfo = await blockchain.GetbBlockchainInfo();
+
+Console.WriteLine(getbBlockchainInfo);
+```
+<details>
+  
+  <summary>Server response</summary>
+ 
+ ```json
+{
+  "result": {
+    "chain": "main",
+    "blocks": 645397,
+    "headers": 645397,
+    "bestblockhash": "000000000000000000066375ede5da171433cb80cf68661eaa71123a55799e3f",
+    "difficulty": 17557993035167.3,
+    "mediantime": 1598427110,
+    "verificationprogress": 0.9999997177461921,
+    "initialblockdownload": false,
+    "chainwork": "000000000000000000000000000000000000000012cc279e8fda2b1e12bf7fc4",
+    "size_on_disk": 581074555,
+    "pruned": true,
+    "pruneheight": 644983,
+    "automatic_pruning": true,
+    "prune_target_size": 629145600,
+    "softforks": {
+      "bip34": {
+        "type": "buried",
+        "active": true,
+        "height": 227931
+      },
+      "bip66": {
+        "type": "buried",
+        "active": true,
+        "height": 363725
+      },
+      "bip65": {
+        "type": "buried",
+        "active": true,
+        "height": 388381
+      },
+      "csv": {
+        "type": "buried",
+        "active": true,
+        "height": 419328
+      },
+      "segwit": {
+        "type": "buried",
+        "active": true,
+        "height": 481824
+      }
+    },
+    "warnings": ""
+  },
+  "error": null,
+  "id": null
+}
+```
+</details>
+
+
+Reference
+-----
+**[BLOCKCHAIN](#BLOCKCHAIN)**, **[CONTROL](#CONTROL)**, **[GENERATING](#GENERATING)**, **[MINING](#MINING)**, **[NETWORK](#NETWORK)**, **[RAWTRANSACTIONS](#RAWTRANSACTIONS)**, **[UTIL](#UTIL)**, **[WALLET](#WALLET)**, **[ZMQ](#ZMQ)**
+
 
 BLOCKCHAIN
 -----
@@ -28,7 +123,8 @@ BLOCKCHAIN
 **[getbestblockhash](#getbestblockhash),** **[getblock](#getblock)**, **[getblockchaininfo](#getblockchaininfo)**, **[getblockcount](#getblockcount)**, **[getblockhash](#getblockhash)**,  **[getblockheader](#getblockheader)**,  **[getblockstats](#getblockstats)**,  **[getchaintips](#getchaintips)**,  **[getchaintxstats](#getchaintxstats)**,  **[getdifficulty](#getdifficulty)**,  **[getmempoolancestors](#getmempoolancestors)**,  **[getmempooldescendants](#getmempooldescendants)**,  **[getmempoolentry](#getmempoolentry)**,  **[getmempoolinfo](#getmempoolinfo)**, **[getrawmempool](#getrawmempool)**, **[gettxout](#gettxout)**, **[gettxoutproof](#gettxoutproof)**, **[gettxoutsetinfo](#gettxoutsetinfo)**, **[preciousblock](#preciousblock)**, **[pruneblockchain](#pruneblockchain)**, **[savemempool](#savemempool)**, **[scantxoutset](#scantxoutset)**, **[verifychain](#verifychain)**, **[verifytxoutproof](#verifytxoutproof)**
 
 
-### getbestblockhash
+### getbestblockhash  
+##### Returns the hash of the best (tip) block in the most-work fully-validated chain.
 -----
 ```csharp    
   BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -38,7 +134,6 @@ BLOCKCHAIN
   string getbestblockhash = await blockchain.GetBestBlockHash();
   
   Console.WriteLine(getbestblockhash);
-  
 ```
 
 <details>
@@ -55,6 +150,7 @@ BLOCKCHAIN
 </details>
 
 ### getblock
+##### Returns information about block.
 -----
 ```csharp
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -69,7 +165,6 @@ string getbestblockhash_VerbosityTwo = await blockchain.GetBlock(blockhash, Verb
 Console.WriteLine(getbestblockhash_VerbosityZero);
 Console.WriteLine(getbestblockhash_VerbosityOne);
 Console.WriteLine(getbestblockhash_VerbosityTwo);
-  
 ```
 
 <details>
@@ -200,6 +295,7 @@ Console.WriteLine(getbestblockhash_VerbosityTwo);
 </details>
 
 ### getblockchaininfo
+##### Returns an object containing various state info regarding blockchain processing.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -209,7 +305,6 @@ Blockchain blockchain = new Blockchain(bitcoinClient);
 string getblockchaininfo = await blockchain.GetbBlockchainInfo();
 
 Console.WriteLine(getblockchaininfo);
-  
 ```
 
 <details>
@@ -266,6 +361,7 @@ Console.WriteLine(getblockchaininfo);
 </details>
 
 ### getblockcount
+##### 
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -275,7 +371,6 @@ Blockchain blockchain = new Blockchain(bitcoinClient);
 string getblockcount = await blockchain.GetBlockCount();
 
 Console.WriteLine(getblockcount);
-  
 ```
 
 <details>
@@ -292,6 +387,7 @@ Console.WriteLine(getblockcount);
 </details>
 
 ### getblockhash
+##### Returns the height of the most-work fully-validated chain. The genesis block has height 0.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -301,7 +397,6 @@ Blockchain blockchain = new Blockchain(bitcoinClient);
 string getblockhash = await blockchain.GetBlockHash(1000);
 
 Console.WriteLine(getblockhash);
-  
 ```
 
 <details>
@@ -318,6 +413,7 @@ Console.WriteLine(getblockhash);
 </details>
 
 ### getblockheader
+##### If "BlockHeaderVerbosity.Hex", returns a string that is serialized, hex-encoded data for blockheader 'hash'. If "BlockHeaderVerbosity.Json", returns an Object with information about blockheader "hash".
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -330,7 +426,6 @@ string getblockheader_Json = await blockchain.GetBlockHeader(blockhash, BlockHea
             
 Console.WriteLine(getblockheader_Hex);
 Console.WriteLine(getblockheader_Json);
-  
 ```
 
 <details>
@@ -375,6 +470,7 @@ Console.WriteLine(getblockheader_Json);
 </details>
 
 ### getblockstats
+##### Compute per block statistics for a given window. All amounts are in satoshis. It won't work for some heights with pruning.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -400,7 +496,6 @@ string getblockstats_with_filter = await blockchain.GetBlockStats(100, blockStat
 Console.WriteLine(getblockstats_byHeight);
 Console.WriteLine(getblockstats_byBlockhash);
 Console.WriteLine(getblockstats_with_filter);
-  
 ```
 
 <details>
@@ -517,6 +612,7 @@ Console.WriteLine(getblockstats_with_filter);
 </details>
 
 ### getchaintips
+##### Return information about all known tips in the block tree, including the main chain as well as orphaned branches.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -526,7 +622,6 @@ Blockchain blockchain = new Blockchain(bitcoinClient);
 string getchaintips = await blockchain.GetChainTips();
 
 Console.WriteLine(getchaintips);
-  
 ```
 
 <details>
@@ -574,6 +669,7 @@ Console.WriteLine(getchaintips);
 </details>
 
 ### getchaintxstats
+##### Compute statistics about the total number and rate of transactions in the chain.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -592,7 +688,6 @@ string getchaintxstats_nblocks_finalBlockhash = await blockchain.GetChainTxStats
 Console.WriteLine(getchaintxstats);
 Console.WriteLine(getchaintxstats_nblocks);
 Console.WriteLine(getchaintxstats_nblocks_finalBlockhash);
-  
 ```
 
 <details>
@@ -660,6 +755,7 @@ Console.WriteLine(getchaintxstats_nblocks_finalBlockhash);
 </details>
 
 ### getdifficulty
+##### Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -685,6 +781,7 @@ Console.WriteLine(getdifficulty);
 </details>
 
 ### getmempoolancestors
+##### If txid is in the mempool, returns all in-mempool ancestors.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");            
@@ -694,7 +791,6 @@ string txid = "e3da017450b456e194cb32f9959808b2ec2dacf8702018edf334eabafe829257"
 string getmempoolancestors = await blockchain.GetMemPoolAncestors(txid);
 
 Console.WriteLine(getmempoolancestors);
-  
 ```
 
 <details>
@@ -711,6 +807,7 @@ Console.WriteLine(getmempoolancestors);
 </details>
 
 ### getmempooldescendants
+##### If txid is in the mempool, returns all in-mempool descendants.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");           
@@ -720,7 +817,6 @@ string txid = "ebf7b4cfe5a4aaf3c9faede04369527e14cc7c9766c448c765b6d64e85bee1a8"
 string getmempooldescendants = await blockchain.GetMemPoolDescendants(txid);
 
 Console.WriteLine(getmempooldescendants);
-  
 ```
 
 <details>
@@ -737,6 +833,7 @@ Console.WriteLine(getmempooldescendants);
 </details>
 
 ### getmempoolentry
+##### Returns mempool data for given transaction.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");         
@@ -746,7 +843,6 @@ string txid = "e3da017450b456e194cb32f9959808b2ec2dacf8702018edf334eabafe829257"
 string getmempoolentry = await blockchain.GetMemPoolEntry(txid);
 
 Console.WriteLine(getmempoolentry);
-  
 ```
 
 <details>
@@ -786,6 +882,7 @@ Console.WriteLine(getmempoolentry);
 </details>
 
 ### getmempoolinfo
+##### Returns details on the active state of the TX memory pool.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -795,7 +892,6 @@ Blockchain blockchain = new Blockchain(bitcoinClient);
 string getmempoolinfo = await blockchain.GetMemPoolInfo();
 
 Console.WriteLine(getmempoolinfo);
-  
 ```
 
 <details>
@@ -820,6 +916,7 @@ Console.WriteLine(getmempoolinfo);
 </details>
 
 ### getrawmempool
+##### Returns all transaction ids in memory pool as a json array of string transaction ids.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -830,7 +927,6 @@ string getrawmempool_ArrayTxIds = await blockchain.GetRawMempool(ReturnFormat.Ar
 
 Console.WriteLine(getrawmempool_Json);
 Console.WriteLine(getrawmempool_ArrayTxIds);
-  
 ```
 
 <details>
@@ -1008,6 +1104,7 @@ Console.WriteLine(getrawmempool_ArrayTxIds);
 </details>
 
 ### gettxout
+##### Returns details about an unspent transaction output.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1047,6 +1144,7 @@ Console.WriteLine(gettxout);
 </details>
 
 ### gettxoutproof
+##### Returns a hex-encoded proof that "txid" was included in a block.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1094,6 +1192,7 @@ Console.WriteLine(gettxoutproof_InThisBlock);
 </details>
 
 ### gettxoutsetinfo
+##### Returns statistics about the unspent transaction output set. Note this call may take some time.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1128,6 +1227,7 @@ Console.WriteLine(gettxoutsetinfo);
 </details>
 
 ### preciousblock
+##### Treats a block as if it were received before others with the same work.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1153,6 +1253,7 @@ Console.WriteLine(preciousblock);
 </details>
 
 ### pruneblockchain
+##### Prune blockchain height. May be set to a discrete height, or to a UNIX epoch time to prune blocks whose block time is at least 2 hours older than the provided timestamp.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -1168,7 +1269,6 @@ string pruneblockchain_UpToUnixEpochTime = await blockchain.PruneBlockchain(Unix
 
 Console.WriteLine(pruneblockchain_UpToHeight);
 Console.WriteLine(pruneblockchain_UpToUnixEpochTime);
-  
 ```
 
 <details>
@@ -1197,6 +1297,7 @@ Console.WriteLine(pruneblockchain_UpToUnixEpochTime);
 </details>
 
 ### savemempool
+##### Dumps the mempool to disk. It will fail until the previous dump is fully loaded.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -1222,6 +1323,7 @@ Console.WriteLine(savemempool);
 </details>
 
 ### scantxoutset
+##### Scans the unspent transaction output set for entries that match certain output descriptors.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1238,7 +1340,6 @@ scanTxOutSet.ScanObjects = new List<string>()
 string scantxoutset = await blockchain.ScanTxOutSet(Scan.Start, scanTxOutSet);
 
 Console.WriteLine(scantxoutset);
-  
 ```
 
 <details>
@@ -1296,6 +1397,7 @@ Console.WriteLine(scantxoutset);
 </details>
 
 ### verifychain
+##### Verifies blockchain database.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1321,6 +1423,7 @@ Console.WriteLine(verifychain);
 </details>
 
 ### verifytxoutproof
+##### Verifies that a proof points to a transaction in a block, returning the transaction it commits to and throwing an RPC error if the block is not in our best chain.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1331,7 +1434,6 @@ string hexProof = "000000207a5cd1d7d427da62a4a50fe4c91f92a5d4ad71335c72348808000
 string verifytxoutproof = await blockchain.VerifyTxOutProof(hexProof);
 
 Console.WriteLine(verifytxoutproof);
-  
 ```
 
 <details>
@@ -1356,6 +1458,7 @@ CONTROL
 
 
 ### getmemoryinfo
+##### Returns an object containing information about memory usage.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1390,6 +1493,7 @@ Console.WriteLine(getmemoryinfo);
 </details>
 
 ### getrpcinfo
+##### Returns details of the RPC server.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1423,6 +1527,7 @@ Console.WriteLine(getrpcinfo);
 </details>
 
 ### help
+##### List all commands, or get help for a specified command.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1461,6 +1566,7 @@ Console.WriteLine(help_with_Command);
 </details>
 
 ### logging
+##### Gets and sets the logging configuration. When called without an argument, returns the list of categories with status that are currently being debug logged or not. When called with arguments, adds or removes categories from debug logging and return the lists above.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1479,7 +1585,6 @@ string logging_filtered = await serverControl.Logging(include, exclude);
             
 Console.WriteLine(logging);
 Console.WriteLine(logging_filtered);
-
 ```
 
 <details>
@@ -1554,6 +1659,7 @@ Console.WriteLine(logging_filtered);
 </details>
 
 ### stop
+##### Request a graceful shutdown of Bitcoin Core.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1563,7 +1669,6 @@ ServerControl serverControl = new ServerControl(bitcoinClient);
 string stop = await serverControl.StopServer();
             
 Console.WriteLine(stop);
-  
 ```
 
 <details>
@@ -1580,6 +1685,7 @@ Console.WriteLine(stop);
 </details>
 
 ### uptime
+##### Returns the total uptime of the server.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1610,6 +1716,7 @@ GENERATING
 
 
 ### generatetoaddress
+##### Mine blocks immediately to a specified address (before the RPC call returns).
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8334", "alice:pass");
@@ -1619,7 +1726,6 @@ RegTestGenerate regTestGenerate = new RegTestGenerate(bitcoinClient);
 string generatetoaddress = await regTestGenerate.GenerateToAddress(100, "bcrt1qtljavjnh8584zc2vrl08gkpcuvlawgm8cd9rfx");
 
 Console.WriteLine(generatetoaddress);
-  
 ```
 
 <details>
@@ -1737,6 +1843,7 @@ Console.WriteLine(generatetoaddress);
 </details>
 
 ### generatetodescriptor
+##### Mine blocks immediately to a specified descriptor (before the RPC call returns).
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8334", "alice:pass");
@@ -1746,7 +1853,6 @@ RegTestGenerate regTestGenerate = new RegTestGenerate(bitcoinClient);
 string generatetodescriptor = await regTestGenerate.GenerateToDescriptor(10, "addr(bcrt1qtljavjnh8584zc2vrl08gkpcuvlawgm8cd9rfx)");
 
 Console.WriteLine(generatetodescriptor);
-  
 ```
 
 <details>
@@ -1781,6 +1887,7 @@ MINING
 
 
 ### getblocktemplate
+##### It returns data needed to construct a block to work on.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -1793,7 +1900,6 @@ getBlockTemplate.Rules = Rules.segwit;
 
 string getblocktemplate = await mining.GetBlockTemplate(getBlockTemplate);
 Console.WriteLine(getblocktemplate);
-
 ```
 
 <details>
@@ -1967,6 +2073,7 @@ Console.WriteLine(getblocktemplate);
 </details>
 
 ### getmininginfo
+##### Returns a json object containing mining-related information.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -2001,6 +2108,7 @@ Console.WriteLine(getmininginfo);
 </details>
 
 ### getnetworkhashps
+##### Returns the estimated network hashes per second based on the last n blocks.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -2026,6 +2134,7 @@ Console.WriteLine(getnetworkhashps);
 </details>
 
 ### prioritisetransaction
+##### Accepts the transaction into mined blocks at a higher (or lower) priority.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -2036,7 +2145,6 @@ string prioritisetransaction = await mining.PrioritiseTransaction(txid, 2);
             
 Console.WriteLine(BitcoinRpc.Debug.JsonRequest.GetRequestAsString(true));
 Console.WriteLine(prioritisetransaction);
-  
 ```
 
 <details>
@@ -2053,6 +2161,7 @@ Console.WriteLine(prioritisetransaction);
 </details>
 
 ### submitblock
+##### Attempts to submit new block to network.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2062,7 +2171,6 @@ string hexdata = "01000000000000000000000000000000000000000000000000000000000000
 
 string submitblock = await mining.SubmitBlock(hexdata);
 Console.WriteLine(submitblock);
-  
 ```
 
 <details>
@@ -2079,6 +2187,7 @@ Console.WriteLine(submitblock);
 </details>
 
 ### submitheader
+##### Decode the given hexdata as a header and submit it as a candidate chain tip if valid.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2088,7 +2197,6 @@ string hexdata = "01000000000000000000000000000000000000000000000000000000000000
 
 string submitheader = await mining.SubmitHeader(hexdata);
 Console.WriteLine(submitheader);
-  
 ```
 
 <details>
@@ -2114,6 +2222,7 @@ NETWORK
 
 
 ### addnode
+##### Attempts to add or remove a node from the addnode list.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2124,7 +2233,6 @@ string removeNode = await network.AddNode("43.225.62.107:8333", NodeCommand.remo
             
 Console.WriteLine(addnode);
 Console.WriteLine(removeNode);
-  
 ```
 
 <details>
@@ -2154,6 +2262,7 @@ Console.WriteLine(removeNode);
 </details>
 
 ### clearbanned
+##### Clear all banned IPs.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2179,6 +2288,7 @@ Console.WriteLine(clearbanned);
 </details>
 
 ### disconnectnode
+##### Immediately disconnects from the specified peer node.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2218,6 +2328,7 @@ Console.WriteLine(disconnectnode_byNodeId);
 </details>
 
 ### getaddednodeinfo
+##### Returns information about the given added node, or all added nodes.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2228,7 +2339,6 @@ string getaddednodeinfo_Specific = await network.GetAddedNodeInfo("47.113.95.224
 
 Console.WriteLine(getaddednodeinfo_All);
 Console.WriteLine(getaddednodeinfo_Specific);
-  
 ```
 
 <details>
@@ -2290,6 +2400,7 @@ Console.WriteLine(getaddednodeinfo_Specific);
 </details>
 
 ### getconnectioncount
+##### Returns the number of connections to other nodes.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2315,6 +2426,7 @@ Console.WriteLine(getconnectioncount);
 </details>
 
 ### getnettotals
+##### Returns information about network traffic, including bytes in, bytes out, and current time.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2352,6 +2464,7 @@ Console.WriteLine(getnettotals);
 </details>
 
 ### getnetworkinfo
+##### Returns an object containing various state info regarding P2P networking.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2417,6 +2530,7 @@ Console.WriteLine(getnetworkinfo);
 </details>
 
 ### getnodeaddresses
+##### Return known addresses which can potentially be used to find new nodes in the network.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -2449,6 +2563,7 @@ Console.WriteLine(getnodeaddresses);
 </details>
 
 ### getpeerinfo
+##### Returns data about each connected network node as a json array of objects.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3284,6 +3399,7 @@ Console.WriteLine(getpeerinfo);
 </details>
 
 ### listbanned
+##### List all banned IPs/Subnets.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3309,6 +3425,7 @@ Console.WriteLine(listbanned);
 </details>
 
 ### ping
+##### Requests that a ping be sent to all other nodes, to measure ping time.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3334,6 +3451,7 @@ Console.WriteLine(ping);
 </details>
 
 ### setban
+##### Attempts to add or remove an IP/Subnet from the banned list.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3349,7 +3467,6 @@ setBan.BanTime = 86400;
 string setban = await network.SetBan(setBan);
 
 Console.WriteLine(setban);
-  
 ```
 
 <details>
@@ -3366,6 +3483,7 @@ Console.WriteLine(setban);
 </details>
 
 ### setnetworkactive
+##### Disable/enable all p2p network activity.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3397,6 +3515,7 @@ RAWTRANSACTIONS
 
 
 ### analyzepsbt
+##### Analyzes and provides information about the current status of a PSBT and its inputs.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3408,7 +3527,6 @@ string PSBT = "cHNidP8BAH0CAAAAAXz0qBDXO+uQOsNVaUcorfJafZYydCv5kGUTLaFs/r2HAAAAA
 string analyzepsbt = await rawTransaction.AnalyzePSBT(PSBT);
 
 Console.WriteLine(analyzepsbt);
-  
 ```
 
 <details>
@@ -3437,22 +3555,21 @@ Console.WriteLine(analyzepsbt);
 </details>
 
 ### combinepsbt
+##### Combine multiple partially signed Bitcoin transactions into one transaction.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
 RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
-
            
 List<string> pSBTs = new List<string>
-            {
+{
                 "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgf0cwRAIgdAGK1BgAl7hzMjwAFXILNoTMgSOJEEjn282bVa1nnJkCIHPTabdA4+tT3O+jOCPIBwUUylWn3ZVE8VfBZ5EyYRGMAQEDBAEAAAABBEdSIQKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfyEC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtdSriIGApWDvzmuCmCXR60Zmt3WNPphCFWdbFzTm0whg/GrluB/ENkMak8AAACAAAAAgAAAAIAiBgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU21xDZDGpPAAAAgAAAAIABAACAAAEBIADC6wsAAAAAF6kUt/X69A49QKWkWbHbNTXyty+pIeiHIgIDCJ3BDHrG21T5EymvYXMz2ziM6tDCMfcjN50bmQMLAtxHMEQCIGLrelVhB6fHP0WsSrWh3d9vcHX7EnWWmn84Pv/3hLyyAiAMBdu3Rw2/LwhVfdNWxzJcHtMJE+mWzThAlF2xIijaXwEBAwQBAAAAAQQiACCMI1MXN0O1ld+0oHtyuo5C43l9p06H/n2ddJfjsgKJAwEFR1IhAwidwQx6xttU+RMpr2FzM9s4jOrQwjH3IzedG5kDCwLcIQI63ZBPPW3PWd25BrDe4jUpt/+57VDl6GFRkmhgIh8Oc1KuIgYCOt2QTz1tz1nduQaw3uI1Kbf/ue1Q5ehhUZJoYCIfDnMQ2QxqTwAAAIAAAACAAwAAgCIGAwidwQx6xttU+RMpr2FzM9s4jOrQwjH3IzedG5kDCwLcENkMak8AAACAAAAAgAIAAIAAIgIDqaTDf1mW06ol26xrVwrwZQOUSSlCRgs1R1Ptnuylh3EQ2QxqTwAAAIAAAACABAAAgAAiAgJ/Y5l1fS7/VaE2rQLGhLGDi2VW5fG2s0KCqUtrUAUQlhDZDGpPAAAAgAAAAIAFAACAAA==",
                 "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU210gwRQIhAPYQOLMI3B2oZaNIUnRvAVdyk0IIxtJEVDk82ZvfIhd3AiAFbmdaZ1ptCgK4WxTl4pB02KJam1dgvqKBb2YZEKAG6gEBAwQBAAAAAQRHUiEClYO/Oa4KYJdHrRma3dY0+mEIVZ1sXNObTCGD8auW4H8hAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXUq4iBgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfxDZDGpPAAAAgAAAAIAAAACAIgYC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtcQ2QxqTwAAAIAAAACAAQAAgAABASAAwusLAAAAABepFLf1+vQOPUClpFmx2zU18rcvqSHohyICAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zRzBEAiBl9FulmYtZon/+GnvtAWrx8fkNVLOqj3RQql9WolEDvQIgf3JHA60e25ZoCyhLVtT/y4j3+3Weq74IqjDym4UTg9IBAQMEAQAAAAEEIgAgjCNTFzdDtZXftKB7crqOQuN5fadOh/59nXSX47ICiQMBBUdSIQMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3CECOt2QTz1tz1nduQaw3uI1Kbf/ue1Q5ehhUZJoYCIfDnNSriIGAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zENkMak8AAACAAAAAgAMAAIAiBgMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3BDZDGpPAAAAgAAAAIACAACAACICA6mkw39ZltOqJdusa1cK8GUDlEkpQkYLNUdT7Z7spYdxENkMak8AAACAAAAAgAQAAIAAIgICf2OZdX0u/1WhNq0CxoSxg4tlVuXxtrNCgqlLa1AFEJYQ2QxqTwAAAIAAAACABQAAgAA="            
-            };
+};
             
 string combinepsbt = await rawTransaction.CombinePSBT(pSBTs);
 
 Console.WriteLine(combinepsbt);
-  
 ```
 
 <details>
@@ -3469,6 +3586,7 @@ Console.WriteLine(combinepsbt);
 </details>
 
 ### combinerawtransaction
+##### Combine multiple partially signed transactions into one transaction. The combined transaction may be another partially signed transaction or a fully signed transaction.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3483,7 +3601,6 @@ List<string> rawTxs = new List<string>
 string combinerawtransaction = await rawTransaction.CombineRawTransaction(rawTxs);
 
 Console.WriteLine(combinerawtransaction);
-  
 ```
 
 <details>
@@ -3500,6 +3617,8 @@ Console.WriteLine(combinerawtransaction);
 </details>
 
 ### converttopsbt
+##### Converts a network serialized transaction to a PSBT. This should be used only with createrawtransaction and fundrawtransaction
+createpsbt and walletcreatefundedpsbt should be used for new applications.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3525,6 +3644,8 @@ Console.WriteLine(converttopsbt);
 </details>
 
 ### createpsbt
+##### Creates a transaction in the Partially Signed Transaction format.
+Implements the Creator role.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -3569,6 +3690,7 @@ Console.WriteLine(createpsbt);
 </details>
 
 ### createrawtransaction
+##### Create a transaction spending the given inputs and creating new outputs. Returns hex-encoded raw transaction.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
@@ -3608,6 +3730,7 @@ Console.WriteLine(createrawtransaction);
 </details>
 
 ### decodepsbt
+##### Return a JSON object representing the serialized, base64-encoded partially signed Bitcoin transaction.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3823,6 +3946,7 @@ Console.WriteLine(decodepsbt);
 </details>
 
 ### decoderawtransaction
+##### Return a JSON object representing the serialized, hex-encoded transaction.
 -----
 ```csharp    
 BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
@@ -3832,7 +3956,6 @@ string rawTx = "0200000003809d3482a6b977773a58ff3af53fba4815024c078d07f0e2e3ec47
 
 string decoderawtransaction = await rawTransaction.DecodeRawTransaction(rawTx);
 Console.WriteLine(decoderawtransaction);
-  
 ```
 
 <details>
@@ -3901,10 +4024,16 @@ Console.WriteLine(decoderawtransaction);
 </details>
 
 ### decodescript
+##### Decode a hex-encoded script.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string script = "0200000003809d3482a6b977773a58ff3af53fba4815024c078d07f0e2e3ec47cbf0a9fdcb0000000000ffffffffa8e1be854ed6b665c748c466977ccc147e526943e0edfac9f3aaa4e5cfb4f7eb0000000000ffffffff01151c428db500966314adce5b36e2750beb68418185d0fbad5dda5644d489320000000000ffffffff0110270000000000001600144450bf53ac0907e5355368bbbcbfed1f6419905600000000";
+
+string decodescript = await rawTransaction.DecodeScript(script);
+Console.WriteLine(decodescript);
 ```
 
 <details>
@@ -3912,15 +4041,40 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "asm": "0 0 3448192 OP_SIZE OP_RIPEMD160 OP_NOP10 OP_NIP OP_NIP 58ff3af53fba4815024c078d07f0e2e3ec47cbf0a9fdcb0000000000ffffffffa8e1be854ed6b665c748c466977ccc147e526943e0edfac9f3aa OP_MAX OP_UNKNOWN OP_UNKNOWN OP_NOP5 OP_UNKNOWN OP_UNKNOWN 0 0 0 0 0 OP_INVALIDOPCODE OP_INVALIDOPCODE OP_INVALIDOPCODE OP_INVALIDOPCODE 21 428db500966314adce5b36e2750beb68418185d0fbad5dda5644d489 [error]",
+    "type": "nonstandard",
+    "p2sh": "3EtVi2wJgGJtUjWxLLddEyeSvrmaSFv57n",
+    "segwit": {
+      "asm": "0 e4ca92b571f04183de76fea713cf54c90ece8617ba57b42facad65844783b76e",
+      "hex": "0020e4ca92b571f04183de76fea713cf54c90ece8617ba57b42facad65844783b76e",
+      "reqSigs": 1,
+      "type": "witness_v0_scripthash",
+      "addresses": [
+        "bc1qun9f9dt37pqc8hnkl6n38n65ey8vapshhftmgtav44jcg3urkahq68tkds"
+      ],
+      "p2sh-segwit": "31ogGQQLx5acnSLjqJ3wCHTrowXp2S3tNs"
+    }
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### finalizepsbt
+##### Finalize the inputs of a PSBT. If the transaction is fully signed, it will produce a network serialized transaction which can be broadcast with sendrawtransaction. Otherwise a PSBT will be created which has the final_scriptSig and final_scriptWitness fields filled for inputs that are complete.
+Implements the Finalizer and Extractor roles.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string pSBT = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l+ErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW+qk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU210gwRQIhAPYQOLMI3B2oZaNIUnRvAVdyk0IIxtJEVDk82ZvfIhd3AiAFbmdaZ1ptCgK4WxTl4pB02KJam1dgvqKBb2YZEKAG6gEBAwQBAAAAAQRHUiEClYO/Oa4KYJdHrRma3dY0+mEIVZ1sXNObTCGD8auW4H8hAtq2H/SaFNtqfQKwzR+7ePxLGDErW05U2uTbovv+9TbXUq4iBgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfxDZDGpPAAAAgAAAAIAAAACAIgYC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui+/71NtcQ2QxqTwAAAIAAAACAAQAAgAABASAAwusLAAAAABepFLf1+vQOPUClpFmx2zU18rcvqSHohyICAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zRzBEAiBl9FulmYtZon/+GnvtAWrx8fkNVLOqj3RQql9WolEDvQIgf3JHA60e25ZoCyhLVtT/y4j3+3Weq74IqjDym4UTg9IBAQMEAQAAAAEEIgAgjCNTFzdDtZXftKB7crqOQuN5fadOh/59nXSX47ICiQABBUdSIQMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3CECOt2QTz1tz1nduQaw3uI1Kbf/ue1Q5ehhUZJoYCIfDnNSriIGAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zENkMak8AAACAAAAAgAMAAIAiBgMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3BDZDGpPAAAAgAAAAIACAACAACICA6mkw39ZltOqJdusa1cK8GUDlEkpQkYLNUdT7Z7spYdxENkMak8AAACAAAAAgAQAAIAAIgICf2OZdX0u/1WhNq0CxoSxg4tlVuXxtrNCgqlLa1AFEJYQ2QxqTwAAAIAAAACABQAAgAA=";
+
+string finalizepsbt = await rawTransaction.FinalizePSBT(pSBT);
+Console.WriteLine(finalizepsbt);  
 ```
 
 <details>
@@ -3928,15 +4082,28 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "psbt": "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw\u002BHaliN9VRuh0LR2HAI8AAAAAAAEAuwIAAAABqtc5MQGL0l\u002BErkALaISL4J23BurCrBgpi6vucatlb4sAAAAASEcwRAIgWPb8fGoz4bMVSNSByCbAFb0wE1qtQs1neQ2rZtKtJDsCIEoc7SYExnNbY5PltBaR3XiwDwxZQvufdRhW\u002Bqk4FX26Af7///8CgPD6AgAAAAAXqRQPuUY0IWlrgsgzryQceMF9295JNIfQ8gonAQAAABepFCnKdPigj4GZlCgYXJe12FLkBj9hh2UAAAAiAgLath/0mhTban0CsM0fu3j8SxgxK1tOVNrk26L7/vU210gwRQIhAPYQOLMI3B2oZaNIUnRvAVdyk0IIxtJEVDk82ZvfIhd3AiAFbmdaZ1ptCgK4WxTl4pB02KJam1dgvqKBb2YZEKAG6gEBAwQBAAAAAQRHUiEClYO/Oa4KYJdHrRma3dY0\u002BmEIVZ1sXNObTCGD8auW4H8hAtq2H/SaFNtqfQKwzR\u002B7ePxLGDErW05U2uTbovv\u002B9TbXUq4iBgKVg785rgpgl0etGZrd1jT6YQhVnWxc05tMIYPxq5bgfxDZDGpPAAAAgAAAAIAAAACAIgYC2rYf9JoU22p9ArDNH7t4/EsYMStbTlTa5Nui\u002B/71NtcQ2QxqTwAAAIAAAACAAQAAgAABASAAwusLAAAAABepFLf1\u002BvQOPUClpFmx2zU18rcvqSHohyICAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zRzBEAiBl9FulmYtZon/\u002BGnvtAWrx8fkNVLOqj3RQql9WolEDvQIgf3JHA60e25ZoCyhLVtT/y4j3\u002B3Weq74IqjDym4UTg9IBAQMEAQAAAAEEIgAgjCNTFzdDtZXftKB7crqOQuN5fadOh/59nXSX47ICiQABBUdSIQMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3CECOt2QTz1tz1nduQaw3uI1Kbf/ue1Q5ehhUZJoYCIfDnNSriIGAjrdkE89bc9Z3bkGsN7iNSm3/7ntUOXoYVGSaGAiHw5zENkMak8AAACAAAAAgAMAAIAiBgMIncEMesbbVPkTKa9hczPbOIzq0MIx9yM3nRuZAwsC3BDZDGpPAAAAgAAAAIACAACAACICA6mkw39ZltOqJdusa1cK8GUDlEkpQkYLNUdT7Z7spYdxENkMak8AAACAAAAAgAQAAIAAIgICf2OZdX0u/1WhNq0CxoSxg4tlVuXxtrNCgqlLa1AFEJYQ2QxqTwAAAIAAAACABQAAgAA=",
+    "complete": false
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### fundrawtransaction
+##### Add inputs to a transaction until it has enough in value to meet its out value.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string rawTx = "0200000001809d3482a6b977773a58ff3af53fba4815024c078d07f0e2e3ec47cbf0a9fdcb0100000000ffffffff018813000000000000160014f998998746cb1bb34377075a79d0d9c494569d2100000000";
+
+string fundrawtransaction = await rawTransaction.FundRawTransaction(rawTx);
+Console.WriteLine(fundrawtransaction);
 ```
 
 <details>
@@ -3944,15 +4111,29 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "hex": "0200000001809d3482a6b977773a58ff3af53fba4815024c078d07f0e2e3ec47cbf0a9fdcb0100000000ffffffff028813000000000000160014f998998746cb1bb34377075a79d0d9c494569d217b4b010000000000160014691dbebc30ecd822976d054be083fb6af3bd97ec00000000",
+    "fee": 0.00000141,
+    "changepos": 1
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getrawtransaction
+##### Returns the raw transaction data.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string txid = "cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80";
+string getrawtransaction = await rawTransaction.GetRawTransaction(txid);
+
+Console.WriteLine(getrawtransaction);
 ```
 
 <details>
@@ -3960,15 +4141,33 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "02000000000101a8e1be854ed6b665c748c466977ccc147e526943e0edfac9f3aaa4e5cfb4f7eb0000000000fdffffff02ab241200000000001600147fd0e5fbb32a78ac2ced83fbc26be7d63e1f91fa905f0100000000001600147733bcaec8bf310756b795c691706057e11942050247304402204c7b2c1fb29ab7305c733e92463603357b932e6062c6c4e288e7d8a35564f52102205fd821196711e4708e7ce8c7ecb7dbed3e78b670964b6856b1684776e11df1690121033b5e7d8865da58d0f9e4e83e529f472de94a1817c709c18e3cd1e07d0530c3646a961b00",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### joinpsbts
+##### Joins multiple distinct PSBTs with different inputs and outputs into one PSBT with inputs and outputs from all of the PSBTs
+No input in any of the PSBTs can be in more than one of the PSBTs.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+List<string> pSBTs = new List<string>
+{
+"cHNidP8BAHUCAAAAASaBcTce3/KF6Tet7qSze3gADAVmy7OtZGQXE8pCFxv2AAAAAAD+////AtPf9QUAAAAAGXapFNDFmQPFusKGh2DpD9UhpGZap2UgiKwA4fUFAAAAABepFDVF5uM7gyxHBQ8k0+65PJwDlIvHh7MuEwAAAQD9pQEBAAAAAAECiaPHHqtNIOA3G7ukzGmPopXJRjr6Ljl/hTPMti+VZ+UBAAAAFxYAFL4Y0VKpsBIDna89p95PUzSe7LmF/////4b4qkOnHf8USIk6UwpyN+9rRgi7st0tAXHmOuxqSJC0AQAAABcWABT+Pp7xp0XpdNkCxDVZQ6vLNL1TU/////8CAMLrCwAAAAAZdqkUhc/xCX/Z4Ai7NK9wnGIZeziXikiIrHL++E4sAAAAF6kUM5cluiHv1irHU6m80GfWx6ajnQWHAkcwRAIgJxK+IuAnDzlPVoMR3HyppolwuAJf3TskAinwf4pfOiQCIAGLONfc0xTnNMkna9b7QPZzMlvEuqFEyADS8vAtsnZcASED0uFWdJQbrUqZY3LLh+GFbTZSYG2YVi/jnF6efkE/IQUCSDBFAiEA0SuFLYXc2WHS9fSrZgZU327tzHlMDDPOXMMJ/7X85Y0CIGczio4OFyXBl/saiK9Z9R5E5CVbIBZ8hoQDHAXR8lkqASECI7cr7vCWXRC+B3jv7NYfysb3mk6haTkzgHNEZPhPKrMAAAAAAAAA",
+
+"cHNidP8BAKACAAAAAqsJSaCMWvfEm4IS9Bfi8Vqz9cM9zxU4IagTn4d6W3vkAAAAAAD+////qwlJoIxa98SbghL0F+LxWrP1wz3PFTghqBOfh3pbe+QBAAAAAP7///8CYDvqCwAAAAAZdqkUdopAu9dAy+gdmI5x3ipNXHE5ax2IrI4kAAAAAAAAGXapFG9GILVT+glechue4O/p+gOcykWXiKwAAAAAAAEHakcwRAIgR1lmF5fAGwNrJZKJSGhiGDR9iYZLcZ4ff89X0eURZYcCIFMJ6r9Wqk2Ikf/REf3xM286KdqGbX+EhtdVRs7tr5MZASEDXNxh/HupccC1AaZGoqg7ECy0OIEhfKaC3Ibi1z+ogpIAAQEgAOH1BQAAAAAXqRQ1RebjO4MsRwUPJNPuuTycA5SLx4cBBBYAFIXRNTfy4mVAWjTbr6nj3aAfuCMIAAAA",
+
+"cHNidP8BAFUCAAAAASeaIyOl37UfxF8iD6WLD8E+HjNCeSqF1+Ns1jM7XLw5AAAAAAD/////AaBa6gsAAAAAGXapFP/pwAYQl8w7Y28ssEYPpPxCfStFiKwAAAAAAAEBIJVe6gsAAAAAF6kUY0UgD2jRieGtwN8cTRbqjxTA2+uHIgIDsTQcy6doO2r08SOM1ul+cWfVafrEfx5I1HVBhENVvUZGMEMCIAQktY7/qqaU4VWepck7v9SokGQiQFXN8HC2dxRpRC0HAh9cjrD+plFtYLisszrWTt5g6Hhb+zqpS5m9+GFR25qaAQEEIgAgdx/RitRZZm3Unz1WTj28QvTIR3TjYK2haBao7UiNVoEBBUdSIQOxNBzLp2g7avTxI4zW6X5xZ9Vp+sR/HkjUdUGEQ1W9RiED3lXR4drIBeP4pYwfv5uUwC89uq/hJ/78pJlfJvggg71SriIGA7E0HMunaDtq9PEjjNbpfnFn1Wn6xH8eSNR1QYRDVb1GELSmumcAAACAAAAAgAQAAIAiBgPeVdHh2sgF4/iljB+/m5TALz26r+En/vykmV8m+CCDvRC0prpnAAAAgAAAAIAFAACAAAA="
+};
+
+string joinpsbts = await rawTransaction.JoinPSBTS(pSBTs);
+Console.WriteLine(joinpsbts);
 ```
 
 <details>
@@ -3976,15 +4175,26 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "cHNidP8BAP1WAQIAAAAEJoFxNx7f8oXpN63upLN7eAAMBWbLs61kZBcTykIXG/YAAAAAAP7///\u002BrCUmgjFr3xJuCEvQX4vFas/XDPc8VOCGoE5\u002BHelt75AAAAAAA/v///yeaIyOl37UfxF8iD6WLD8E\u002BHjNCeSqF1\u002BNs1jM7XLw5AAAAAAD/////qwlJoIxa98SbghL0F\u002BLxWrP1wz3PFTghqBOfh3pbe\u002BQBAAAAAP7///8FoFrqCwAAAAAZdqkU/\u002BnABhCXzDtjbyywRg\u002Bk/EJ9K0WIrADh9QUAAAAAF6kUNUXm4zuDLEcFDyTT7rk8nAOUi8eH09/1BQAAAAAZdqkU0MWZA8W6woaHYOkP1SGkZlqnZSCIrGA76gsAAAAAGXapFHaKQLvXQMvoHZiOcd4qTVxxOWsdiKyOJAAAAAAAABl2qRRvRiC1U/oJXnIbnuDv6foDnMpFl4isAAAAAAABAMwBAAAAAomjxx6rTSDgNxu7pMxpj6KVyUY6\u002Bi45f4UzzLYvlWflAQAAABcWABS\u002BGNFSqbASA52vPafeT1M0nuy5hf////\u002BG\u002BKpDpx3/FEiJOlMKcjfva0YIu7LdLQFx5jrsakiQtAEAAAAXFgAU/j6e8adF6XTZAsQ1WUOryzS9U1P/////AgDC6wsAAAAAGXapFIXP8Ql/2eAIuzSvcJxiGXs4l4pIiKxy/vhOLAAAABepFDOXJboh79Yqx1OpvNBn1semo50FhwAAAAAAAAEBIJVe6gsAAAAAF6kUY0UgD2jRieGtwN8cTRbqjxTA2\u002BuHAQQiACB3H9GK1FlmbdSfPVZOPbxC9MhHdONgraFoFqjtSI1WgQEFR1IhA7E0HMunaDtq9PEjjNbpfnFn1Wn6xH8eSNR1QYRDVb1GIQPeVdHh2sgF4/iljB\u002B/m5TALz26r\u002BEn/vykmV8m\u002BCCDvVKuIgYDsTQcy6doO2r08SOM1ul\u002BcWfVafrEfx5I1HVBhENVvUYQtKa6ZwAAAIAAAACABAAAgCIGA95V0eHayAXj\u002BKWMH7\u002BblMAvPbqv4Sf\u002B/KSZXyb4IIO9ELSmumcAAACAAAAAgAUAAIAAAQEgAOH1BQAAAAAXqRQ1RebjO4MsRwUPJNPuuTycA5SLx4cBBBYAFIXRNTfy4mVAWjTbr6nj3aAfuCMIAAAAAAAA",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### sendrawtransaction
+##### Submit a raw transaction (serialized, hex-encoded) to local node and network.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string hex = "020000000001012ec9d65ba255e44b85810beac4cad16418fa5c263a1d9f45ab03a4001edf24650000000000ffffffff01e803000000000000160014f998998746cb1bb34377075a79d0d9c494569d2102473044022039fc28874fc1fbf14c4297a4160acfb9793d341f32c61ccc27818fff5d47433102203c091fa28c69e3b2a337b560e20823f0a1b0aa7069d5f98dbe325a6807caa19e012102fc6958eee747f2471d4f34d5e4d7639de5c1abc32dbf05d876554cd7af66608900000000";
+
+string sendrawtransaction = await rawTransaction.SendRawTransaction(hex);
+         
+Console.WriteLine(sendrawtransaction);
 ```
 
 <details>
@@ -3992,15 +4202,46 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "2d7ecff0b455774f9740b8e11c12ec873479b46de92082bf2a12015baf63366e",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### signrawtransactionwithkey
+##### Sign inputs for raw transaction.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+//Step 1. Create the raw transaction.
+
+RawInputs rawInputs = new RawInputs
+{
+   Inputs = new List<RawInput>() { new RawInput("6524df1e00a403ab459f1d3a265cfa1864d1cac4ea0b81854be455a25bd6c92e", 0) }
+};
+
+RawOutputs rawOutputs = new RawOutputs()
+{
+   Outputs = new List<RawOutput> { new RawOutput("tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k", 0.00001f) }
+;
+
+//The response object.
+string response = await rawTransaction.CreateRawTransaction(rawInputs, rawOutputs);
+
+//Deserialize the response.
+dynamic deserialized = JsonConvert.DeserializeObject(response);
+
+//Get the hex string.
+string result = deserialized.result; // "02000000012ec9d65ba255e44b85810beac4cad16418fa5c263a1d9f45ab03a4001edf24650000000000ffffffff01e803000000000000160014f998998746cb1bb34377075a79d0d9c494569d2100000000"
+
+//Step 2. Sign the raw transaction with private key.
+string signrawtransactionwithkey = await rawTransaction.SignRawTransactionWithKey(result, new List<string> { "cSPSK16wrGeeNhhS97zgUDfvEkahRa7uGmG1UKnpzxKhe8Vdppg1" });
+
+Console.WriteLine(signrawtransactionwithkey);
 ```
 
 <details>
@@ -4008,15 +4249,28 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "hex": "020000000001012ec9d65ba255e44b85810beac4cad16418fa5c263a1d9f45ab03a4001edf24650000000000ffffffff01e803000000000000160014f998998746cb1bb34377075a79d0d9c494569d2102473044022039fc28874fc1fbf14c4297a4160acfb9793d341f32c61ccc27818fff5d47433102203c091fa28c69e3b2a337b560e20823f0a1b0aa7069d5f98dbe325a6807caa19e012102fc6958eee747f2471d4f34d5e4d7639de5c1abc32dbf05d876554cd7af66608900000000",
+    "complete": true
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### testmempoolaccept
+##### Returns result of mempool acceptance tests indicating if raw transaction (serialized, hex-encoded) would be accepted by mempool.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string rawTx = "020000000001012ec9d65ba255e44b85810beac4cad16418fa5c263a1d9f45ab03a4001edf24650000000000ffffffff01e803000000000000160014f998998746cb1bb34377075a79d0d9c494569d2102473044022039fc28874fc1fbf14c4297a4160acfb9793d341f32c61ccc27818fff5d47433102203c091fa28c69e3b2a337b560e20823f0a1b0aa7069d5f98dbe325a6807caa19e012102fc6958eee747f2471d4f34d5e4d7639de5c1abc32dbf05d876554cd7af66608900000000";
+
+string testmempoolaccept = await rawTransaction.TestMemPoolAccept(rawTx);
+Console.WriteLine(testmempoolaccept); 
 ```
 
 <details>
@@ -4024,15 +4278,30 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "txid": "2d7ecff0b455774f9740b8e11c12ec873479b46de92082bf2a12015baf63366e",
+      "allowed": true
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### utxoupdatepsbt
+##### Updates all segwit inputs and outputs in a PSBT with data from output descriptors, the UTXO set or the mempool.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+RawTransaction rawTransaction = new RawTransaction(bitcoinClient);
 
-  
+string pSBT = "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw+HaliN9VRuh0LR2HAI8AAAAAAAAAAAA=";
+
+string utxoupdatepsbt = await rawTransaction.UtxoUpdatePSBT(pSBT);
+Console.WriteLine(utxoupdatepsbt);
 ```
 
 <details>
@@ -4040,7 +4309,11 @@ Console.WriteLine(decoderawtransaction);
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "cHNidP8BAJoCAAAAAljoeiG1ba8MI76OcHBFbDNvfLqlyHV5JPVFiHuyq911AAAAAAD/////g40EJ9DsZQpoqka7CwmK6kQiwHGyyng1Kgd5WdB86h0BAAAAAP////8CcKrwCAAAAAAWABTYXCtx0AYLCcmIauuBXlCZHdoSTQDh9QUAAAAAFgAUAK6pouXw\u002BHaliN9VRuh0LR2HAI8AAAAAAAAAAAA=",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
@@ -4050,10 +4323,23 @@ UTIL
 
 
 ### createmultisig
+##### Creates a multi-signature address with n signature of m keys required.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Util util = new Util(bitcoinClient);
 
-  
+int nRequired = 4;
+List<string> publicKeys = new List<string>
+{
+    "034fab17259fc38d1ef5cfef0d41bc770d571052ff77aa543fc42926c9cfc7e5ca",
+    "0259ddbb4b6b46cb166175ec41bdf4e6be91b0a7eaf9bfa08ce880dfa6dda40363",
+    "039369ebfe09dc44bd0864a2063b72ee3ecf11f2754a28c4bfd9a9e88031b93a30",
+    "039c54dcacf5b675560745054c39988136d1b4fd312e69c22fdb68816f36999fa9"
+};
+
+string createmultisig= await util.CreateMultisig(nRequired, publicKeys,AddressType.bech32);
+Console.WriteLine(createmultisig);
 ```
 
 <details>
@@ -4061,15 +4347,29 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "address": "tb1qu04n9l6ps64n4uy84e5khh7nld77hkxqam29wsupd3t5uklvmcdqx3m6c0",
+    "redeemScript": "5421034fab17259fc38d1ef5cfef0d41bc770d571052ff77aa543fc42926c9cfc7e5ca210259ddbb4b6b46cb166175ec41bdf4e6be91b0a7eaf9bfa08ce880dfa6dda4036321039369ebfe09dc44bd0864a2063b72ee3ecf11f2754a28c4bfd9a9e88031b93a3021039c54dcacf5b675560745054c39988136d1b4fd312e69c22fdb68816f36999fa954ae",
+    "descriptor": "wsh(multi(4,034fab17259fc38d1ef5cfef0d41bc770d571052ff77aa543fc42926c9cfc7e5ca,0259ddbb4b6b46cb166175ec41bdf4e6be91b0a7eaf9bfa08ce880dfa6dda40363,039369ebfe09dc44bd0864a2063b72ee3ecf11f2754a28c4bfd9a9e88031b93a30,039c54dcacf5b675560745054c39988136d1b4fd312e69c22fdb68816f36999fa9))#wtp4909w"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### deriveaddresses
+##### Derives one or more addresses corresponding to an output descriptor.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Util util = new Util(bitcoinClient);
 
-  
+string deriveaddresses = await util.DeriveAddresses("wsh(multi(4,034fab17259fc38d1ef5cfef0d41bc770d571052ff77aa543fc42926c9cfc7e5ca,0259ddbb4b6b46cb166175ec41bdf4e6be91b0a7eaf9bfa08ce880dfa6dda40363,039369ebfe09dc44bd0864a2063b72ee3ecf11f2754a28c4bfd9a9e88031b93a30,039c54dcacf5b675560745054c39988136d1b4fd312e69c22fdb68816f36999fa9))#wtp4909w");
+
+Console.WriteLine(deriveaddresses);
 ```
 
 <details>
@@ -4077,15 +4377,30 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    "tb1qu04n9l6ps64n4uy84e5khh7nld77hkxqam29wsupd3t5uklvmcdqx3m6c0"
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### estimatesmartfee
+##### Estimates the approximate fee per kilobyte needed for a transaction to begin confirmation within conf_target blocks if possible and return the number of blocks
+for which the estimate is valid. Uses virtual transaction size as defined in BIP 141 (witness data is discounted).
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+            
+Util util = new Util(bitcoinClient);
 
-  
+int confTarget = 6;
+EstimateMode estimateMode = EstimateMode.CONSERVATIVE;
+
+string estimatesmartfee = await util.EstimateSmartFee(confTarget, estimateMode);
+Console.WriteLine(estimatesmartfee);
 ```
 
 <details>
@@ -4093,15 +4408,31 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "feerate": 0.00061476,
+    "blocks": 6
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getdescriptorinfo
+##### Analyses a descriptor.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");           
+Util util = new Util(bitcoinClient);
 
-  
+int confTarget = 6;
+EstimateMode estimateMode = EstimateMode.CONSERVATIVE;
+
+string descriptor = "wsh(multi(1,xpub661MyMwAqRbcFW31YEwpkMuc5THy2PSt5bDMsktWQcFF8syAmRUapSCGu8ED9W6oDMSgv6Zz8idoc4a6mr8BDzTJY47LJhkJ8UB7WEGuduB/1/0/*,xpub69H7F5d8KSRgmmdJg2KhpAK8SR3DjMwAdkxj3ZuxV27CprR9LgpeyGmXUbC6wb7ERfvrnKZjXoUmmDznezpbZb7ap6r1D3tgFxHmwMkQTPH/0/0/*))";
+
+string getdescriptorinfo = await util.GetDescriptorInfo(descriptor);           
+Console.WriteLine(getdescriptorinfo);  
 ```
 
 <details>
@@ -4109,15 +4440,33 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "descriptor": "wsh(multi(1,xpub661MyMwAqRbcFW31YEwpkMuc5THy2PSt5bDMsktWQcFF8syAmRUapSCGu8ED9W6oDMSgv6Zz8idoc4a6mr8BDzTJY47LJhkJ8UB7WEGuduB/1/0/*,xpub69H7F5d8KSRgmmdJg2KhpAK8SR3DjMwAdkxj3ZuxV27CprR9LgpeyGmXUbC6wb7ERfvrnKZjXoUmmDznezpbZb7ap6r1D3tgFxHmwMkQTPH/0/0/*))#t2zpj2eu",
+    "checksum": "t2zpj2eu",
+    "isrange": true,
+    "issolvable": true,
+    "hasprivatekeys": false
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### signmessagewithprivkey
+##### Sign a message with the private key of an address.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Util util = new Util(bitcoinClient);
 
-  
+//Only legacy supported.
+string privKey = "cVD8v4Zprw2NRkNfqhNtgVrh4LuguYcZkwcjb3s6so3TLJqt2AAw";
+string msg = "Hello World";
+string signmessagewithprivkey = await util.SignMessageWithPrivKey(privKey, msg);
+
+Console.WriteLine(signmessagewithprivkey);
 ```
 
 <details>
@@ -4125,15 +4474,25 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "H79SeYYWoy/ZmcYUQQ\u002BAB\u002Bp34nYow5p7vZH9vtxKKpVKHvqUdtbscJOfOClVZokO3o1QmzLVCHB23ZONYE1UfG4=",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### validateaddress
+##### Return information about the given bitcoin address.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+Util util = new Util(bitcoinClient);
 
-  
+string address = "bc1qn7epr0z8t0gn5zlxpask5j0d0647zus4nj3fvj";
+string validateaddress = await util.ValidateAddress(address);
+            
+Console.WriteLine(validateaddress);
 ```
 
 <details>
@@ -4141,15 +4500,36 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "isvalid": true,
+    "address": "bc1qn7epr0z8t0gn5zlxpask5j0d0647zus4nj3fvj",
+    "scriptPubKey": "00149fb211bc475bd13a0be60f616a49ed7eabe17215",
+    "isscript": false,
+    "iswitness": true,
+    "witness_version": 0,
+    "witness_program": "9fb211bc475bd13a0be60f616a49ed7eabe17215"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### verifymessage
+##### Verify a signed message.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Util util = new Util(bitcoinClient);
 
-  
+//Only legacy address supported.
+string address = "muWkDUiLRXVFMmKTXkNtfoxgsJppUSXPKi";
+string signature = "H79SeYYWoy/ZmcYUQQ\u002BAB\u002Bp34nYow5p7vZH9vtxKKpVKHvqUdtbscJOfOClVZokO3o1QmzLVCHB23ZONYE1UfG4=";
+string msg = "Hello World";
+string verifymessage = await util.VerifyMessage(address, signature, msg);
+
+Console.WriteLine(verifymessage);
 ```
 
 <details>
@@ -4157,7 +4537,11 @@ UTIL
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": true,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
@@ -4167,10 +4551,16 @@ WALLET
 
 
 ### abandontransaction
+##### Mark in-wallet transaction "txid" as abandoned.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string txid = "6524df1e00a403ab459f1d3a265cfa1864d1cac4ea0b81854be455a25bd6c92e";
+string abandontransaction = await wallet.AbandonTransaction(txid);
+
+Console.WriteLine(abandontransaction);
 ```
 
 <details>
@@ -4178,15 +4568,29 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": {
+    "code": -5,
+    "message": "Transaction not eligible for abandonment"
+  },
+  "id": null
+}
 ```
 </details>
 
 ### abortrescan
+##### Stops current wallet rescan triggered by an RPC call, e.g. by an importprivkey call.
+Note: Use "getwalletinfo" to query the scanning progress.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string abortrescan = await wallet.AbortRescan();
 
-  
+Console.WriteLine(abortrescan);
 ```
 
 <details>
@@ -4194,15 +4598,32 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": true,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### addmultisigaddress
+##### Add an nrequired-to-sign multisignature address to the wallet.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+List<string> keys = new List<string>()
+{
+    "tb1qwuemetkghucsw44hjhrfzurq2ls3jss9lwfj62",
+    "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076"
+};
+
+int nRequired = 2;
+AddressType addressType = AddressType.bech32;
+
+string addmultisigaddress = await wallet.AddMultisigAddress(nRequired, keys, addressType);
+Console.WriteLine(addmultisigaddress);
 ```
 
 <details>
@@ -4210,15 +4631,29 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "address": "tb1qs2axh0ldwzh9w4uqnpja5p8caqr676tzchh63vlheke2kuhf2d7s0nxmux",
+    "redeemScript": "522102fc6958eee747f2471d4f34d5e4d7639de5c1abc32dbf05d876554cd7af66608921024f10e363d21c591612197a8b7cdc2debcb8250555cf8a44d9d6aeafcc14c0ae952ae",
+    "descriptor": "wsh(multi(2,[6e528489/0\u0027/0\u0027/0\u0027]02fc6958eee747f2471d4f34d5e4d7639de5c1abc32dbf05d876554cd7af666089,[9b6a804e/0\u0027/0\u0027/3\u0027]024f10e363d21c591612197a8b7cdc2debcb8250555cf8a44d9d6aeafcc14c0ae9))#4afx49du"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### backupwallet
+##### Safely copies current wallet file to destination, which can be a directory or a path with filename.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string backupwallet = await wallet.BackupWallet("backup.dat");
+            
+Console.WriteLine(backupwallet);
 ```
 
 <details>
@@ -4226,15 +4661,25 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### bumpfee
+##### Bumps the fee of an opt-in-RBF transaction T, replacing it with a new transaction B.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string txid = "6524df1e00a403ab459f1d3a265cfa1864d1cac4ea0b81854be455a25bd6c92e";
+string bumpfee = await wallet.BumpFee(txid);
 
-  
+Console.WriteLine(bumpfee);
 ```
 
 <details>
@@ -4242,15 +4687,42 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": {
+    "code": -4,
+    "message": "Transaction has been mined, or is conflicted with a mined transaction"
+  },
+  "id": null
+}
 ```
 </details>
 
 ### createwallet
+##### Creates and loads a new wallet.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+//required
+string walletName = "tomate";
+
+//optional. wallet password.
+string passphrase = "12345";
+
+//optional
+bool disablePrivateKeys = false;
+
+//optional
+bool blank = false;
+            
+//optional
+bool avoidReuse = false;
+
+string createwallet = await wallet.CreateWallet(walletName, disablePrivateKeys, blank, passphrase, avoidReuse);
+
+Console.WriteLine(createwallet);
 ```
 
 <details>
@@ -4258,15 +4730,28 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "name": "tomate",
+    "warning": ""
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### dumpprivkey
+##### Reveals the private key corresponding to 'address'. Then the importprivkey can be used with this output
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
 
-  
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string dumpprivkey = await wallet.DumpPrivKey("tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076");
+
+Console.WriteLine(dumpprivkey);
 ```
 
 <details>
@@ -4274,15 +4759,27 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "cQLanjPtqTSrPgLDV7oKgvv3HJXca9sakzzRZNjcUpaHt2a2A3h6",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### dumpwallet
+##### Dumps all wallet keys in a human-readable format to a server-side file. This does not allow overwriting existing files.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
 
-  
+List<string> wallets = await MultipleWallet.GetWallets(bitcoinClient);
+
+Wallet wallet = new Wallet(bitcoinClient);
+
+string dumpprivkey = await wallet.DumpWallet("walletDump.txt");
+
+Console.WriteLine(dumpprivkey);
 ```
 
 <details>
@@ -4290,15 +4787,28 @@ WALLET
   <summary>Server response</summary>
  
  ```json
+  {
+  "result": {
+    "filename": "E:\\Bitcoin\\walletDump.txt"
+  },
+  "error": null,
+  "id": null
+}
 
 ```
 </details>
 
 ### encryptwallet
+##### Encrypts the wallet with 'passphrase'. This is for first time encryption. After this, any calls that interact with private keys such as sending or signing  will require the passphrase to be set prior the making these calls. Use the walletpassphrase call for this, and then walletlock call. If the wallet is already encrypted, use the walletpassphrasechange call.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient, "orange");
 
-  
+string passphrase = "12345";
+string encryptwallet = await wallet.EncryptWallet(passphrase);
+
+Console.WriteLine(encryptwallet);
 ```
 
 <details>
@@ -4306,15 +4816,25 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "wallet encrypted; The keypool has been flushed and a new HD seed was generated (if you are using HD). You need to make a new backup.",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getaddressesbylabel
+##### Returns the list of addresses assigned the specified label.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string label = "one";
+string getaddressesbylabel = await wallet.GetAddressesByLabel(label);
+
+Console.WriteLine(getaddressesbylabel);  
 ```
 
 <details>
@@ -4322,15 +4842,32 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "tb1qnh3ahpknxnycpxva5vftt9mn0l6zyv74qxnfag": {
+      "purpose": "receive"
+    },
+    "tb1qhhjmmg5pgjtlcux2mlky3lq5mv0zlzfzhdeq6j": {
+      "purpose": "receive"
+    }
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getaddressinfo
+##### Return information about the given bitcoin address. Some of the information will only be present if the address is in the active wallet.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");           
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string address = "tb1qa6rs93lmdxsq2v3mnumna7wheenxr6tcax39j6";
+string getaddressinfo = await wallet.GetAddressInfo(address);
+
+Console.WriteLine(getaddressinfo); 
 ```
 
 <details>
@@ -4338,15 +4875,45 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "address": "tb1qa6rs93lmdxsq2v3mnumna7wheenxr6tcax39j6",
+    "scriptPubKey": "0014ee8702c7fb69a005323b9f373ef9d7ce6661e978",
+    "ismine": true,
+    "solvable": true,
+    "desc": "wpkh([df099759/0\u0027/0\u0027/14\u0027]027b6340ec261f9f9df90407d8033988c77476dedf36afd1ba7405f1d3b89ac600)#qcypltg8",
+    "iswatchonly": false,
+    "isscript": false,
+    "iswitness": true,
+    "witness_version": 0,
+    "witness_program": "ee8702c7fb69a005323b9f373ef9d7ce6661e978",
+    "pubkey": "027b6340ec261f9f9df90407d8033988c77476dedf36afd1ba7405f1d3b89ac600",
+    "ischange": false,
+    "timestamp": 1597225442,
+    "hdkeypath": "m/0\u0027/0\u0027/14\u0027",
+    "hdseedid": "e58c31d9d60daaa1f19fa3a2508c178e9d72f725",
+    "hdmasterfingerprint": "df099759",
+    "labels": [
+      ""
+    ]
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getbalance
+##### Returns the total available balance. The available balance is what the wallet considers currently spendable.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string getbalance = await wallet.GetBalance();
+
+Console.WriteLine(getbalance); 
 ```
 
 <details>
@@ -4354,15 +4921,25 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": 0.00020000,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getbalances
+##### Returns an object with all balances in BTC.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string getbalances = await wallet.GetBalances();
+
+Console.WriteLine(getbalances); 
 ```
 
 <details>
@@ -4370,15 +4947,36 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "mine": {
+      "trusted": 0.03794156,
+      "untrusted_pending": 0.00000000,
+      "immature": 0.00000000
+    }
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getnewaddress
+##### Returns a new Bitcoin address for receiving payments. If 'label' is specified, it is added to the address book so payments received with the address will be associated with 'label'.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+//Optional.
+AddressType addressType = AddressType.bech32;
+
+//Optional.
+string label = "best address";
+
+string getnewaddress = await wallet.GetNewAddress(label, addressType);
+
+Console.WriteLine(getnewaddress);  
 ```
 
 <details>
@@ -4386,15 +4984,27 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "bc1qrz74rd4v7lryfqu2cudckql4ta200ye6apjpnk",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getrawchangeaddress
+##### Returns a new Bitcoin address, for receiving change. This is for use with raw transactions, NOT normal use.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+//Optional.
+AddressType addressType = AddressType.bech32;
+
+string getrawchangeaddress = await wallet.GetRawChangeAddress(addressType);
+
+Console.WriteLine(getrawchangeaddress);  
 ```
 
 <details>
@@ -4402,15 +5012,27 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "bc1qv450gz0t5uw0hrt5xkvnegm2wvlrpg0y9pq452",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getreceivedbyaddress
+##### Returns the total amount received by the given address in transactions with at least minconf confirmations.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
 
-  
+Wallet wallet = new Wallet(bitcoinClient);
+
+string address = "tb1qqvegzkql09s694kaa0czzav4ragmcnmwqg6ynk";
+            
+string getreceivedbyaddress = await wallet.GetReceivedByAddress(address);
+
+Console.WriteLine(getreceivedbyaddress); 
 ```
 
 <details>
@@ -4418,15 +5040,25 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": 0.00019890,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getreceivedbylabel
+##### Returns the total amount received by addresses with "label" in transactions with at least "minconf" confirmations.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string label = "one";
+string getreceivedbylabel = await wallet.GetReceivedByLabel(label);
 
-  
+Console.WriteLine(getreceivedbylabel)
 ```
 
 <details>
@@ -4434,15 +5066,25 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": 0.01000000,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### gettransaction
+##### Get detailed information about in-wallet transaction "txid".
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string txid = "39c2b0dac1b7d986cd9042b72c4228ea78bb0439a6062062f0b5d98ac9cb013d";
+string gettransaction = await wallet.GetTransaction(txid);
 
-  
+Console.WriteLine(gettransaction);  
 ```
 
 <details>
@@ -4450,15 +5092,51 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "amount": -0.00059859,
+    "fee": -0.00000141,
+    "confirmations": 1026,
+    "blockhash": "00000000b99db7eba7428632c355e5554ebbb84d0d3b5d0e105f21c3f6dfb1f9",
+    "blockheight": 1807234,
+    "blockindex": 195,
+    "blocktime": 1597417309,
+    "txid": "39c2b0dac1b7d986cd9042b72c4228ea78bb0439a6062062f0b5d98ac9cb013d",
+    "walletconflicts": [],
+    "time": 1597416426,
+    "timereceived": 1597416426,
+    "bip125-replaceable": "no",
+    "comment": "suck",
+    "to": "comto",
+    "details": [
+      {
+        "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+        "category": "send",
+        "amount": -0.00059859,
+        "vout": 0,
+        "fee": -0.00000141,
+        "abandoned": false
+      }
+    ],
+    "hex": "02000000000101e297d407f4d71d2bb96be4bac2d38921da8a74be436d601512802fd1d1ea4b6f0000000000fdffffff02d3e9000000000000160014f998998746cb1bb34377075a79d0d9c494569d21794a2a00000000001600146bdb400743f59e6c86b910003e018516334a8f7b02473044022008a4ecf385e4ecdad091f67d3617cc4225c21d8a9c0a94ece1535df578b26566022079538f621ab333eaeac95325a61d7eb5ce30976603e32a8bb0e6695fcd004fb40121021c5814c662bf0a4ca156eb31ffb8c664e167a965aa0c60acf36c757ba758a1f03d931b00"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getunconfirmedbalance
+##### DEPRECATED!!!
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string getunconfirmedbalance = await wallet.GetUnconfirmedBalance();
 
-  
+Console.WriteLine(getunconfirmedbalance);
 ```
 
 <details>
@@ -4466,15 +5144,25 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": 0.01000000,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### getwalletinfo
+##### Returns an object containing various wallet state info.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient, "boss");
 
-  
+string getwalletinfo = await wallet.GetWalletInfo();
+
+Console.WriteLine(getwalletinfo);  
 ```
 
 <details>
@@ -4482,15 +5170,48 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "walletname": "boss",
+    "walletversion": 169900,
+    "balance": 0.03794156,
+    "unconfirmed_balance": 0.01000000,
+    "immature_balance": 0.00000000,
+    "txcount": 72,
+    "keypoololdest": 1597417444,
+    "keypoolsize": 999,
+    "hdseedid": "468c02ca66ad6fc391406fafa19ff009ab78debd",
+    "keypoolsize_hd_internal": 1000,
+    "paytxfee": 0.00000000,
+    "private_keys_enabled": true,
+    "avoid_reuse": false,
+    "scanning": false
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### importaddress
+##### Adds an address or script (in hex) that can be watched as if it were in your wallet but cannot be used to spend. Requires a new wallet backup.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+//Required.
+string address = "mtXWDB6k5yC5v7TcwKZHB89SUp85yCKshy";
+            
+//Optional.
+string label = "label";
+
+//Optional.
+bool rescan = false;
+
+string importaddress = await wallet.ImportAddress(address, label, rescan);
+
+Console.WriteLine(importaddress); 
 ```
 
 <details>
@@ -4498,15 +5219,37 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### importmulti
+##### Import addresses/scripts (with private or public keys, redeem script (P2SH)), optionally rescanning the blockchain from the earliest creation time of the imported scripts. Requires a new wallet backup.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+List<MultiData> multiDatas = new List<MultiData>();
+
+MultiData MultiData = new MultiData()
+{
+      Desc = "addr(mtXWDB6k5yC5v7TcwKZHB89SUp85yCKshy)",
+      Label = "imported",
+      WatchOnly=true,
+                
+};
+            
+MultiData.SetTimestamp(CreationTime.Now);
+
+string importmulti = await wallet.ImportMulti(multiDatas);
+
+Console.WriteLine(importmulti); 
 ```
 
 <details>
@@ -4514,15 +5257,30 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### importprivkey
+##### Adds a private key (as returned by dumpprivkey) to your wallet. Requires a new wallet backup.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+//Required.
+string privKey = "cPF57iFYMW9wwegtpoZxN6ouJ2LWjxCHZokfaBTmaV3g9wcdpYzc";
+
+//Optional.
+bool rescan = false;
+
+string importprivkey = await wallet.ImportPrivKey(privKey, rescan);
+
+Console.WriteLine(importprivkey);
 ```
 
 <details>
@@ -4530,15 +5288,27 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### importprunedfunds
+##### Imports funds without rescan. Corresponding address or script must previously be included in wallet.
 -----
 ```csharp    
-
-  
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string rawTx = "0100000001f3f6a909f8521adb57d898d2985834e632374e770fd9e2b98656f1bf1fdfd427010000006b48304502203a776322ebf8eb8b58cc6ced4f2574f4c73aa664edce0b0022690f2f6f47c521022100b82353305988cb0ebd443089a173ceec93fe4dbfe98d74419ecc84a6a698e31d012103c5c1bc61f60ce3d6223a63cedbece03b12ef9f0068f2f3c4a7e7f06c523c3664ffffffff0260e31600000000001976a914977ae6e32349b99b72196cb62b5ef37329ed81b488ac063d1000000000001976a914f76bc4190f3d8e2315e5c11c59cfc8be9df747e388ac00000000";
+            
+string txOutProof = "00000020eaff1b2556050adcfd6994ecf108e925d07743aa529fe6f528010000000000001da0a71c89d160cae71e342a449342d2195768e39a9ed8d9e7e48409a44481e233c33f5fffff001d1e3525e1d00100000adae8f7bc7e19f44570ed252b4ee1dddf4d15fc3578ee92a3b4b8e7a32b797091effafc7601cab2f5a39c9422660c4c8d2d0b0bcd17be9824c98698e5542946061d78ace3258b0ff8dc09bcaa63fadfdfa71a136423570e5dfc63abccafd9ae9b234efd2c4dc22048acbd1163b3d524e0fb54e5e2c23719885f9730d08a76c1daaa70ac6019e0b5a1f3295232f6a1aeee541e68b2fd63403fd3ae2b6d945362ae527ca4689075ed2717cef6bf26ca0e68cc45aec7c9c5a665b8b02d7c27aabd8fa8e1be854ed6b665c748c466977ccc147e526943e0edfac9f3aaa4e5cfb4f7ebac2e3ec7aac342b5a9cb200be28d4e58fb7547b9a1f8252d9878ad42541e84e632ecbf55b2cbdfec9074ecbf9f6908024db8e80838d43959184107523031864f9a03005d7e09315b1bb076a227751cb31d2b077335c71af555013bce0424fe1003b5d500";
+          
+string importprunedfunds = await wallet.ImportPrunedFunds(rawTx, txOutProof);
+Console.WriteLine(importprunedfunds);  
 ```
 
 <details>
@@ -4546,15 +5316,30 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": {
+    "code": -5,
+    "message": "Transaction given doesn\u0027t exist in proof"
+  },
+  "id": null
+}
 ```
 </details>
 
 ### importpubkey
+##### Adds a public key (in hex) that can be watched as if it were in your wallet but cannot be used to spend. Requires a new wallet backup.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string pubKey = "024b840f7aa5881b9b9b0022e1808d1083738ce11239f890345adea7df4a0f9702";
+bool rescan = false;
+
+string importpubkey = await wallet.ImportPubkey(pubKey, rescan);
+
+Console.WriteLine(importpubkey);
 ```
 
 <details>
@@ -4562,15 +5347,25 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### importwallet
+##### Imports keys from a wallet dump file (see dumpwallet). Requires a new wallet backup to include imported keys.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
+           
+string fileName = "walletDump.txt";
+string importwallet = await wallet.ImportWallet(fileName);
 
-  
+Console.WriteLine(importwallet);
 ```
 
 <details>
@@ -4578,15 +5373,25 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### keypoolrefill
+##### Fills the keypool.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
+                    
+int newSize = 100;
+string keypoolrefill = await wallet.KeyPoolRefill(newSize);
 
-  
+Console.WriteLine(keypoolrefill);
 ```
 
 <details>
@@ -4594,15 +5399,25 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listaddressgroupings
+##### Lists groups of addresses which have had their common ownership made public by common use as inputs or as the resulting change in past transactions.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
+            
+string listaddressgroupings = await wallet.ListAddressGroupings();
 
-  
+Console.WriteLine(listaddressgroupings);  
 ```
 
 <details>
@@ -4610,15 +5425,76 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    [
+      [
+        "tb1qrvstcs4r60kxpqhcf0phhz2uwe36khfd3jww4t",
+        0.00000000
+      ],
+      [
+        "tb1qg3gt75avpyr72d2ndzame0ldrajpnyzk7syq0l",
+        0.00000000,
+        ""
+      ],
+      [
+        "tb1q208y4ftpp5r4ssuj73ve2hqey6sl97tj36wsqd",
+        0.00000000
+      ],
+      [
+        "tb1qwuemetkghucsw44hjhrfzurq2ls3jss9lwfj62",
+        0.01090000,
+        ""
+      ],
+      [
+        "tb1q0vgtreynmdpwfnetu2qesxxkj4c3ys0uhkze6c",
+        0.00000000
+      ],
+      [
+        "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076",
+        0.00080000,
+        ""
+      ],
+      [
+        "tb1qhwafkc0kdmktd4wksdrywukrrh7ugpasega5dz",
+        0.00000000
+      ],
+      [
+        "tb1qck5tv8cwwgtdf4xemgg4d0m3jl5pt9cnlyqkfg",
+        0.00000000
+      ],
+      [
+        "tb1qmnqprxwfm250fs0s0zt7matf84qmk98p0l72kt",
+        0.00000000
+      ],
+      [
+        "tb1qa98l6du0qjc02pyrq2at07zszqm33wuvjmnq9n",
+        0.00000000
+      ],
+      [
+        "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+        0.00000000,
+        ""
+      ]
+    ]
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listlabels
+##### Returns the list of all labels, or labels that are assigned to addresses with a specific purpose.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient, "");
 
-  
+string listlabels = await wallet.ListLabels();
+
+Console.WriteLine(listlabels); 
 ```
 
 <details>
@@ -4626,15 +5502,32 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    "",
+    "John Doe",
+    "apple",
+    "best Address",
+    "cherry",
+    "one"
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listlockunspent
+##### Returns list of temporarily unspendable outputs. See the lockunspent call to lock and unlock transactions for spending.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string listlockunspent = await wallet.ListLockUnspent();
+
+Console.WriteLine(listlockunspent);  
 ```
 
 <details>
@@ -4642,15 +5535,38 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "txid": "3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501",
+      "vout": 0
+    },
+    {
+      "txid": "cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80",
+      "vout": 0
+    },
+    {
+      "txid": "11a461bbe76f06a67e9695f43e0108c0f5b8a3a0243c01d8b2528ff6de3961f1",
+      "vout": 0
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listreceivedbyaddress
+##### List balances by receiving address.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string listreceivedbyaddress = await wallet.ListReceivedByAddress();
+
+Console.WriteLine(listreceivedbyaddress);  
 ```
 
 <details>
@@ -4658,15 +5574,57 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "address": "tb1qqvegzkql09s694kaa0czzav4ragmcnmwqg6ynk",
+      "amount": 0.00019890,
+      "confirmations": 963,
+      "label": "ddddd",
+      "txids": [
+        "3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501"
+      ]
+    },
+    {
+      "address": "tb1qgflg6yl8au445lt6xfddlvfumvp6d6z3g9wegt",
+      "amount": 0.01100000,
+      "confirmations": 5,
+      "label": "",
+      "txids": [
+        "d51acb8f691f1a7de84ecc338e1fbcb0b19908b192d8ddd05a5f62abf1b32029",
+        "8ddf6b7b33b1dba884f5f8c7869c2e2f8f89573c8fb28e5b27d9d904e007546b"
+      ]
+    },
+    {
+      "address": "tb1qwmxm8tshffmphupk7wr6j443uechlap7pver9e",
+      "amount": 0.06130442,
+      "confirmations": 1028,
+      "label": "",
+      "txids": [
+        "ccaa4c9ac0d1a54e0ef137be53f5be00eda8c88e57ed261e9e621ad2e8de1858",
+        "cda20c686f38983907b38d8404df79916f23b3ccd02561f33666ac290814448b",
+        "3f2a689bdcb7efe12d94b77ea0f5970a68eb8226b6a0db62e1b0cc94a46a3698"
+      ]
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listreceivedbylabel
+##### List received transactions by label.
 -----
 ```csharp    
 
-  
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
+
+string listreceivedbylabel = await wallet.ListReceivedByLabel();
+
+Console.WriteLine(listreceivedbylabel); 
 ```
 
 <details>
@@ -4674,15 +5632,36 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "amount": 0.07230442,
+      "confirmations": 5,
+      "label": ""
+    },
+    {
+      "amount": 0.00019890,
+      "confirmations": 963,
+      "label": "ddddd"
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listsinceblock
+##### Get all transactions in blocks since block "blockhash", or all transactions if omitted.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string listsinceblock = await wallet.ListSinceBlock();
+
+Console.WriteLine(listsinceblock);
 ```
 
 <details>
@@ -4690,15 +5669,417 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "transactions": [
+      {
+        "address": "tb1qqvegzkql09s694kaa0czzav4ragmcnmwqg6ynk",
+        "category": "receive",
+        "amount": 0.00019890,
+        "label": "ddddd",
+        "vout": 0,
+        "confirmations": 963,
+        "blockhash": "00000000000000f7eda6b3c891cc0f5239711fd118bcd167d156ecff0a04d5d6",
+        "blockheight": 1807302,
+        "blockindex": 41,
+        "blocktime": 1597484398,
+        "txid": "3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501",
+        "walletconflicts": [],
+        "time": 1597483770,
+        "timereceived": 1597483770,
+        "bip125-replaceable": "no"
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1040,
+        "blockhash": "00000000fb3efbec6ebe89436b2388825beca38aee09179925b7d1651b27e018",
+        "blockheight": 1807225,
+        "blockindex": 144,
+        "blocktime": 1597409600,
+        "txid": "c1e5d3718ff4ff0dfd5f50bd09d7c36c30a1ce203228041422411b8dbf28f501",
+        "walletconflicts": [],
+        "time": 1597409548,
+        "timereceived": 1597409548,
+        "bip125-replaceable": "no",
+        "comment": "commmm",
+        "abandoned": false
+      },
+ ...
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00000856,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1043,
+        "blockhash": "0000000041b2713cdb39acf33f23a13958c9f17b417edb0298929b349a756c52",
+        "blockheight": 1807222,
+        "blockindex": 292,
+        "blocktime": 1597406145,
+        "txid": "f75488995e7798671522d72a2572e3c59dc99cd5697a3fa7712cfc3b7612a4c8",
+        "walletconflicts": [],
+        "time": 1597405740,
+        "timereceived": 1597405740,
+        "bip125-replaceable": "no",
+        "comment": "Some Comment",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00000855,
+        "vout": 0,
+        "fee": -0.00000145,
+        "confirmations": 1042,
+        "blockhash": "00000000000001344fd8f0567312d5588219839d7665f566705e90f474075931",
+        "blockheight": 1807223,
+        "blockindex": 60,
+        "blocktime": 1597407196,
+        "txid": "ffc7550455b99809dc99943f330ac6e03361972680475afc4a9bbfcb0fb62bcb",
+        "walletconflicts": [],
+        "time": 1597406613,
+        "timereceived": 1597406613,
+        "bip125-replaceable": "no",
+        "comment": "Some Comment",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1040,
+        "blockhash": "00000000fb3efbec6ebe89436b2388825beca38aee09179925b7d1651b27e018",
+        "blockheight": 1807225,
+        "blockindex": 381,
+        "blocktime": 1597409600,
+        "txid": "deb3ae9407331440b8151d66dbade001d851daf2892323f2e93ef4adbd6a06cd",
+        "walletconflicts": [],
+        "time": 1597409368,
+        "timereceived": 1597409368,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00000856,
+        "vout": 0,
+        "fee": -0.00000144,
+        "confirmations": 1042,
+        "blockhash": "00000000000001344fd8f0567312d5588219839d7665f566705e90f474075931",
+        "blockheight": 1807223,
+        "blockindex": 102,
+        "blocktime": 1597407196,
+        "txid": "eb02550d87192fc775a7303dc25df7e8b2cf4abd8fc9b1341c0fccbbc25cdccf",
+        "walletconflicts": [],
+        "time": 1597406840,
+        "timereceived": 1597406840,
+        "bip125-replaceable": "no",
+        "comment": "Some Comment",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1041,
+        "blockhash": "00000000f3033e79df7a23f0e7c148fcf987294c4efd6a1bd5645244f6475faa",
+        "blockheight": 1807224,
+        "blockindex": 346,
+        "blocktime": 1597408398,
+        "txid": "8b78cf3258640cfdd99904e7da0ea49b9cf9c5a56f1699f4b90bfc8ba34f6ad0",
+        "walletconflicts": [],
+        "time": 1597407792,
+        "timereceived": 1597407792,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "2NF2TWBfHqgDpff2xWRB1DJR3C3kWUaQrsS",
+        "category": "send",
+        "amount": -0.00020000,
+        "vout": 0,
+        "fee": -0.00141858,
+        "confirmations": 1026,
+        "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+        "blockheight": 1807239,
+        "blockindex": 1,
+        "blocktime": 1597422210,
+        "txid": "aff347e3bf1803d33548b3b440506d7df6275ce4fae6c548f9076de0f46a63d1",
+        "walletconflicts": [],
+        "time": 1597420923,
+        "timereceived": 1597420923,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+        "category": "send",
+        "amount": -0.00050000,
+        "vout": 0,
+        "fee": -0.00000141,
+        "confirmations": 1032,
+        "blockhash": "00000000f6fa4a3eaf6233a60c26d6b9e08e8f7c5dd33b97ef456086c273b484",
+        "blockheight": 1807233,
+        "blockindex": 126,
+        "blocktime": 1597416108,
+        "txid": "12e20f0b5de4fc6065055792bcdca79e9e454d7b7265d9a8e42941e9924b83d2",
+        "walletconflicts": [],
+        "time": 1597416062,
+        "timereceived": 1597416062,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1040,
+        "blockhash": "00000000fb3efbec6ebe89436b2388825beca38aee09179925b7d1651b27e018",
+        "blockheight": 1807225,
+        "blockindex": 143,
+        "blocktime": 1597409600,
+        "txid": "098eab880fd384ceb67a3d10b0909ced7b2747f3f95dcf689a2f3d4b69bde9d5",
+        "walletconflicts": [],
+        "time": 1597409391,
+        "timereceived": 1597409391,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00000856,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1042,
+        "blockhash": "00000000000001344fd8f0567312d5588219839d7665f566705e90f474075931",
+        "blockheight": 1807223,
+        "blockindex": 105,
+        "blocktime": 1597407196,
+        "txid": "d36b75b7b339b276cbee0442777cb8d39a9663601c03cfe22b1da37b1e03edda",
+        "walletconflicts": [],
+        "time": 1597406974,
+        "timereceived": 1597406974,
+        "bip125-replaceable": "no",
+        "comment": "Some Comment",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1040,
+        "blockhash": "00000000fb3efbec6ebe89436b2388825beca38aee09179925b7d1651b27e018",
+        "blockheight": 1807225,
+        "blockindex": 386,
+        "blocktime": 1597409600,
+        "txid": "753932efdf10d8c73e3a71a8ee14907e096d704458c9ebcff8354ef2d0afbfe1",
+        "walletconflicts": [],
+        "time": 1597409585,
+        "timereceived": 1597409585,
+        "bip125-replaceable": "no",
+        "comment": "commmm",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00000855,
+        "vout": 1,
+        "fee": -0.00000145,
+        "confirmations": 1042,
+        "blockhash": "00000000000001344fd8f0567312d5588219839d7665f566705e90f474075931",
+        "blockheight": 1807223,
+        "blockindex": 61,
+        "blocktime": 1597407196,
+        "txid": "e255b24a54e998c9efb03e3cd997c974fd31a3dff3b5ff10c45da341494550e2",
+        "walletconflicts": [],
+        "time": 1597406288,
+        "timereceived": 1597406288,
+        "bip125-replaceable": "no",
+        "comment": "Some Comment",
+        "abandoned": false
+      },
+      {
+        "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+        "category": "send",
+        "amount": -0.00059859,
+        "vout": 1,
+        "fee": -0.00000141,
+        "confirmations": 1031,
+        "blockhash": "00000000b99db7eba7428632c355e5554ebbb84d0d3b5d0e105f21c3f6dfb1f9",
+        "blockheight": 1807234,
+        "blockindex": 194,
+        "blocktime": 1597417309,
+        "txid": "6f4bead1d12f801215606d43be748ada2189d3c2bae46bb92b1dd7f407d497e2",
+        "walletconflicts": [],
+        "time": 1597416354,
+        "timereceived": 1597416354,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1041,
+        "blockhash": "00000000f3033e79df7a23f0e7c148fcf987294c4efd6a1bd5645244f6475faa",
+        "blockheight": 1807224,
+        "blockindex": 345,
+        "blocktime": 1597408398,
+        "txid": "f47003d462ce015eced4168903c14e41d6398974272abed0d56126cf24e5cee4",
+        "walletconflicts": [],
+        "time": 1597407726,
+        "timereceived": 1597407726,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 0,
+        "fee": -0.00000144,
+        "confirmations": 1041,
+        "blockhash": "00000000f3033e79df7a23f0e7c148fcf987294c4efd6a1bd5645244f6475faa",
+        "blockheight": 1807224,
+        "blockindex": 356,
+        "blocktime": 1597408398,
+        "txid": "eb7ae3d68e2b983be1f1604f8fd468a3ac990dbe88fc97bc99e4eea5f43df1e8",
+        "walletconflicts": [],
+        "time": 1597407980,
+        "timereceived": 1597407980,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 1,
+        "fee": -0.00000144,
+        "confirmations": 1041,
+        "blockhash": "00000000f3033e79df7a23f0e7c148fcf987294c4efd6a1bd5645244f6475faa",
+        "blockheight": 1807224,
+        "blockindex": 248,
+        "blocktime": 1597408398,
+        "txid": "8e2180ff4225faa677bdced807cb5ff01c4f93bf7c03f32768a8a83ca4acf3ec",
+        "walletconflicts": [],
+        "time": 1597408095,
+        "timereceived": 1597408095,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076",
+        "category": "send",
+        "amount": -0.00020000,
+        "label": "",
+        "vout": 1,
+        "fee": -0.00140859,
+        "confirmations": 1026,
+        "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+        "blockheight": 1807239,
+        "blockindex": 3,
+        "blocktime": 1597422210,
+        "txid": "11a461bbe76f06a67e9695f43e0108c0f5b8a3a0243c01d8b2528ff6de3961f1",
+        "walletconflicts": [],
+        "time": 1597420844,
+        "timereceived": 1597420844,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+        "category": "send",
+        "amount": -0.00020000,
+        "vout": 0,
+        "fee": -0.00000172,
+        "confirmations": 1046,
+        "blockhash": "00000000db93593441a3ad991d32ca1e0dda463bb19aa13de3cf89b54ebd2293",
+        "blockheight": 1807219,
+        "blockindex": 328,
+        "blocktime": 1597402898,
+        "txid": "f4542c60d0ca72a00e3b43b0cbf9dbf7066a4951fbcee600c1c2964cbfee3cfa",
+        "walletconflicts": [],
+        "time": 1597402794,
+        "timereceived": 1597402794,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "tb1qwuemetkghucsw44hjhrfzurq2ls3jss9lwfj62",
+        "category": "send",
+        "amount": -0.00010000,
+        "label": "",
+        "vout": 1,
+        "fee": -0.00000172,
+        "confirmations": 1046,
+        "blockhash": "00000000db93593441a3ad991d32ca1e0dda463bb19aa13de3cf89b54ebd2293",
+        "blockheight": 1807219,
+        "blockindex": 328,
+        "blocktime": 1597402898,
+        "txid": "f4542c60d0ca72a00e3b43b0cbf9dbf7066a4951fbcee600c1c2964cbfee3cfa",
+        "walletconflicts": [],
+        "time": 1597402794,
+        "timereceived": 1597402794,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      },
+      {
+        "address": "n3FnenEMWzrw5XuVwaPG6qgBAsgwVZMtgj",
+        "category": "send",
+        "amount": -0.00001000,
+        "vout": 0,
+        "fee": -0.00000144,
+        "confirmations": 1041,
+        "blockhash": "00000000f3033e79df7a23f0e7c148fcf987294c4efd6a1bd5645244f6475faa",
+        "blockheight": 1807224,
+        "blockindex": 355,
+        "blocktime": 1597408398,
+        "txid": "465ce8083ac1aec6133b6e6bde23ea778363a93c63f2db5e92396981828be6fd",
+        "walletconflicts": [],
+        "time": 1597407974,
+        "timereceived": 1597407974,
+        "bip125-replaceable": "no",
+        "abandoned": false
+      }
+    ],
+    "removed": [],
+    "lastblock": "0000000071a161910e348bdf3b6b2691cb93d3265b217165863659cfc5b40d5c"
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listtransactions
+##### If a label name is provided, this will return only incoming transactions paying to addresses with the specified label.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string listtransactions = await wallet.ListTransactions();
+
+Console.WriteLine(listtransactions); 
 ```
 
 <details>
@@ -4706,15 +6087,211 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+      "category": "send",
+      "amount": -0.00059859,
+      "vout": 0,
+      "fee": -0.00000141,
+      "confirmations": 1031,
+      "blockhash": "00000000b99db7eba7428632c355e5554ebbb84d0d3b5d0e105f21c3f6dfb1f9",
+      "blockheight": 1807234,
+      "blockindex": 195,
+      "blocktime": 1597417309,
+      "txid": "39c2b0dac1b7d986cd9042b72c4228ea78bb0439a6062062f0b5d98ac9cb013d",
+      "walletconflicts": [],
+      "time": 1597416426,
+      "timereceived": 1597416426,
+      "bip125-replaceable": "no",
+      "comment": "suck",
+      "to": "comto",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+      "category": "send",
+      "amount": -0.00059859,
+      "vout": 1,
+      "fee": -0.00000141,
+      "confirmations": 1031,
+      "blockhash": "00000000b99db7eba7428632c355e5554ebbb84d0d3b5d0e105f21c3f6dfb1f9",
+      "blockheight": 1807234,
+      "blockindex": 250,
+      "blocktime": 1597417309,
+      "txid": "9259992982e759964ea3b8a57c2e4962ac89ffdfc7ed78b9a8b745255be19fa4",
+      "walletconflicts": [],
+      "time": 1597416711,
+      "timereceived": 1597416711,
+      "bip125-replaceable": "no",
+      "comment": "suck",
+      "to": "comto",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qwmxm8tshffmphupk7wr6j443uechlap7pver9e",
+      "category": "receive",
+      "amount": 0.01683033,
+      "label": "",
+      "vout": 0,
+      "confirmations": 1028,
+      "blockhash": "000000009e0491f8f205d4f71544cf4c74ab2821a1406b24fb816b3aaaa683ad",
+      "blockheight": 1807237,
+      "blockindex": 300,
+      "blocktime": 1597420574,
+      "txid": "3f2a689bdcb7efe12d94b77ea0f5970a68eb8226b6a0db62e1b0cc94a46a3698",
+      "walletconflicts": [],
+      "time": 1597420165,
+      "timereceived": 1597420165,
+      "bip125-replaceable": "no"
+    },
+    {
+      "address": "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076",
+      "category": "send",
+      "amount": -0.00020000,
+      "label": "",
+      "vout": 1,
+      "fee": -0.00140859,
+      "confirmations": 1026,
+      "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+      "blockheight": 1807239,
+      "blockindex": 3,
+      "blocktime": 1597422210,
+      "txid": "11a461bbe76f06a67e9695f43e0108c0f5b8a3a0243c01d8b2528ff6de3961f1",
+      "walletconflicts": [],
+      "time": 1597420844,
+      "timereceived": 1597420844,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "2NF2TWBfHqgDpff2xWRB1DJR3C3kWUaQrsS",
+      "category": "send",
+      "amount": -0.00020000,
+      "vout": 0,
+      "fee": -0.00141858,
+      "confirmations": 1026,
+      "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+      "blockheight": 1807239,
+      "blockindex": 1,
+      "blocktime": 1597422210,
+      "txid": "aff347e3bf1803d33548b3b440506d7df6275ce4fae6c548f9076de0f46a63d1",
+      "walletconflicts": [],
+      "time": 1597420923,
+      "timereceived": 1597420923,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "2NF2TWBfHqgDpff2xWRB1DJR3C3kWUaQrsS",
+      "category": "send",
+      "amount": -0.00020000,
+      "vout": 0,
+      "fee": -0.00141858,
+      "confirmations": 1026,
+      "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+      "blockheight": 1807239,
+      "blockindex": 2,
+      "blocktime": 1597422210,
+      "txid": "8903339fa21b5856e8ba9ed0828a9f03888ace9d551a2c24e3d19f9e3c3f9220",
+      "walletconflicts": [],
+      "time": 1597421084,
+      "timereceived": 1597421084,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qqvegzkql09s694kaa0czzav4ragmcnmwqg6ynk",
+      "category": "receive",
+      "amount": 0.00019890,
+      "label": "ddddd",
+      "vout": 0,
+      "confirmations": 963,
+      "blockhash": "00000000000000f7eda6b3c891cc0f5239711fd118bcd167d156ecff0a04d5d6",
+      "blockheight": 1807302,
+      "blockindex": 41,
+      "blocktime": 1597484398,
+      "txid": "3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501",
+      "walletconflicts": [],
+      "time": 1597483770,
+      "timereceived": 1597483770,
+      "bip125-replaceable": "no"
+    },
+    {
+      "address": "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076",
+      "category": "send",
+      "amount": -0.00080000,
+      "label": "",
+      "vout": 1,
+      "fee": -0.00000141,
+      "confirmations": 291,
+      "blockhash": "00000000a6119fc55b2562e3898ff2a41a9e880020694f203955608e3b0b857d",
+      "blockheight": 1807974,
+      "blockindex": 430,
+      "blocktime": 1598014259,
+      "txid": "ebf7b4cfe5a4aaf3c9faede04369527e14cc7c9766c448c765b6d64e85bee1a8",
+      "walletconflicts": [],
+      "time": 1598013143,
+      "timereceived": 1598013143,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qwuemetkghucsw44hjhrfzurq2ls3jss9lwfj62",
+      "category": "send",
+      "amount": -0.00090000,
+      "label": "",
+      "vout": 1,
+      "fee": -0.00000141,
+      "confirmations": 286,
+      "blockhash": "00000000d8cd50ceee79f11c7a19eaf39edbb99a54aedc778bbcae127ef1bdf3",
+      "blockheight": 1807979,
+      "blockindex": 287,
+      "blocktime": 1598019699,
+      "txid": "cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80",
+      "walletconflicts": [],
+      "time": 1598018608,
+      "timereceived": 1598018608,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qgflg6yl8au445lt6xfddlvfumvp6d6z3g9wegt",
+      "category": "receive",
+      "amount": 0.01000000,
+      "label": "",
+      "vout": 1,
+      "confirmations": 5,
+      "blockhash": "00000000136a11a9752faa1b074bdbd77e84ae291659e8cf102b64ed41de62da",
+      "blockheight": 1808260,
+      "blockindex": 64,
+      "blocktime": 1598286739,
+      "txid": "d51acb8f691f1a7de84ecc338e1fbcb0b19908b192d8ddd05a5f62abf1b32029",
+      "walletconflicts": [],
+      "time": 1598286265,
+      "timereceived": 1598286265,
+      "bip125-replaceable": "no"
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listunspent
+##### Returns array of unspent transaction outputs with between minconf and maxconf (inclusive) confirmations.
+Optionally filter to only include txouts paid to specified addresses.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string listunspent = await wallet.ListUnspent();
+
+Console.WriteLine(listunspent);
 ```
 
 <details>
@@ -4722,15 +6299,211 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    {
+      "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+      "category": "send",
+      "amount": -0.00059859,
+      "vout": 0,
+      "fee": -0.00000141,
+      "confirmations": 1031,
+      "blockhash": "00000000b99db7eba7428632c355e5554ebbb84d0d3b5d0e105f21c3f6dfb1f9",
+      "blockheight": 1807234,
+      "blockindex": 195,
+      "blocktime": 1597417309,
+      "txid": "39c2b0dac1b7d986cd9042b72c4228ea78bb0439a6062062f0b5d98ac9cb013d",
+      "walletconflicts": [],
+      "time": 1597416426,
+      "timereceived": 1597416426,
+      "bip125-replaceable": "no",
+      "comment": "suck",
+      "to": "comto",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k",
+      "category": "send",
+      "amount": -0.00059859,
+      "vout": 1,
+      "fee": -0.00000141,
+      "confirmations": 1031,
+      "blockhash": "00000000b99db7eba7428632c355e5554ebbb84d0d3b5d0e105f21c3f6dfb1f9",
+      "blockheight": 1807234,
+      "blockindex": 250,
+      "blocktime": 1597417309,
+      "txid": "9259992982e759964ea3b8a57c2e4962ac89ffdfc7ed78b9a8b745255be19fa4",
+      "walletconflicts": [],
+      "time": 1597416711,
+      "timereceived": 1597416711,
+      "bip125-replaceable": "no",
+      "comment": "suck",
+      "to": "comto",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qwmxm8tshffmphupk7wr6j443uechlap7pver9e",
+      "category": "receive",
+      "amount": 0.01683033,
+      "label": "",
+      "vout": 0,
+      "confirmations": 1028,
+      "blockhash": "000000009e0491f8f205d4f71544cf4c74ab2821a1406b24fb816b3aaaa683ad",
+      "blockheight": 1807237,
+      "blockindex": 300,
+      "blocktime": 1597420574,
+      "txid": "3f2a689bdcb7efe12d94b77ea0f5970a68eb8226b6a0db62e1b0cc94a46a3698",
+      "walletconflicts": [],
+      "time": 1597420165,
+      "timereceived": 1597420165,
+      "bip125-replaceable": "no"
+    },
+    {
+      "address": "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076",
+      "category": "send",
+      "amount": -0.00020000,
+      "label": "",
+      "vout": 1,
+      "fee": -0.00140859,
+      "confirmations": 1026,
+      "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+      "blockheight": 1807239,
+      "blockindex": 3,
+      "blocktime": 1597422210,
+      "txid": "11a461bbe76f06a67e9695f43e0108c0f5b8a3a0243c01d8b2528ff6de3961f1",
+      "walletconflicts": [],
+      "time": 1597420844,
+      "timereceived": 1597420844,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "2NF2TWBfHqgDpff2xWRB1DJR3C3kWUaQrsS",
+      "category": "send",
+      "amount": -0.00020000,
+      "vout": 0,
+      "fee": -0.00141858,
+      "confirmations": 1026,
+      "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+      "blockheight": 1807239,
+      "blockindex": 1,
+      "blocktime": 1597422210,
+      "txid": "aff347e3bf1803d33548b3b440506d7df6275ce4fae6c548f9076de0f46a63d1",
+      "walletconflicts": [],
+      "time": 1597420923,
+      "timereceived": 1597420923,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "2NF2TWBfHqgDpff2xWRB1DJR3C3kWUaQrsS",
+      "category": "send",
+      "amount": -0.00020000,
+      "vout": 0,
+      "fee": -0.00141858,
+      "confirmations": 1026,
+      "blockhash": "00000000247e018b2781be633c8605bd75b7aaee0419d4c1603782afbf8d1319",
+      "blockheight": 1807239,
+      "blockindex": 2,
+      "blocktime": 1597422210,
+      "txid": "8903339fa21b5856e8ba9ed0828a9f03888ace9d551a2c24e3d19f9e3c3f9220",
+      "walletconflicts": [],
+      "time": 1597421084,
+      "timereceived": 1597421084,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qqvegzkql09s694kaa0czzav4ragmcnmwqg6ynk",
+      "category": "receive",
+      "amount": 0.00019890,
+      "label": "ddddd",
+      "vout": 0,
+      "confirmations": 963,
+      "blockhash": "00000000000000f7eda6b3c891cc0f5239711fd118bcd167d156ecff0a04d5d6",
+      "blockheight": 1807302,
+      "blockindex": 41,
+      "blocktime": 1597484398,
+      "txid": "3289d44456da5dadfbd085814168eb0b75e2365bcead14639600b58d421c1501",
+      "walletconflicts": [],
+      "time": 1597483770,
+      "timereceived": 1597483770,
+      "bip125-replaceable": "no"
+    },
+    {
+      "address": "tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076",
+      "category": "send",
+      "amount": -0.00080000,
+      "label": "",
+      "vout": 1,
+      "fee": -0.00000141,
+      "confirmations": 291,
+      "blockhash": "00000000a6119fc55b2562e3898ff2a41a9e880020694f203955608e3b0b857d",
+      "blockheight": 1807974,
+      "blockindex": 430,
+      "blocktime": 1598014259,
+      "txid": "ebf7b4cfe5a4aaf3c9faede04369527e14cc7c9766c448c765b6d64e85bee1a8",
+      "walletconflicts": [],
+      "time": 1598013143,
+      "timereceived": 1598013143,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qwuemetkghucsw44hjhrfzurq2ls3jss9lwfj62",
+      "category": "send",
+      "amount": -0.00090000,
+      "label": "",
+      "vout": 1,
+      "fee": -0.00000141,
+      "confirmations": 286,
+      "blockhash": "00000000d8cd50ceee79f11c7a19eaf39edbb99a54aedc778bbcae127ef1bdf3",
+      "blockheight": 1807979,
+      "blockindex": 287,
+      "blocktime": 1598019699,
+      "txid": "cbfda9f0cb47ece3e2f0078d074c021548ba3ff53aff583a7777b9a682349d80",
+      "walletconflicts": [],
+      "time": 1598018608,
+      "timereceived": 1598018608,
+      "bip125-replaceable": "no",
+      "abandoned": false
+    },
+    {
+      "address": "tb1qgflg6yl8au445lt6xfddlvfumvp6d6z3g9wegt",
+      "category": "receive",
+      "amount": 0.01000000,
+      "label": "",
+      "vout": 1,
+      "confirmations": 5,
+      "blockhash": "00000000136a11a9752faa1b074bdbd77e84ae291659e8cf102b64ed41de62da",
+      "blockheight": 1808260,
+      "blockindex": 64,
+      "blocktime": 1598286739,
+      "txid": "d51acb8f691f1a7de84ecc338e1fbcb0b19908b192d8ddd05a5f62abf1b32029",
+      "walletconflicts": [],
+      "time": 1598286265,
+      "timereceived": 1598286265,
+      "bip125-replaceable": "no"
+    }
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listwalletdir
+##### Returns a list of wallets in the wallet directory.
 -----
 ```csharp    
 
-  
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
+
+string listwalletdir = await wallet.ListWalletDir();
+
+Console.WriteLine(listwalletdir);
 ```
 
 <details>
@@ -4738,15 +6511,52 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "wallets": [
+      {
+        "name": "apple"
+      },
+      {
+        "name": "banana"
+      },
+      {
+        "name": "boss"
+      },
+      {
+        "name": "cherry"
+      },
+      {
+        "name": "cherryw"
+      },
+      {
+        "name": "orange"
+      },
+      {
+        "name": "tomate"
+      },
+      {
+        "name": ""
+      }
+    ]
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### listwallets
+##### Returns a list of currently loaded wallets.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string listwallets = await wallet.ListWallets();
+
+Console.WriteLine(listwallets); 
 ```
 
 <details>
@@ -4754,15 +6564,35 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [
+    "",
+    "apple",
+    "banana",
+    "boss",
+    "cherry",
+    "cherryw",
+    "orange",
+    "tomate"
+  ],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### loadwallet
+##### Loads a wallet from a wallet file or directory.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient, "boss");
 
-  
+string fileName = "apple";
+string loadwallet = await wallet.LoadWallet(fileName);
+
+Console.WriteLine(loadwallet);  
 ```
 
 <details>
@@ -4770,15 +6600,29 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "name": "apple",
+    "warning": ""
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### lockunspent
+##### Updates list of temporarily unspendable outputs. Temporarily lock (unlock=false) or unlock (unlock=true) specified transaction outputs. If no transaction outputs are specified when unlocking then all current locked transaction outputs are unlocked. A locked transaction output will not be chosen by automatic coin selection, when spending bitcoins. Locks are stored in memory only. Nodes start with zero locked outputs, and the locked output list
+is always cleared (by virtue of process exit) when a node stops or fails.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+bool unclock = false;
+string lockunspent = await wallet.LockUnspent(unclock);
+            
+Console.WriteLine(lockunspent);
 ```
 
 <details>
@@ -4786,15 +6630,25 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": true,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### removeprunedfunds
+##### Deletes the specified transaction from the wallet. Meant for use with pruned wallets and as a companion to importprunedfunds. This will affect wallet balances.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string txid = "ab094f2e094824552cc6b69a857ce05ceda1d5eed792b33860470b63707def90";
+string removeprunedfunds = await wallet.RemovePrunedFunds(txid);
+            
+Console.WriteLine(removeprunedfunds);
 ```
 
 <details>
@@ -4802,15 +6656,32 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### rescanblockchain
+##### Rescan the local blockchain for wallet related transactions.
+Note: Use "getwalletinfo" to query the scanning progress.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient, "apple");
 
-  
+//Optional
+int startHeight = 0;
+
+//Optional
+int stopHeight = 10000;
+
+string rescanblockchain = await wallet.RescanBlockchain(startHeight, stopHeight);
+            
+Console.WriteLine(rescanblockchain);
 ```
 
 <details>
@@ -4818,15 +6689,45 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "start_height": 0,
+    "stop_height": 10000
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### sendmany
+##### Send multiple times. Amounts are double-precision floating point numbers. Requires wallet passphrase to be set with walletpassphrase call if wallet is encrypted.
 -----
 ```csharp    
 
-  
+  BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient, "boss");
+
+SendMany sendMany = new SendMany();
+sendMany.AddressesAmounts = new List<AddressAmount>()
+{
+    new AddressAmount("tb1qwuemetkghucsw44hjhrfzurq2ls3jss9lwfj62", 0.0001f),
+    new AddressAmount("tb1qqvegzkql09s694kaa0czzav4ragmcnmwqg6ynk", 0.00002f),
+    new AddressAmount("tb1qnh2qtqsu4un8xey5d3258tfd7efl3eu4acp076", 0.00035f),
+    new AddressAmount("tb1qwmxm8tshffmphupk7wr6j443uechlap7pver9e", 0.00089f),
+    new AddressAmount("tb1qlxvfnp6xevdmxsmhqad8n5xecj29d8fpkaaf2k", 0.0004999f)
+};
+
+sendMany.ConfTarget = 6;
+sendMany.EstimateMode = EstimateMode.CONSERVATIVE;
+sendMany.Replaceable = true;
+sendMany.SubtractFeeFrom = new List<string> { "tb1qqvegzkql09s694kaa0czzav4ragmcnmwqg6ynk" };
+sendMany.Comment = "For coffe";
+
+string rescanblockchain = await wallet.SendMany(sendMany);
+            
+Console.WriteLine(rescanblockchain);
 ```
 
 <details>
@@ -4834,15 +6735,27 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "8272deeaf27668af2f945ba51aa83754ae6ffd2478e2e58984d47a022a73dd33",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### sendtoaddress
+##### Send an amount to a given address. Requires wallet passphrase to be set with walletpassphrase call if wallet is encrypted.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+SendToAddress sendToAddress = new SendToAddress("2NFvnihMBvphwrqBLvoQzSycmoYkMAmVX1a", 0.0000777f);
+
+string sendtoaddress = await wallet.SendToAddress(sendToAddress);
+            
+Console.WriteLine(sendtoaddress); 
 ```
 
 <details>
@@ -4850,15 +6763,27 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "33e32952831e25ad4ebc5ee7a9f9c1402e26addf9c33aca8c3fc400bbad650ef",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### sethdseed
+##### Set or generate a new HD wallet seed. Non-HD wallets will not be upgraded to being a HD wallet. Wallets that are already HD will have a new HD seed set so that new keys added to the keypool will be derived from this new seed.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+bool newKeyPool = true;
+string hdSeed = "925p7GqzqXYY6kCFTvpvNF7U74Zj8MA4UVJSC3QKmczUaN8pPqV";
+            
+string sethdseed = await wallet.SetHDSeed(newKeyPool, hdSeed);
+            
+Console.WriteLine(sethdseed);
 ```
 
 <details>
@@ -4866,15 +6791,27 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### setlabel
+##### Sets the label associated with the given address.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");          
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string address = "n357LCRWaa2FFUazB1vAMYD79wQLEA1kdh";
+string label = "car";
+
+string setlabel = await wallet.SetLabel(address, label);
+            
+Console.WriteLine(setlabel);
 ```
 
 <details>
@@ -4882,15 +6819,27 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### settxfee
+##### Set the transaction fee per kB for this wallet. Overrides the global -paytxfee command line parameter.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+float amount = 0.0001f;
+
+string settxfee = await wallet.SetTxFee(amount);
+            
+Console.WriteLine(settxfee);
 ```
 
 <details>
@@ -4898,15 +6847,28 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": true,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### setwalletflag
+##### Change the state of the given wallet flag for a wallet.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+Flag flag = Flag.Avoid_reuse;
+bool value = true;
+
+string setwalletflag = await wallet.SetWalletFlag(flag, value);
+            
+Console.WriteLine(setwalletflag);
 ```
 
 <details>
@@ -4914,15 +6876,32 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "flag_name": "avoid_reuse",
+    "flag_state": true,
+    "warnings": "You need to rescan the blockchain in order to correctly mark used destinations in the past. Until this is done, some destinations may be considered unused, even if the opposite is the case."
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### signmessage
+##### Sign a message with the private key of an address Requires wallet passphrase to be set with walletpassphrase call if wallet is encrypted.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8333", "alice:pass");            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+//Only legacy addresses supported.
+string address = "1BnJ4bvMJBPbXsVRXJ2AEs3GFB8kQ63NwY";
+string msg = "Hello World";
+
+string signmessage = await wallet.SignMessage(address, msg);
+            
+Console.WriteLine(signmessage); 
 ```
 
 <details>
@@ -4930,15 +6909,25 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": "H43ZfDF1QV8k5E2b8Gxg2urqB7kWsEK7gqbEclRoMzc0RWhzUO/F7EP6ArUUJ7TD7f4lna8zzTJPd9CS3a29b7g=",
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### signrawtransactionwithwallet
+##### Sign inputs for raw transaction (serialized, hex-encoded). The second optional argument (may be null) is an array of previous transaction outputs that this transaction depends on but may not yet be in the block chain. Requires wallet passphrase to be set with walletpassphrase call if wallet is encrypted.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient, "boss");
+            
+string txid = "0200000001c21355a9db10317974a8dccf65cfe6053968f7fdea1a19631943f21dffd26b480000000000ffffffff018c8101000000000016001476cdb3ae174a761bf036f387a956b1e6717ff43e00000000";
 
-  
+string signrawtransactionwithwallet = await wallet.SignRawTransactionWithWallet(txid);           
+Console.WriteLine(signrawtransactionwithwallet);
 ```
 
 <details>
@@ -4946,15 +6935,29 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "hex": "02000000000101c21355a9db10317974a8dccf65cfe6053968f7fdea1a19631943f21dffd26b480000000000ffffffff018c8101000000000016001476cdb3ae174a761bf036f387a956b1e6717ff43e0246304302202903f465ed980b7f8f8dc42a84639b1e45d0ae19e482841ad8965a2a02db8e20021f5814249c5e1b9c3458945422bf374495fe461680a9eefe0d1bb2982f23d5eb012102423a287e267ffb18bc72dc85848b5c9d971799ffbe576e6c9f8ef0275b5a11cd00000000",
+    "complete": true
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### unloadwallet
+##### Unloads the active wallet otherwise unloads the wallet specified in the argument.
 -----
 ```csharp    
 
-  
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
+
+string unloadwallet = await wallet.UnloadWallet();
+            
+Console.WriteLine(unloadwallet);
 ```
 
 <details>
@@ -4962,15 +6965,39 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### walletcreatefundedpsbt
+##### Creates and funds a transaction in the Partially Signed Transaction format. Inputs will be added if supplied inputs are not enough. Implements the Creator and Updater roles.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient, "boss");
 
-  
+//The inputs
+List<RawInput> rawInputs = new List<RawInput>();
+RawInput rawInput = new RawInput("486bd2ff1df2431963191aeafdf7683905e6cf65cfdca874793110dba95513c2", 0);
+
+rawInputs.Add(rawInput);
+
+//The outputs
+List<RawOutput> rawOutputs = new List<RawOutput>();
+RawOutput rawOutput = new RawOutput("mi88psRX4MawyLrxjrvwdrg9C6jHVPQifg", 0.0008f);
+
+rawOutputs.Add(rawOutput);
+
+//Data in hex format;
+string hexData = "48656c6c6f20576f726c64";
+
+string walletcreatefundedpsbt = await wallet.WalletCreateFundedPSBT(rawInputs, rawOutputs,hexData: hexData);
+            
+Console.WriteLine(walletcreatefundedpsbt); 
 ```
 
 <details>
@@ -4978,15 +7005,30 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "psbt": "cHNidP8BAIoCAAAAAcITVanbEDF5dKjcz2XP5gU5aPf96hoZYxlD8h3/0mtIAAAAAAD/////A4A4AQAAAAAAGXapFByXmfCaDDF7dYP94X7McpvZwfVaiKwaCQ4AAAAAABYAFO4RFDd9uMTRJkoogvoLMxdkd9i8AAAAAAAAAAANagtIZWxsbyBXb3JsZAAAAAAAAQEfQEIPAAAAAAAWABQDMoFYH3lhotbd6/AhdZUfUbxPbiIGAkI6KH4mf/sYvHLchYSLXJ2XF5n/vldubJ\u002BO8CdbWhHNEGPT0\u002BUAAACAAAAAgAMAAIAAACICA9SDITfNkb3deCAOi5GOkLJiegguBjehci73SzUsifVJEIGRNdwAAACAAQAAgAEAAIAAAA==",
+    "fee": 0.00000166,
+    "changepos": 1
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### walletlock
+##### Removes the wallet encryption key from memory, locking the wallet. After calling this method, you will need to call walletpassphrase again
+before being able to call any methods which require the wallet to be unlocked.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+            
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string walletlock = await wallet.WalletLock();
+            
+Console.WriteLine(walletlock); 
 ```
 
 <details>
@@ -4994,15 +7036,26 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### walletpassphrase
+##### Stores the wallet decryption key in memory for 'timeout' seconds. This is needed prior to performing transactions related to private keys such as sending bitcoins
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient, "");
 
-  
+string passphrase = "12345";
+int timeout = 98765431;
+
+string walletpassphrase = await wallet.WalletPassphrase(passphrase, timeout);
+Console.WriteLine(walletpassphrase);
 ```
 
 <details>
@@ -5010,15 +7063,26 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### walletpassphrasechange
+##### Changes the wallet passphrase from 'oldpassphrase' to 'newpassphrase'.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient);
 
-  
+string oldPassphrase = "12345";
+string newPassphrase = "apple";
+
+string walletpassphrasechange = await wallet.WalletPassphraseChange(oldPassphrase, newPassphrase);
+Console.WriteLine(walletpassphrasechange); 
 ```
 
 <details>
@@ -5026,15 +7090,25 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": null,
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
 ### walletprocesspsbt
+##### Update a PSBT with input information from our wallet and then sign inputs that we can sign for. Requires wallet passphrase to be set with walletpassphrase call if wallet is encrypted.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");
+Wallet wallet = new Wallet(bitcoinClient, "");
 
-  
+string psbt = "cHNidP8BAIoCAAAAAcITVanbEDF5dKjcz2XP5gU5aPf96hoZYxlD8h3/0mtIAAAAAAD/////A4A4AQAAAAAAGXapFByXmfCaDDF7dYP94X7McpvZwfVaiKwaCQ4AAAAAABYAFO4RFDd9uMTRJkoogvoLMxdkd9i8AAAAAAAAAAANagtIZWxsbyBXb3JsZAAAAAAAAQEfQEIPAAAAAAAWABQDMoFYH3lhotbd6/AhdZUfUbxPbiIGAkI6KH4mf/sYvHLchYSLXJ2XF5n/vldubJ\u002BO8CdbWhHNEGPT0\u002BUAAACAAAAAgAMAAIAAACICA9SDITfNkb3deCAOi5GOkLJiegguBjehci73SzUsifVJEIGRNdwAAACAAQAAgAEAAIAAAA==";
+            
+string walletprocesspsbt = await wallet.WalletProcessPSBT(psbt);
+Console.WriteLine(walletprocesspsbt); 
 ```
 
 <details>
@@ -5042,7 +7116,14 @@ WALLET
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": {
+    "psbt": "cHNidP8BAIoCAAAAAcITVanbEDF5dKjcz2XP5gU5aPf96hoZYxlD8h3/0mtIAAAAAAD/////A4A4AQAAAAAAGXapFByXmfCaDDF7dYP94X7McpvZwfVaiKwaCQ4AAAAAABYAFO4RFDd9uMTRJkoogvoLMxdkd9i8AAAAAAAAAAANagtIZWxsbyBXb3JsZAAAAAAAAQEfQEIPAAAAAAAWABQDMoFYH3lhotbd6/AhdZUfUbxPbiIGAkI6KH4mf/sYvHLchYSLXJ2XF5n/vldubJ\u002BO8CdbWhHNEGPT0\u002BUAAACAAAAAgAMAAIAAACICA9SDITfNkb3deCAOi5GOkLJiegguBjehci73SzUsifVJEIGRNdwAAACAAQAAgAEAAIAAAA==",
+    "complete": true
+  },
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
@@ -5058,10 +7139,16 @@ ZMQ
 
 
 ### getzmqnotifications
+##### Returns information about the active ZeroMQ notifications.
 -----
 ```csharp    
+BitcoinClient bitcoinClient = new BitcoinClient("http://127.0.0.1:8332", "alice:pass");           
 
-  
+ZMQ zMQ = new ZMQ(bitcoinClient);
+
+string getzmqnotifications = await zMQ.GetZMQNotifications();
+
+Console.WriteLine(getzmqnotifications);
 ```
 
 <details>
@@ -5069,7 +7156,11 @@ ZMQ
   <summary>Server response</summary>
  
  ```json
-
+{
+  "result": [],
+  "error": null,
+  "id": null
+}
 ```
 </details>
 
