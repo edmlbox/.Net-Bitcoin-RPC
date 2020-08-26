@@ -24,13 +24,12 @@ Table of contents
 
 INSTALLATION
 -----
-
+#### Option #1.
 ### NuGet Package Manager
 In **Solution Explorer**, right-click on your project and choose **Manage NuGet Packages**.
 Select the **Browse tab**, search for [BitcoinRPC](https://www.nuget.org/packages/BitcoinRPC/), select that package in the list, and select **Install**.
 
-## -or- ##
-
+#### Option #2.
 ### Package Manager Console
 1. Select the **Tools > NuGet Package Manager > Package Manager Console** menu command.
 1. Once the console opens, check that the **Default project drop-down list** shows the project into which you want to install the package. If you have a single project in the solution, it is already selected.
