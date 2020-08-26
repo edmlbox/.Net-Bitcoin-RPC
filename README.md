@@ -111,7 +111,7 @@ Console.WriteLine(getbBlockchainInfo);
 </details>
 
 
-Core RPC
+Core RPC reference.
 -----
 **[BLOCKCHAIN](#BLOCKCHAIN)**, **[CONTROL](#CONTROL)**, **[GENERATING](#GENERATING)**, **[MINING](#MINING)**, **[NETWORK](#NETWORK)**, **[RAWTRANSACTIONS](#RAWTRANSACTIONS)**, **[UTIL](#UTIL)**, **[WALLET](#WALLET)**, **[ZMQ](#ZMQ)**
 
