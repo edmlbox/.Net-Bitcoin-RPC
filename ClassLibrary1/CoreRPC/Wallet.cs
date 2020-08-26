@@ -18,10 +18,12 @@ namespace BitcoinRpc.CoreRPC
     {
         BitcoinClient bitcoinClient;
         HttpRequest httpRequest;
-        public Wallet(BitcoinClient bitcoinClient)
+        public string ActiveWallet { get; set; }
+        public Wallet(BitcoinClient bitcoinClient, string walletName=null)
         {
             this.bitcoinClient = bitcoinClient;
-            httpRequest = new HttpRequest(bitcoinClient);
+            this.ActiveWallet = walletName;
+            httpRequest = new HttpRequest(bitcoinClient, this.ActiveWallet);
         }
 
 

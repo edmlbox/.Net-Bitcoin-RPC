@@ -15,13 +15,18 @@ namespace BitcoinRpc
          HttpRequestMessage httpRequestMessage;
          byte[] byteArrayPassword;
          string base64;
+         string nodeAddress;
 
-        public HttpRequest(BitcoinClient bitcoinClient)
+        public HttpRequest(BitcoinClient bitcoinClient, string activeWallet=null)
         {
             this.bitcoinClient = bitcoinClient;
+            this.nodeAddress = activeWallet;
+            if (nodeAddress != null) { nodeAddress = bitcoinClient.NodeAddress +"/wallet/" + activeWallet; }
+            else { nodeAddress = bitcoinClient.NodeAddress; }
+             
 
             httpClient = new HttpClient();
-            httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, bitcoinClient.NodeAddress);
+            httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, nodeAddress);
             httpClient.DefaultRequestHeaders
               .Accept
               .Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -31,19 +36,23 @@ namespace BitcoinRpc
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64);
 
         }
+
+
+
+
         public async Task<string> SendReq(string methodName, object guesType = null)
         {
 
             try {
                 //HttpRequestMessage must be set to a new instance each time request is sent,
                 //otherwise you will get an error: "The request message was already sent. Cannot send the same request message multiple times."
-                httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, bitcoinClient.NodeAddress);
+                httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, nodeAddress);
                 /*-----------------------------------------------------------------------------*/
 
                 string JsonRequestBody = new JsonHandler().JsonWriter(methodName, guesType);
 
                 //Store the request in a static field. For debug purpose.
-                Debug.JsonRequest.SerializedJson = JsonRequestBody;
+                GetInfo.JsonRequest.SerializedJson = JsonRequestBody;
                 byte[] jsonByteContent = Encoding.ASCII.GetBytes(JsonRequestBody);
 
                 httpRequestMessage.Content = new ByteArrayContent(jsonByteContent);

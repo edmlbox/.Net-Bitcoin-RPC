@@ -7,15 +7,18 @@
 	  <RootNamespace>BitcoinRpc</RootNamespace>
 	  <Authors>Eduard Karpa</Authors>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Description>Fill later</Description>
+	  <Description>Bitcoin Core RPC library for .Net. All commands are covered with examples on https://github.com/edmlbox/.Net-Bitcoin-RPC</Description>
 	  <Copyright>Eduard Karpa</Copyright>
 	  <PackageTags>bitcoin core rpc api library wrapper</PackageTags>
 	  <PackageId>BitcoinRPC</PackageId>
 	  <AssemblyVersion>1.0.0.1</AssemblyVersion>
 	  <FileVersion>1.0.0.1</FileVersion>
-	  <Version>1.0.8</Version>
+	  <Version>1.1.2</Version>
 	  <PackageProjectUrl>https://github.com/edmlbox/.Net-Bitcoin-RPC</PackageProjectUrl>
 	  <RepositoryUrl>https://github.com/edmlbox/.Net-Bitcoin-RPC</RepositoryUrl>
+	  <NeutralLanguage>en</NeutralLanguage>
+	  <Product>BitcoinRPC</Product>
+	  <PackageIcon>bitcoin (2).png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -29,6 +32,13 @@
 
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="4.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\Downloads\bitcoin (2).png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

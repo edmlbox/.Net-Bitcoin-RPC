@@ -10,17 +10,13 @@ namespace BitcoinRpc
 {
    public class BitcoinClient
     {
-        
         public string NodeAddress { get; set; }
         public string UserPassword { get; set; }
-        
 
         public BitcoinClient(string nodeAddress, string userPassword)
         {
             NodeAddress = nodeAddress;
             UserPassword = userPassword;
-            
-           
         }
 
 
