@@ -1,4 +1,4 @@
-![Preview1](./icon600.png)  
+![Preview1](./icon700.png)  
 # .Net-Bitcoin-RPC
 
 ### Bitcoin Core RPC library for .Net. All commands are covered with examples.
