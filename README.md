@@ -1,6 +1,6 @@
 ![Preview1](./icon700.png) 
 
-### Bitcoin Core RPC library for .Net. All commands are covered with examples.
+### Bitcoin Core RPC library for .Net. Full implementation. All commands are covered with examples.
 
 Table of contents
 =================
